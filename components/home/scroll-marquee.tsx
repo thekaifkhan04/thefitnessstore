@@ -24,10 +24,11 @@ export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
     restDelta: 0.0005,
   });
 
-  // Moves strictly from Left to Right as the visitor scrolls down through the section
-  // When scrolling stops, progress stops and marquee stays completely stationary
+  // Line 1 moves Left to Right as visitor scrolls down
+  // Line 2 moves Right to Left as visitor scrolls down (counter-directional motion)
+  // When scrolling stops, both lines stay completely stationary
   const x1 = useTransform(smoothProgress, [0, 1], ["-28%", "4%"]);
-  const x2 = useTransform(smoothProgress, [0, 1], ["-34%", "-2%"]);
+  const x2 = useTransform(smoothProgress, [0, 1], ["-4%", "-34%"]);
 
   return (
     <section
