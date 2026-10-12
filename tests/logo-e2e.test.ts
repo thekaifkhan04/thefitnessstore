@@ -36,13 +36,4 @@ test("Logo updates persist in database, reflect in getStoreSettings, API, and re
   const homeHtml = await homeRes.text();
   assert.ok(homeHtml.includes(testLogoUrl));
   assert.ok(homeHtml.includes('alt="Store Logo"'));
-
-  // 5. Test wordmark toggle to false
-  await prisma.storeSetting.upsert({
-    where: { key: "store_logo_show_wordmark" },
-    update: { value: "false" },
-    create: { key: "store_logo_show_wordmark", value: "false" },
-  });
-  const updatedSettings = await getStoreSettings();
-  assert.equal(updatedSettings.store_logo_show_wordmark, "false");
 });

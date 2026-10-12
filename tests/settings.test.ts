@@ -59,6 +59,9 @@ test("Theme primary color and custom logo URL are supported in settings", async 
   const testColor = "#10B981";
   const testLogo = "/images/brand/custom-test-logo.png";
 
+  const prevColor = await prisma.storeSetting.findUnique({ where: { key: "theme_primary_color" } });
+  const prevLogo = await prisma.storeSetting.findUnique({ where: { key: "store_logo_url" } });
+
   try {
     await prisma.storeSetting.upsert({
       where: { key: "theme_primary_color" },
@@ -75,9 +78,24 @@ test("Theme primary color and custom logo URL are supported in settings", async 
     assert.equal(settings.theme_primary_color, testColor);
     assert.equal(settings.store_logo_url, testLogo);
   } finally {
-    await prisma.storeSetting.deleteMany({
-      where: { key: { in: ["theme_primary_color", "store_logo_url"] } },
-    });
+    if (prevColor) {
+      await prisma.storeSetting.upsert({
+        where: { key: "theme_primary_color" },
+        update: { value: prevColor.value },
+        create: { key: "theme_primary_color", value: prevColor.value },
+      });
+    } else {
+      await prisma.storeSetting.deleteMany({ where: { key: "theme_primary_color" } });
+    }
+    if (prevLogo) {
+      await prisma.storeSetting.upsert({
+        where: { key: "store_logo_url" },
+        update: { value: prevLogo.value },
+        create: { key: "store_logo_url", value: prevLogo.value },
+      });
+    } else {
+      await prisma.storeSetting.deleteMany({ where: { key: "store_logo_url" } });
+    }
   }
 });
 
