@@ -93,7 +93,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Email Address</h3>
-                  <p className="text-xs text-neutral-700 dark:text-neutral-300 mt-1 font-mono">{settings.support_email || "support@thefitnessstore.com"}</p>
+                  <p className="text-xs text-neutral-700 dark:text-neutral-300 mt-1 font-mono">{settings.support_email || "thefitnessstore2022@gmail.com"}</p>
                   <p className="text-[11px] text-neutral-500 mt-0.5">For B2B proposals & supplier enquiries</p>
                 </div>
               </div>

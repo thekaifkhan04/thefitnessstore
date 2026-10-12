@@ -43,7 +43,7 @@ export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   store_logo_show_wordmark: "true",
   theme_primary_color: "#E31E2F",
   whatsapp_number: process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || "919876543210",
-  support_email: "support@thefitnessstore.com",
+  support_email: "thefitnessstore2022@gmail.com",
   contact_phone: "+91 98765 43210",
   store_address: "Shop 12, Prime Fitness Hub, Commercial Plaza, India",
   hero_eyebrow: "BUILT FOR EVERY REP · RETAIL & WHOLESALE",

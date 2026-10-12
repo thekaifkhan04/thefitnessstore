@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-3">
             <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">5. Contact Us</h2>
             <p>
-              If you have any questions regarding your data, please contact us at <span className="text-neutral-900 dark:text-white font-mono">support@thefitnessstore.com</span>.
+              If you have any questions regarding your data, please contact us at <a href="mailto:thefitnessstore2022@gmail.com" className="text-neutral-900 dark:text-white font-mono hover:underline">thefitnessstore2022@gmail.com</a>.
             </p>
           </section>
         </div>

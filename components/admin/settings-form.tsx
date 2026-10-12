@@ -785,7 +785,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             </label>
             <input
               type="email"
-              value={settings.support_email || "support@thefitnessstore.com"}
+              value={settings.support_email || "thefitnessstore2022@gmail.com"}
               onChange={(e) => handleChange("support_email", e.target.value)}
               className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
