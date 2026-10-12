@@ -100,13 +100,16 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
           </p>
         </div>
 
-        {/* Status Filter Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto text-xs">
+        {/* Status Filter Tabs - Separated with generous bottom padding from scrollbar */}
+        <div
+          className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 text-xs scrollbar-thin scrollbar-thumb-[#2f2f2f] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap shrink-0"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <button
             onClick={() => setFilterStatus("ALL")}
-            className={`px-3 py-1.5 rounded-xl font-semibold uppercase tracking-wider transition-colors shrink-0 ${
+            className={`px-3.5 py-2 rounded-xl font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filterStatus === "ALL"
-                ? "bg-[#E31E2F] text-white"
+                ? "bg-[#E31E2F] text-white shadow-sm font-bold"
                 : "bg-[#141414] text-neutral-400 hover:text-white border border-[#262626]"
             }`}
           >
@@ -118,9 +121,9 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
               <button
                 key={opt.value}
                 onClick={() => setFilterStatus(opt.value)}
-                className={`px-3 py-1.5 rounded-xl font-semibold uppercase tracking-wider transition-colors shrink-0 ${
+                className={`px-3.5 py-2 rounded-xl font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
                   filterStatus === opt.value
-                    ? "bg-[#E31E2F] text-white"
+                    ? "bg-[#E31E2F] text-white shadow-sm font-bold"
                     : "bg-[#141414] text-neutral-400 hover:text-white border border-[#262626]"
                 }`}
               >

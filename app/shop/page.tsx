@@ -275,31 +275,31 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           </div>
         )}
 
-        {/* Main Content Layout: Sticky Scrollable Sidebar + Products Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 py-8 items-start">
-          {/* Scrollable Sticky Sidebar Filters (Stays visible alongside products) */}
-          <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-2 scrollbar-thin scrollbar-thumb-[#292929] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent">
+        {/* Main Content Layout: Left Sidebar (Categories & Brands) + Right Products Grid */}
+        <div className="flex flex-row gap-3 sm:gap-6 py-6 items-start">
+          {/* Left Sidebar: Categories & Brands (Always fixed on the left side of the page) */}
+          <aside className="w-28 sm:w-52 md:w-60 lg:w-64 shrink-0 space-y-4 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[#292929] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent">
             {/* Filter by Category with Dedicated Vertical Scrollbar */}
-            <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] space-y-3">
+            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#121212] border border-[#242424] space-y-2">
               <div className="flex items-center justify-between">
-                <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-[#E31E2F]" />
+                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-[#E31E2F]" />
                   <span>CATEGORIES</span>
                 </h3>
-                <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Scrollable</span>
+                <span className="text-[9px] text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
               </div>
 
-              {/* Scrollable list container with explicit styled scrollbar */}
-              <div className="max-h-60 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-1">
+              {/* Scrollable list container */}
+              <div className="max-h-64 sm:max-h-72 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
                 <Link
                   href={`/shop${currentBrand ? `?brand=${encodeURIComponent(currentBrand)}` : ""}`}
-                  className={`block px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
+                  className={`block px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                     !currentCategorySlug
                       ? "bg-[#E31E2F] text-white font-bold"
                       : "text-neutral-400 hover:text-white hover:bg-[#181818]"
                   }`}
                 >
-                  All Categories ({totalCount})
+                  All ({totalCount})
                 </Link>
 
                 {categories.map((cat) => {
@@ -311,14 +311,14 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                         category: cat.slug,
                         ...(currentBrand ? { brand: currentBrand } : {}),
                       }).toString()}`}
-                      className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
+                      className={`flex items-center justify-between px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                         isSelected
                           ? "bg-[#E31E2F] text-white font-bold"
                           : "text-neutral-400 hover:text-white hover:bg-[#181818]"
                       }`}
                     >
-                      <span className="truncate pr-2">{cat.name}</span>
-                      <span className="text-[10px] opacity-75 font-mono shrink-0">
+                      <span className="truncate pr-1">{cat.name}</span>
+                      <span className="text-[9px] sm:text-[10px] opacity-75 font-mono shrink-0 hidden sm:inline">
                         {cat._count.products}
                       </span>
                     </Link>
@@ -329,20 +329,20 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
             {/* Filter by Brand with Dedicated Vertical Scrollbar */}
             {brands.length > 0 && (
-              <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] space-y-3">
+              <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#121212] border border-[#242424] space-y-2">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                    <Award className="w-4 h-4 text-[#E31E2F]" />
+                  <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-[#E31E2F]" />
                     <span>BRANDS</span>
                   </h3>
-                  <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Scrollable</span>
+                  <span className="text-[9px] text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
                 </div>
 
-                {/* Scrollable brands container with explicit styled scrollbar */}
-                <div className="max-h-52 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-1">
+                {/* Scrollable brands container */}
+                <div className="max-h-52 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
                   <Link
                     href={`/shop${currentCategorySlug ? `?category=${currentCategorySlug}` : ""}`}
-                    className={`block px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
+                    className={`block px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                       !currentBrand
                         ? "bg-[#E31E2F] text-white font-bold"
                         : "text-neutral-400 hover:text-white hover:bg-[#181818]"
@@ -360,13 +360,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                           ...(currentCategorySlug ? { category: currentCategorySlug } : {}),
                           brand: b,
                         }).toString()}`}
-                        className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors ${
+                        className={`flex items-center justify-between px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                           isSelected
                             ? "bg-[#E31E2F] text-white font-bold"
                             : "text-neutral-400 hover:text-white hover:bg-[#181818]"
                         }`}
                       >
-                        <span className="truncate pr-2">{b}</span>
+                        <span className="truncate pr-1">{b}</span>
                         {isSelected && <span className="text-[10px] font-bold">&bull;</span>}
                       </Link>
                     );
@@ -374,29 +374,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 </div>
               </div>
             )}
-
-            {/* Direct WhatsApp Wholesale Help Banner */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-[#2c2c2c] space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#E31E2F]">
-                NEED ASSISTANCE?
-              </span>
-              <h4 className="font-display text-lg font-bold uppercase text-white leading-tight">
-                WHOLESALE & BULK ENQUIRIES
-              </h4>
-              <p className="text-xs text-neutral-400 leading-relaxed">
-                Looking for multiple gym pieces or bulk equipment rates? Direct chat with store management on WhatsApp.
-              </p>
-              <Link
-                href="/bulk-orders"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-[#E31E2F] hover:underline uppercase tracking-wider pt-1"
-              >
-                <span>Bulk Order Form</span> &rarr;
-              </Link>
-            </div>
           </aside>
 
-          {/* Products Column (Directly visible alongside the scrollable category sidebar) */}
-          <div className="lg:col-span-3 space-y-6">
+          {/* Right Column: Products Grid Beside Left Sidebar */}
+          <div className="flex-1 min-w-0 space-y-6">
             {/* Main Product Grid */}
             {products.length === 0 ? (
               <div className="py-20 text-center rounded-2xl bg-[#121212] border border-[#222222] p-8 space-y-4">
@@ -415,7 +396,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-2.5 sm:gap-4">
                   {products.map((p) => (
                     <ProductCard
                       key={p.id}

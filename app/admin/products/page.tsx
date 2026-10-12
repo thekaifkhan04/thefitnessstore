@@ -67,38 +67,43 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-wrap items-center gap-3">
-        <form action="/admin/products" method="GET" className="relative flex-1 min-w-[240px]">
-          {categoryId && <input type="hidden" name="categoryId" value={categoryId} />}
-          <input
-            type="text"
-            name="q"
-            defaultValue={query || ""}
-            placeholder="Search by name, SKU, or brand..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#121212] border border-[#2b2b2b] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
-          />
-          <Search className="w-4 h-4 text-neutral-500 absolute left-3.5 top-3" />
-        </form>
+      {/* Search Bar */}
+      <form action="/admin/products" method="GET" className="relative w-full">
+        {categoryId && <input type="hidden" name="categoryId" value={categoryId} />}
+        <input
+          type="text"
+          name="q"
+          defaultValue={query || ""}
+          placeholder="Search by name, SKU, or brand..."
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#121212] border border-[#2b2b2b] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+        />
+        <Search className="w-4 h-4 text-neutral-500 absolute left-3.5 top-3" />
+      </form>
 
-        <div className="flex items-center gap-2 overflow-x-auto">
+      {/* Categories Filter Strip - Separated with generous bottom padding so scrollbar never overlaps buttons */}
+      <div className="pt-1">
+        <div
+          className="flex items-center gap-2 overflow-x-auto pb-3.5 pt-1 px-1 scrollbar-thin scrollbar-thumb-[#2f2f2f] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
           <Link
             href="/admin/products"
-            className={`px-3 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider shrink-0 ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
               !categoryId
-                ? "bg-[#1f1f1f] text-white border border-[#333333]"
-                : "bg-[#121212] text-neutral-400 hover:text-white border border-[#242424]"
+                ? "bg-[#E31E2F] text-white shadow-sm font-bold"
+                : "bg-[#141414] text-neutral-400 hover:text-white border border-[#242424]"
             }`}
           >
-            All Categories
+            All Categories ({products.length})
           </Link>
-          {categories.slice(0, 8).map((cat) => (
+          {categories.map((cat) => (
             <Link
               key={cat.id}
               href={`/admin/products?categoryId=${cat.id}`}
-              className={`px-3 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider shrink-0 ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
                 categoryId === cat.id
-                  ? "bg-[#E31E2F] text-white"
-                  : "bg-[#121212] text-neutral-400 hover:text-white border border-[#242424]"
+                  ? "bg-[#E31E2F] text-white shadow-sm font-bold"
+                  : "bg-[#141414] text-neutral-400 hover:text-white border border-[#242424]"
               }`}
             >
               {cat.name}
