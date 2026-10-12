@@ -4,6 +4,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { getStoreSettings } from "@/lib/settings";
 import { ProductCard } from "@/components/product/product-card";
+import { ScrollMarquee } from "@/components/home/scroll-marquee";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import {
   ArrowRight,
@@ -241,32 +242,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TYPOGRAPHIC MARQUEE STRIP - THE FITNESS STORE Animated Left-to-Right */}
-      <section className="py-7 bg-[#080808] overflow-hidden select-none border-b border-[#181818]">
-        {/* Line 1: Moving Smoothly Left-to-Right */}
-        <div className="flex whitespace-nowrap overflow-hidden">
-          <div className="animate-marquee-right flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-neutral-100">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span key={i} className="inline-flex items-center shrink-0">
-                <span>{settings.marquee_line1_text || "THE FITNESS STORE"}</span>
-                <span className="text-[#E31E2F] mx-6 sm:mx-8">·</span>
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Line 2: Moving Smoothly in Outline Style */}
-        <div className="flex whitespace-nowrap overflow-hidden mt-2 sm:mt-3">
-          <div className="animate-marquee-left flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-stroke">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span key={i} className="inline-flex items-center shrink-0">
-                <span>{settings.marquee_line2_text || "THE FITNESS STORE"}</span>
-                <span className="text-[#E31E2F] mx-6 sm:mx-8">·</span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* TYPOGRAPHIC SCROLL MARQUEE STRIP - Only moves Left-to-Right while scrolling through it */}
+      <ScrollMarquee
+        line1Text={settings.marquee_line1_text || "THE FITNESS STORE"}
+        line2Text={
+          settings.marquee_line2_text ||
+          "THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT"
+        }
+      />
 
       {/* SECTION D: SHOP BY CATEGORY */}
       <section id="categories" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
