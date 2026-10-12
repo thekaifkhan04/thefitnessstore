@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { TFSLogoEmblem } from "@/components/brand/tfs-logo";
+import { useSettings } from "@/context/settings-context";
 import {
   Save,
   CheckCircle2,
@@ -65,6 +66,7 @@ const STYLE_OPTIONS = [
 
 export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const router = useRouter();
+  const { updateSettings } = useSettings();
   const [settings, setSettings] = useState<Record<string, string>>(initialSettings);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
@@ -78,7 +80,22 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const activeStyle = settings.theme_heading_style || "uppercase";
 
   const handleChange = (key: string, value: string) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
+    setSettings((prev) => {
+      const next = { ...prev, [key]: value };
+      if (
+        [
+          "theme_primary_color",
+          "theme_text_color",
+          "theme_muted_text_color",
+          "theme_heading_font",
+          "theme_heading_style",
+          "store_name",
+        ].includes(key)
+      ) {
+        updateSettings({ [key]: value } as any);
+      }
+      return next;
+    });
   };
 
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +120,20 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
 
       const data = await res.json();
       if (data.url) {
-        handleChange("store_logo_url", data.url);
+        const nextSettings = { ...settings, store_logo_url: data.url };
+        setSettings(nextSettings);
+        updateSettings(nextSettings as any);
+
+        // Forcibly persist immediately to the database
+        await fetch("/api/admin/settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(nextSettings),
+        });
+
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2500);
+        router.refresh();
       }
     } catch (err: any) {
       setError(err?.message || "Failed to upload logo");
@@ -111,6 +141,23 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
       setIsUploadingLogo(false);
       e.target.value = "";
     }
+  };
+
+  const handleResetLogo = async () => {
+    const nextSettings = { ...settings, store_logo_url: "" };
+    setSettings(nextSettings);
+    updateSettings(nextSettings as any);
+
+    try {
+      await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(nextSettings),
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2500);
+      router.refresh();
+    } catch {}
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -130,6 +177,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
         setError("Failed to save store configuration.");
       } else {
         setSaved(true);
+        updateSettings(settings as any);
         setTimeout(() => setSaved(false), 2500);
         router.refresh();
       }
@@ -254,7 +302,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                   {settings.store_logo_url && (
                     <button
                       type="button"
-                      onClick={() => handleChange("store_logo_url", "")}
+                      onClick={handleResetLogo}
                       className="px-3 py-1.5 rounded-lg bg-[#1f1f1f] hover:bg-red-950/40 hover:text-red-400 text-neutral-400 text-xs flex items-center gap-1 transition-colors"
                     >
                       <RotateCcw className="w-3 h-3" />

@@ -13,8 +13,10 @@ import {
   Plus,
   ArrowRight,
   Clock,
-  ExternalLink,
   SlidersHorizontal,
+  ExternalLink,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -25,7 +27,7 @@ export default async function AdminDashboardPage() {
     redirect("/admin/login");
   }
 
-  // Calculate real database metrics
+  // Calculate real database metrics (excluding unneeded inventory list)
   const [
     totalProducts,
     publishedProducts,
@@ -34,7 +36,6 @@ export default async function AdminDashboardPage() {
     totalCategories,
     activeOffers,
     totalEnquiries,
-    recentProducts,
     recentEnquiries,
   ] = await Promise.all([
     prisma.product.count(),
@@ -44,13 +45,8 @@ export default async function AdminDashboardPage() {
     prisma.category.count({ where: { isActive: true } }),
     prisma.offer.count({ where: { isActive: true } }),
     prisma.orderEnquiry.count(),
-    prisma.product.findMany({
-      take: 6,
-      orderBy: { updatedAt: "desc" },
-      include: { category: true },
-    }),
     prisma.orderEnquiry.findMany({
-      take: 5,
+      take: 8,
       orderBy: { createdAt: "desc" },
     }),
   ]);
@@ -64,7 +60,7 @@ export default async function AdminDashboardPage() {
             ADMIN DASHBOARD
           </h1>
           <p className="text-xs text-neutral-400 mt-1">
-            Welcome back, <span className="text-white font-semibold">{session.name}</span>. Here is your live inventory status.
+            Welcome back, <span className="text-white font-semibold">{session.name}</span>. Real-time store performance & enquiry management.
           </p>
         </div>
 
@@ -143,132 +139,156 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Split Section: Recent Product Updates & Recent Enquiries */}
+      {/* Main Section: Quick Management Actions + Recent Enquiries */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left: Recent Products (Inspired by RYNOX Admin cards) */}
-        <div className="lg:col-span-8 space-y-4">
+        {/* Left: Quick Actions Hub */}
+        <div className="lg:col-span-5 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl uppercase tracking-wider text-white">
-              RECENTLY UPDATED INVENTORY
+              MANAGEMENT SHORTCUTS
             </h2>
-            <Link
-              href="/admin/products"
-              className="text-xs font-semibold uppercase tracking-wider text-neutral-400 hover:text-[#E31E2F] flex items-center gap-1"
-            >
-              <span>Manage All ({totalProducts})</span> &rarr;
-            </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {recentProducts.map((p) => (
-              <div
-                key={p.id}
-                className={`p-5 rounded-2xl bg-[#131313] border border-[#242424] hover:border-[#383838] transition-all flex flex-col justify-between border-l-4 ${
-                  p.isFeatured
-                    ? "border-l-[#E31E2F]"
-                    : p.isAvailable
-                    ? "border-l-emerald-500"
-                    : "border-l-amber-500"
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
-                      {p.category.name}
-                    </span>
-                    <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                        p.isAvailable
-                          ? "bg-emerald-950/60 text-emerald-400 border border-emerald-800/60"
-                          : "bg-amber-950/60 text-amber-400 border border-amber-800/60"
-                      }`}
-                    >
-                      {p.isAvailable ? "Published" : "Unavailable"}
-                    </span>
-                  </div>
-
-                  <h3 className="font-bold text-sm text-white line-clamp-1">{p.name}</h3>
-                  <div className="flex items-center gap-3 text-xs text-neutral-400 mt-1">
-                    <span className="font-display text-base font-bold text-white">
-                      {formatINR(p.sellingPricePaise)}
-                    </span>
-                    <span>·</span>
-                    <span>SKU: {p.sku}</span>
-                    <span>·</span>
-                    <span className={p.stock < 10 ? "text-amber-400 font-medium" : ""}>
-                      Stock: {p.stock}
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <Link
+              href="/admin/products"
+              className="p-4 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F]/60 transition-all group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-red-950/40 border border-red-800/50 flex items-center justify-center text-[#E31E2F]">
+                  <Package className="w-5 h-5" />
                 </div>
-
-                <div className="pt-4 border-t border-[#1e1e1e] mt-4 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-3">
-                    <Link
-                      href={`/admin/products/${p.id}/edit`}
-                      className="text-neutral-400 hover:text-white font-medium"
-                    >
-                      Edit
-                    </Link>
-                    <Link
-                      href={`/product/${p.slug}`}
-                      target="_blank"
-                      className="text-neutral-500 hover:text-neutral-300"
-                    >
-                      View page
-                    </Link>
-                  </div>
-                  {p.isFeatured && (
-                    <span className="text-[10px] text-[#E31E2F] font-bold uppercase">
-                      ★ Featured
-                    </span>
-                  )}
-                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400 bg-[#1a1a1a] px-2 py-0.5 rounded">
+                  {totalProducts}
+                </span>
               </div>
-            ))}
+              <div>
+                <h3 className="font-display text-base font-bold uppercase text-white group-hover:text-[#E31E2F] transition-colors">
+                  Product Catalogue
+                </h3>
+                <p className="text-[11px] text-neutral-400 mt-0.5">
+                  View, filter, edit & manage all store products.
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/admin/categories"
+              className="p-4 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F]/60 transition-all group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-950/40 border border-blue-800/50 flex items-center justify-center text-blue-400">
+                  <Layers className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400 bg-[#1a1a1a] px-2 py-0.5 rounded">
+                  {totalCategories}
+                </span>
+              </div>
+              <div>
+                <h3 className="font-display text-base font-bold uppercase text-white group-hover:text-[#E31E2F] transition-colors">
+                  Categories
+                </h3>
+                <p className="text-[11px] text-neutral-400 mt-0.5">
+                  Organize categories, display order & images.
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/admin/offers"
+              className="p-4 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F]/60 transition-all group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-rose-950/40 border border-rose-800/50 flex items-center justify-center text-rose-400">
+                  <Flame className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono font-bold text-neutral-400 bg-[#1a1a1a] px-2 py-0.5 rounded">
+                  {activeOffers}
+                </span>
+              </div>
+              <div>
+                <h3 className="font-display text-base font-bold uppercase text-white group-hover:text-[#E31E2F] transition-colors">
+                  Deals & Offers
+                </h3>
+                <p className="text-[11px] text-neutral-400 mt-0.5">
+                  Manage promotional badges, banners & discounts.
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/admin/settings"
+              className="p-4 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F]/60 transition-all group flex flex-col justify-between"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-950/40 border border-emerald-800/50 flex items-center justify-center text-emerald-400">
+                  <SlidersHorizontal className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/50">
+                  Live
+                </span>
+              </div>
+              <div>
+                <h3 className="font-display text-base font-bold uppercase text-white group-hover:text-[#E31E2F] transition-colors">
+                  Store Settings
+                </h3>
+                <p className="text-[11px] text-neutral-400 mt-0.5">
+                  Upload logo, change theme color & WhatsApp details.
+                </p>
+              </div>
+            </Link>
           </div>
         </div>
 
         {/* Right: WhatsApp Enquiries Tracker */}
-        <div className="lg:col-span-4 space-y-4">
+        <div className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-xl uppercase tracking-wider text-white">
-              RECENT ENQUIRIES
+              RECENT WHATSAPP ENQUIRIES
             </h2>
             <Link
               href="/admin/orders"
-              className="text-xs font-semibold uppercase tracking-wider text-neutral-400 hover:text-[#E31E2F]"
+              className="text-xs font-semibold uppercase tracking-wider text-neutral-400 hover:text-[#E31E2F] flex items-center gap-1"
             >
-              View All
+              <span>View All ({totalEnquiries})</span> &rarr;
             </Link>
           </div>
 
           <div className="rounded-2xl bg-[#121212] border border-[#242424] divide-y divide-[#1e1e1e] overflow-hidden">
             {recentEnquiries.length === 0 ? (
-              <div className="p-8 text-center text-xs text-neutral-500">
+              <div className="p-10 text-center text-xs text-neutral-500">
                 No WhatsApp enquiries recorded yet.
               </div>
             ) : (
               recentEnquiries.map((enq) => (
-                <div key={enq.id} className="p-4 space-y-2 text-xs">
+                <div key={enq.id} className="p-4 sm:p-5 space-y-2 text-xs hover:bg-[#161616] transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono font-bold text-white text-[11px]">
+                    <span className="font-mono font-bold text-white text-[12px]">
                       {enq.reference}
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-neutral-800 text-neutral-300">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-neutral-800 text-neutral-300">
                       {enq.status.replace("_", " ")}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between text-neutral-400">
-                    <span>
-                      {enq.customerName || "Anonymous Shopper"} ({enq.itemsCount} items)
+                  <div className="flex items-center justify-between text-neutral-300">
+                    <span className="font-medium">
+                      {enq.customerName || "Anonymous Customer"} · {enq.itemsCount} item{enq.itemsCount !== 1 ? "s" : ""}
                     </span>
-                    <span className="font-display text-sm font-bold text-white">
+                    <span className="font-display text-base font-bold text-white">
                       {formatINR(enq.totalAmountPaise)}
                     </span>
                   </div>
-                  <div className="text-[10px] text-neutral-500 flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    <span>{new Date(enq.createdAt).toLocaleString()}</span>
+                  <div className="text-[11px] text-neutral-500 flex items-center justify-between pt-1">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {new Date(enq.createdAt).toLocaleString()}
+                    </span>
+                    <Link
+                      href="/admin/orders"
+                      className="text-neutral-400 hover:text-[#E31E2F] transition-colors font-medium"
+                    >
+                      Inspect Enquiry &rarr;
+                    </Link>
                   </div>
                 </div>
               ))

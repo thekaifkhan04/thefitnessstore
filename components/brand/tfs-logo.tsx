@@ -1,8 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useSettings } from "@/context/settings-context";
 
 interface TFSLogoProps {
@@ -13,17 +12,29 @@ interface TFSLogoProps {
   logoUrl?: string;
 }
 
-export function TFSLogoEmblem({ className = "w-8 h-8", logoUrl }: { className?: string; logoUrl?: string }) {
-  if (logoUrl) {
+export function TFSLogoEmblem({
+  className = "w-8 h-8",
+  logoUrl,
+}: {
+  className?: string;
+  logoUrl?: string;
+}) {
+  const [imgError, setImgError] = useState(false);
+
+  // Reset error whenever logoUrl changes
+  useEffect(() => {
+    setImgError(false);
+  }, [logoUrl]);
+
+  if (logoUrl && logoUrl.trim() !== "" && !imgError) {
     return (
       <div className={`relative ${className} flex items-center justify-center overflow-hidden`}>
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={logoUrl}
           alt="Store Logo"
-          fill
-          sizes="64px"
-          className="object-contain"
-          priority
+          className="w-full h-full object-contain max-h-full"
+          onError={() => setImgError(true)}
         />
       </div>
     );
@@ -77,10 +88,10 @@ export function TFSLogo({
   const storeName = settings?.store_name || "THE FITNESS STORE";
 
   const emblemSizes = {
-    sm: "w-7 h-7",
-    md: "w-9 h-9",
-    lg: "w-11 h-11",
-    xl: "w-14 h-14",
+    sm: effectiveLogoUrl ? "h-7 w-auto min-w-[1.75rem] max-w-[7rem]" : "w-7 h-7",
+    md: effectiveLogoUrl ? "h-9 w-auto min-w-[2.25rem] max-w-[9rem]" : "w-9 h-9",
+    lg: effectiveLogoUrl ? "h-11 w-auto min-w-[2.75rem] max-w-[12rem]" : "w-11 h-11",
+    xl: effectiveLogoUrl ? "h-14 w-auto min-w-[3.5rem] max-w-[15rem]" : "w-14 h-14",
   };
 
   const wordmarkSizes = {
@@ -96,7 +107,7 @@ export function TFSLogo({
 
   const content = (
     <div className={`flex items-center gap-3 select-none ${className}`}>
-      <div className="relative flex items-center justify-center p-1 rounded bg-[#111111] border border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors">
+      <div className="relative flex items-center justify-center p-1 rounded bg-[#111111] border border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors shrink-0">
         <TFSLogoEmblem className={emblemSizes[size]} logoUrl={effectiveLogoUrl} />
       </div>
       {showWordmark && (

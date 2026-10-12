@@ -69,6 +69,9 @@ const FONT_MAP: Record<string, string> = {
   impact: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function RootLayout({
   children,
 }: {
@@ -113,8 +116,8 @@ export default async function RootLayout({
                 color: var(--text-secondary) !important;
               }
               .font-display {
-                font-family: ${headingFont} !important;
-                text-transform: ${headingStyle} !important;
+                font-family: var(--font-display-custom, ${headingFont}) !important;
+                text-transform: var(--heading-style-custom, ${headingStyle}) !important;
               }
               .bg-\\[\\#E31E2F\\] { background-color: var(--brand-primary) !important; }
               .bg-\\[\\#E31E2F\\] .text-white, .bg-\\[\\#E31E2F\\] * { color: #ffffff !important; }
