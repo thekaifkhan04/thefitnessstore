@@ -183,3 +183,33 @@ test("Theme System - Live HTML response includes zero-FOUC script and ThemeToggl
     "Live HTML must render ThemeToggle button"
   );
 });
+
+test("Theme System - Admin Settings form supports dual-theme text and protects light mode", () => {
+  const settingsFormContent = fs.readFileSync(path.join(process.cwd(), "components/admin/settings-form.tsx"), "utf-8");
+  const settingsContextContent = fs.readFileSync(path.join(process.cwd(), "context/settings-context.tsx"), "utf-8");
+
+  // Headers and labels have light and dark classes
+  assert.ok(
+    settingsFormContent.includes("text-neutral-900 dark:text-white"),
+    "Admin settings form titles must use text-neutral-900 dark:text-white"
+  );
+  assert.ok(
+    settingsFormContent.includes("text-neutral-700 dark:text-neutral-400") ||
+    settingsFormContent.includes("text-neutral-600 dark:text-neutral-400"),
+    "Admin settings form labels must adapt to light mode"
+  );
+  assert.ok(
+    settingsFormContent.includes("bg-white dark:bg-[#121212]"),
+    "Admin settings form card containers must adapt to light mode"
+  );
+
+  // Settings context does not force white text in light mode
+  assert.ok(
+    settingsContextContent.includes("isLight"),
+    "SettingsContext applyThemeStyles must check if light mode is active"
+  );
+  assert.ok(
+    settingsContextContent.includes("removeProperty(\"--text-primary\")"),
+    "SettingsContext applyThemeStyles must remove inline text override in light mode"
+  );
+});

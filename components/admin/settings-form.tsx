@@ -210,12 +210,12 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 pb-16">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f1f1f]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#1f1f1f]">
         <div>
-          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white">
+          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
             STORE CONFIGURATION & THEME
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
             Customize store logo, website theme color, contact coordinates, WhatsApp phone, and hero copywriting
           </p>
         </div>
@@ -265,42 +265,42 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
         </div>
 
         {/* Section 1: Store Logo & Visual Branding */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-5">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-5 shadow-sm">
           <div className="flex items-center gap-2">
-            <ImageIcon className="w-4 h-4 text-neutral-400" />
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+            <ImageIcon className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               STORE LOGO & BRANDING
             </h2>
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Store Name
             </label>
             <input
               type="text"
               value={settings.store_name || "THE FITNESS STORE"}
               onChange={(e) => handleChange("store_name", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Tagline
             </label>
             <input
               type="text"
               value={settings.store_tagline || "Wholesaler & Retailer of Sports & Fitness Goods"}
               onChange={(e) => handleChange("store_tagline", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           {/* Logo Upload & Preview */}
-          <div className="pt-2 border-t border-[#1e1e1e] space-y-4">
+          <div className="pt-2 border-t border-neutral-200 dark:border-[#1e1e1e] space-y-4">
             <div className="flex items-center justify-between">
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block">
                 Custom Logo (PNG, JPG, SVG or WebP)
               </label>
               {settings.store_logo_url && (
@@ -324,9 +324,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               </div>
             )}
 
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-[#181818] border border-[#2a2a2a]">
+            <div className="flex items-center gap-4 p-4 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a]">
               {/* Preview */}
-              <div className="w-16 h-16 rounded-xl bg-[#101010] border border-[#333] flex items-center justify-center p-2 relative overflow-hidden shrink-0">
+              <div className="w-16 h-16 rounded-xl bg-neutral-100 dark:bg-[#101010] border border-neutral-300 dark:border-[#333] flex items-center justify-center p-2 relative overflow-hidden shrink-0">
                 {settings.store_logo_url ? (
                   <Image
                     src={settings.store_logo_url}
@@ -341,14 +341,14 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               </div>
 
               <div className="flex-1 space-y-2">
-                <div className="text-[11px] text-neutral-400">
+                <div className="text-[11px] text-neutral-600 dark:text-neutral-400">
                   {settings.store_logo_url
                     ? "Using custom uploaded logo"
                     : "Using default TFS athletic geometric emblem"}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-[#242424] hover:bg-[#303030] border border-[#3a3a3a] text-xs font-semibold text-white flex items-center gap-1.5 transition-colors">
+                  <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-[#242424] dark:hover:bg-[#303030] border border-neutral-300 dark:border-[#3a3a3a] text-xs font-semibold text-neutral-800 dark:text-white flex items-center gap-1.5 transition-colors">
                     <Upload className="w-3.5 h-3.5" />
                     <span>{isUploadingLogo ? "Uploading..." : "Upload Logo File"}</span>
                     <input
@@ -365,7 +365,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                       type="button"
                       disabled={isSavingLogo}
                       onClick={handleResetLogo}
-                      className="px-3 py-1.5 rounded-lg bg-[#1f1f1f] hover:bg-red-950/40 hover:text-red-400 text-neutral-400 text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-neutral-100 hover:bg-red-50 hover:text-red-600 dark:bg-[#1f1f1f] dark:hover:bg-red-950/40 dark:hover:text-red-400 text-neutral-600 dark:text-neutral-400 text-xs flex items-center gap-1 transition-colors cursor-pointer"
                     >
                       <RotateCcw className="w-3 h-3" />
                       <span>Reset to Default</span>
@@ -376,7 +376,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             </div>
 
             <div>
-              <label className="text-[11px] text-neutral-400 block mb-1">
+              <label className="text-[11px] text-neutral-600 dark:text-neutral-400 block mb-1">
                 Logo Image URL or Local Asset Path:
               </label>
               <div className="flex gap-2">
@@ -385,7 +385,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                   placeholder="/images/brand/custom-logo.png or https://..."
                   value={settings.store_logo_url || ""}
                   onChange={(e) => handleChange("store_logo_url", e.target.value)}
-                  className="flex-1 px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white text-xs font-mono focus:outline-none focus:border-neutral-400"
+                  className="flex-1 px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white text-xs font-mono focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
                 />
                 <button
                   type="button"
@@ -401,12 +401,12 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             </div>
 
             {/* Wordmark display toggle */}
-            <div className="pt-2 border-t border-[#1e1e1e] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="pt-2 border-t border-neutral-200 dark:border-[#1e1e1e] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <span className="text-xs font-semibold text-neutral-300 block">
+                <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-300 block">
                   Wordmark Beside Logo
                 </span>
-                <span className="text-[11px] text-neutral-500">
+                <span className="text-[11px] text-neutral-500 dark:text-neutral-400">
                   Choose whether &quot;THE FITNESS STORE&quot; text displays beside the logo
                 </span>
               </div>
@@ -419,8 +419,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     (settings.store_logo_show_wordmark ?? "true") !== "false"
-                      ? "bg-white text-black shadow"
-                      : "bg-[#1f1f1f] text-neutral-400 hover:text-white"
+                      ? "bg-neutral-900 text-white dark:bg-white dark:text-black shadow"
+                      : "bg-neutral-100 text-neutral-600 hover:text-neutral-900 dark:bg-[#1f1f1f] dark:text-neutral-400 dark:hover:text-white"
                   }`}
                 >
                   Show Text
@@ -433,8 +433,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                   }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     settings.store_logo_show_wordmark === "false"
-                      ? "bg-white text-black shadow"
-                      : "bg-[#1f1f1f] text-neutral-400 hover:text-white"
+                      ? "bg-neutral-900 text-white dark:bg-white dark:text-black shadow"
+                      : "bg-neutral-100 text-neutral-600 hover:text-neutral-900 dark:bg-[#1f1f1f] dark:text-neutral-400 dark:hover:text-white"
                   }`}
                 >
                   Logo Only
@@ -443,40 +443,40 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             </div>
 
             {/* Live Preview */}
-            <div className="pt-2 border-t border-[#1e1e1e] space-y-2">
-              <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+            <div className="pt-2 border-t border-neutral-200 dark:border-[#1e1e1e] space-y-2">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
                 Live Header Preview (As Rendered on Website)
               </div>
-              <div className="p-3.5 rounded-xl bg-black border border-[#222222] flex items-center justify-between overflow-x-auto">
+              <div className="p-3.5 rounded-xl bg-neutral-100 dark:bg-black border border-neutral-200 dark:border-[#222222] flex items-center justify-between overflow-x-auto">
                 <TFSLogo size="md" href="" />
-                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-mono">Navbar</span>
+                <span className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono">Navbar</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Section 2: Website Color Theme Customizer */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-5">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-5 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Palette className="w-4 h-4 text-neutral-400" />
-              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+              <Palette className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 WEBSITE ACCENT COLOR THEME
               </h2>
             </div>
             <div
-              className="w-5 h-5 rounded-full border border-white/20 shadow-sm"
+              className="w-5 h-5 rounded-full border border-neutral-300 dark:border-white/20 shadow-sm"
               style={{ backgroundColor: activeColor }}
             />
           </div>
 
-          <p className="text-neutral-400 text-xs leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
             Select a performance brand color preset or pick any custom hex shade. Buttons, badges, icons, accent lines, and glows will update across the entire store.
           </p>
 
           {/* Presets Grid */}
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-2">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-2">
               Athletic Presets
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -489,15 +489,15 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                     onClick={() => handleChange("theme_primary_color", preset.color)}
                     className={`flex items-center gap-2 p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1e1e1e] border-white/80 shadow-md ring-1 ring-white/50"
-                        : "bg-[#171717] border-[#292929] hover:border-neutral-500 hover:bg-[#1d1d1d]"
+                        ? "bg-neutral-100 dark:bg-[#1e1e1e] border-neutral-900 dark:border-white/80 shadow-md ring-1 ring-neutral-900/30 dark:ring-white/50"
+                        : "bg-neutral-50 dark:bg-[#171717] border-neutral-200 dark:border-[#292929] hover:border-neutral-400 dark:hover:border-neutral-500 hover:bg-neutral-100 dark:hover:bg-[#1d1d1d]"
                     }`}
                   >
                     <span
                       className="w-4 h-4 rounded-full shrink-0 shadow-sm"
                       style={{ backgroundColor: preset.color }}
                     />
-                    <span className="text-[11px] font-semibold text-neutral-200 truncate">
+                    <span className="text-[11px] font-semibold text-neutral-800 dark:text-neutral-200 truncate">
                       {preset.name.split(" ")[0]}
                     </span>
                   </button>
@@ -507,8 +507,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           {/* Custom Color Inputs */}
-          <div className="pt-2 border-t border-[#1e1e1e]">
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+          <div className="pt-2 border-t border-neutral-200 dark:border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Custom Color Picker
             </label>
             <div className="flex items-center gap-2">
@@ -516,26 +516,26 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 type="color"
                 value={activeColor}
                 onChange={(e) => handleChange("theme_primary_color", e.target.value)}
-                className="w-10 h-10 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+                className="w-10 h-10 rounded-xl bg-transparent border border-neutral-300 dark:border-[#333] cursor-pointer p-0.5"
               />
               <input
                 type="text"
                 value={activeColor}
                 onChange={(e) => handleChange("theme_primary_color", e.target.value)}
                 placeholder="#E31E2F"
-                className="w-28 px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+                className="w-28 px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white font-mono uppercase text-xs focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
-              <span className="text-[11px] text-neutral-500">Pick any custom hex code</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">Pick any custom hex code</span>
             </div>
           </div>
         </div>
 
         {/* Section 3: Website Typography & Text Styling Customizer */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-6">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Type className="w-4 h-4 text-neutral-400" />
-              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+              <Type className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 WEBSITE TYPOGRAPHY & TEXT STYLING
               </h2>
             </div>
@@ -547,25 +547,25 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 handleChange("theme_heading_font", "bebas");
                 handleChange("theme_heading_style", "uppercase");
               }}
-              className="text-[11px] text-neutral-400 hover:text-white flex items-center gap-1 hover:underline cursor-pointer"
+              className="text-[11px] text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white flex items-center gap-1 hover:underline cursor-pointer"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Reset Typography</span>
             </button>
           </div>
 
-          <p className="text-neutral-400 text-xs leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
             Customize the dedicated primary text color, muted/secondary text color, heading display font family, and typography styling for the entire website.
           </p>
 
           {/* Primary Text Color */}
           <div className="space-y-3 pt-1">
             <div className="flex items-center justify-between">
-              <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+              <label className="font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-300 text-xs block">
                 Primary Text Color (Headings & Main Content)
               </label>
               <div
-                className="w-4 h-4 rounded-full border border-white/20 shadow-sm"
+                className="w-4 h-4 rounded-full border border-neutral-300 dark:border-white/20 shadow-sm"
                 style={{ backgroundColor: activeTextColor }}
               />
             </div>
@@ -581,15 +581,15 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                     onClick={() => handleChange("theme_text_color", p.color)}
                     className={`flex items-center gap-2 p-2 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
-                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                        ? "bg-neutral-100 dark:bg-[#1e1e1e] border-neutral-900 dark:border-white/80 ring-1 ring-neutral-900/30 dark:ring-white/40"
+                        : "bg-neutral-50 dark:bg-[#171717] border-neutral-200 dark:border-[#292929] hover:border-neutral-400 dark:hover:border-neutral-500"
                     }`}
                   >
                     <span
                       className="w-3.5 h-3.5 rounded-full shrink-0 border border-black/40"
                       style={{ backgroundColor: p.color }}
                     />
-                    <span className="text-[11px] font-semibold text-neutral-300 truncate">
+                    <span className="text-[11px] font-semibold text-neutral-800 dark:text-neutral-300 truncate">
                       {p.name.split(" ")[0]}
                     </span>
                   </button>
@@ -603,27 +603,27 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 type="color"
                 value={activeTextColor}
                 onChange={(e) => handleChange("theme_text_color", e.target.value)}
-                className="w-9 h-9 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+                className="w-9 h-9 rounded-xl bg-transparent border border-neutral-300 dark:border-[#333] cursor-pointer p-0.5"
               />
               <input
                 type="text"
                 value={activeTextColor}
                 onChange={(e) => handleChange("theme_text_color", e.target.value)}
                 placeholder="#FFFFFF"
-                className="w-28 px-3 py-1.5 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+                className="w-28 px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white font-mono uppercase text-xs focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
-              <span className="text-[11px] text-neutral-500">Pick any custom hex shade</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">Pick any custom hex shade</span>
             </div>
           </div>
 
           {/* Secondary / Muted Text Color */}
-          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
+          <div className="space-y-3 pt-3 border-t border-neutral-200 dark:border-[#1e1e1e]">
             <div className="flex items-center justify-between">
-              <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+              <label className="font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-300 text-xs block">
                 Secondary & Muted Text Color (Descriptions, Subtitles & SKU)
               </label>
               <div
-                className="w-4 h-4 rounded-full border border-white/20 shadow-sm"
+                className="w-4 h-4 rounded-full border border-neutral-300 dark:border-white/20 shadow-sm"
                 style={{ backgroundColor: activeMutedColor }}
               />
             </div>
@@ -639,15 +639,15 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                     onClick={() => handleChange("theme_muted_text_color", p.color)}
                     className={`flex items-center gap-2 p-2 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
-                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                        ? "bg-neutral-100 dark:bg-[#1e1e1e] border-neutral-900 dark:border-white/80 ring-1 ring-neutral-900/30 dark:ring-white/40"
+                        : "bg-neutral-50 dark:bg-[#171717] border-neutral-200 dark:border-[#292929] hover:border-neutral-400 dark:hover:border-neutral-500"
                     }`}
                   >
                     <span
                       className="w-3.5 h-3.5 rounded-full shrink-0 border border-black/40"
                       style={{ backgroundColor: p.color }}
                     />
-                    <span className="text-[11px] font-semibold text-neutral-300 truncate">
+                    <span className="text-[11px] font-semibold text-neutral-800 dark:text-neutral-300 truncate">
                       {p.name.split(" ")[0]}
                     </span>
                   </button>
@@ -661,22 +661,22 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 type="color"
                 value={activeMutedColor}
                 onChange={(e) => handleChange("theme_muted_text_color", e.target.value)}
-                className="w-9 h-9 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+                className="w-9 h-9 rounded-xl bg-transparent border border-neutral-300 dark:border-[#333] cursor-pointer p-0.5"
               />
               <input
                 type="text"
                 value={activeMutedColor}
                 onChange={(e) => handleChange("theme_muted_text_color", e.target.value)}
                 placeholder="#A6A6A6"
-                className="w-28 px-3 py-1.5 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+                className="w-28 px-3 py-1.5 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white font-mono uppercase text-xs focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
-              <span className="text-[11px] text-neutral-500">Pick any custom hex shade</span>
+              <span className="text-[11px] text-neutral-500 dark:text-neutral-400">Pick any custom hex shade</span>
             </div>
           </div>
 
           {/* Heading Display Font Family */}
-          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
-            <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+          <div className="space-y-3 pt-3 border-t border-neutral-200 dark:border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-300 text-xs block">
               Major Headings Display Font Family
             </label>
 
@@ -690,17 +690,17 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                     onClick={() => handleChange("theme_heading_font", f.id)}
                     className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
-                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                        ? "bg-neutral-100 dark:bg-[#1e1e1e] border-neutral-900 dark:border-white/80 ring-1 ring-neutral-900/30 dark:ring-white/40"
+                        : "bg-neutral-50 dark:bg-[#171717] border-neutral-200 dark:border-[#292929] hover:border-neutral-400 dark:hover:border-neutral-500"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-white uppercase">{f.name}</span>
+                      <span className="text-xs font-bold text-neutral-900 dark:text-white uppercase">{f.name}</span>
                       {isSelected && (
-                        <span className="text-[10px] font-bold text-emerald-400">ACTIVE</span>
+                        <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">ACTIVE</span>
                       )}
                     </div>
-                    <p className="text-[10px] text-neutral-400">{f.desc}</p>
+                    <p className="text-[10px] text-neutral-600 dark:text-neutral-400">{f.desc}</p>
                   </button>
                 );
               })}
@@ -708,8 +708,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           {/* Heading Letter Case / Style */}
-          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
-            <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+          <div className="space-y-3 pt-3 border-t border-neutral-200 dark:border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-300 text-xs block">
               Heading Letter Case Style
             </label>
 
@@ -723,17 +723,17 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                     onClick={() => handleChange("theme_heading_style", s.id)}
                     className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                       isSelected
-                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
-                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                        ? "bg-neutral-100 dark:bg-[#1e1e1e] border-neutral-900 dark:border-white/80 ring-1 ring-neutral-900/30 dark:ring-white/40"
+                        : "bg-neutral-50 dark:bg-[#171717] border-neutral-200 dark:border-[#292929] hover:border-neutral-400 dark:hover:border-neutral-500"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-white">{s.name}</span>
+                      <span className="text-xs font-bold text-neutral-900 dark:text-white">{s.name}</span>
                       {isSelected && (
-                        <span className="text-[10px] font-bold text-emerald-400">ACTIVE</span>
+                        <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">ACTIVE</span>
                       )}
                     </div>
-                    <p className="text-[10px] text-neutral-400">{s.desc}</p>
+                    <p className="text-[10px] text-neutral-600 dark:text-neutral-400">{s.desc}</p>
                   </button>
                 );
               })}
@@ -741,17 +741,17 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
         </div>
 
-        {/* Section 3: Contact Coordinates & WhatsApp */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+        {/* Section 4: Contact Coordinates & WhatsApp */}
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
           <div className="flex items-center gap-2">
-            <Phone className="w-4 h-4 text-neutral-400" />
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+            <Phone className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               CONTACT & WHATSAPP
             </h2>
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               WhatsApp Business Number (Country Code + Number, no +) *
             </label>
             <input
@@ -760,124 +760,124 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               value={settings.whatsapp_number || "919876543210"}
               onChange={(e) => handleChange("whatsapp_number", e.target.value)}
               placeholder="919876543210"
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] font-mono text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] font-mono text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
-            <p className="text-[10px] text-neutral-500 mt-1">
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1">
               All product enquiry clicks and floating button route to this number.
             </p>
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Contact Phone
             </label>
             <input
               type="text"
               value={settings.contact_phone || "+91 98765 43210"}
               onChange={(e) => handleChange("contact_phone", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Customer Support Email
             </label>
             <input
               type="email"
               value={settings.support_email || "support@thefitnessstore.com"}
               onChange={(e) => handleChange("support_email", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Showroom / Warehouse Address
             </label>
             <textarea
               rows={2}
               value={settings.store_address || ""}
               onChange={(e) => handleChange("store_address", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
         </div>
 
-        {/* Section 4: Homepage Copywriting */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-          <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+        {/* Section 5: Homepage Copywriting */}
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+          <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
             HOMEPAGE COPYWRITING
           </h2>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Hero Eyebrow
             </label>
             <input
               type="text"
               value={settings.hero_eyebrow || "BUILT FOR EVERY REP"}
               onChange={(e) => handleChange("hero_eyebrow", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Hero Main Headline
             </label>
             <textarea
               rows={2}
               value={settings.hero_headline || "YOUR TRAINING. YOUR EQUIPMENT. YOUR LIMITS."}
               onChange={(e) => handleChange("hero_headline", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Hero Description Text
             </label>
             <textarea
               rows={3}
               value={settings.hero_description || ""}
               onChange={(e) => handleChange("hero_description", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Wholesale Section Headline
             </label>
             <input
               type="text"
               value={settings.wholesale_banner_headline || "BUY FOR YOUR GYM. EQUIP YOUR BUSINESS."}
               onChange={(e) => handleChange("wholesale_banner_headline", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
         </div>
 
-        {/* Section 5: Homepage Hero Featured Category Card */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+        {/* Section 6: Homepage Hero Featured Category Card */}
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Flame className="w-4 h-4 text-[#E31E2F]" />
-              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 HOMEPAGE HERO FEATURED CATEGORY CARD
               </h2>
             </div>
-            <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Top of Homepage</span>
+            <span className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Top of Homepage</span>
           </div>
 
-          <p className="text-neutral-400 text-xs leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
             Customize the prominent athletic showcase card displayed in the right column of the landing page hero section.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             <div>
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
                 Badge Label
               </label>
               <input
@@ -885,12 +885,12 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 value={settings.hero_featured_badge || "FEATURED CATEGORY"}
                 onChange={(e) => handleChange("hero_featured_badge", e.target.value)}
                 placeholder="FEATURED CATEGORY"
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
             </div>
 
             <div>
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
                 Category Card Title
               </label>
               <input
@@ -898,13 +898,13 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 value={settings.hero_featured_title || "IPF-SPEC LEVER BELTS"}
                 onChange={(e) => handleChange("hero_featured_title", e.target.value)}
                 placeholder="IPF-SPEC LEVER BELTS"
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
             </div>
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Subtitle / Specification Line
             </label>
             <input
@@ -915,88 +915,88 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               }
               onChange={(e) => handleChange("hero_featured_subtitle", e.target.value)}
               placeholder="13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM"
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
           </div>
 
           {/* 3 Metrics Grid */}
-          <div className="pt-2 border-t border-[#1e1e1e] space-y-2">
-            <span className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+          <div className="pt-2 border-t border-neutral-200 dark:border-[#1e1e1e] space-y-2">
+            <span className="font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-300 text-xs block">
               3 Highlights / Specifications Strip
             </span>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Metric 1 */}
-              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
-                <span className="text-[10px] uppercase font-bold text-neutral-400 block">Spec 1</span>
+              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-[#161616] border border-neutral-200 dark:border-[#262626] space-y-2">
+                <span className="text-[10px] uppercase font-bold text-neutral-600 dark:text-neutral-400 block">Spec 1</span>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Value</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric1_val || "13mm"}
                     onChange={(e) => handleChange("hero_featured_metric1_val", e.target.value)}
                     placeholder="13mm"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs font-semibold focus:outline-none focus:border-neutral-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Label</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric1_lbl || "IPF Spec"}
                     onChange={(e) => handleChange("hero_featured_metric1_lbl", e.target.value)}
                     placeholder="IPF Spec"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs focus:outline-none focus:border-neutral-500"
                   />
                 </div>
               </div>
 
               {/* Metric 2 */}
-              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
-                <span className="text-[10px] uppercase font-bold text-neutral-400 block">Spec 2</span>
+              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-[#161616] border border-neutral-200 dark:border-[#262626] space-y-2">
+                <span className="text-[10px] uppercase font-bold text-neutral-600 dark:text-neutral-400 block">Spec 2</span>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Value</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric2_val || "Steel"}
                     onChange={(e) => handleChange("hero_featured_metric2_val", e.target.value)}
                     placeholder="Steel"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs font-semibold focus:outline-none focus:border-neutral-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Label</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric2_lbl || "Lever Cast"}
                     onChange={(e) => handleChange("hero_featured_metric2_lbl", e.target.value)}
                     placeholder="Lever Cast"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs focus:outline-none focus:border-neutral-500"
                   />
                 </div>
               </div>
 
               {/* Metric 3 */}
-              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
+              <div className="p-3 rounded-xl bg-neutral-50 dark:bg-[#161616] border border-neutral-200 dark:border-[#262626] space-y-2">
                 <span className="text-[10px] uppercase font-bold text-[#E31E2F] block">Spec 3 / Price</span>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Value</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric3_val || "₹4,200"}
                     onChange={(e) => handleChange("hero_featured_metric3_val", e.target.value)}
                     placeholder="₹4,200"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs font-semibold focus:outline-none focus:border-neutral-500"
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <label className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase block">Label</label>
                   <input
                     type="text"
                     value={settings.hero_featured_metric3_lbl || "From"}
                     onChange={(e) => handleChange("hero_featured_metric3_lbl", e.target.value)}
                     placeholder="From"
-                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1f1f1f] border border-neutral-300 dark:border-[#333] text-neutral-900 dark:text-white text-xs focus:outline-none focus:border-neutral-500"
                   />
                 </div>
               </div>
@@ -1004,9 +1004,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           {/* Button CTA */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#1e1e1e]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-neutral-200 dark:border-[#1e1e1e]">
             <div>
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
                 Button CTA Label
               </label>
               <input
@@ -1014,12 +1014,12 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 value={settings.hero_featured_btn_text || "VIEW LEVER BELTS"}
                 onChange={(e) => handleChange("hero_featured_btn_text", e.target.value)}
                 placeholder="VIEW LEVER BELTS"
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
             </div>
 
             <div>
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
                 Button Target Link / URL
               </label>
               <input
@@ -1027,30 +1027,30 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 value={settings.hero_featured_btn_url || "/shop/gym-belts"}
                 onChange={(e) => handleChange("hero_featured_btn_url", e.target.value)}
                 placeholder="/shop/gym-belts"
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono text-xs focus:outline-none focus:border-neutral-400"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white font-mono text-xs focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
               />
             </div>
           </div>
         </div>
 
-        {/* Section 6: Homepage Animated Marquee Ticker */}
-        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+        {/* Section 7: Homepage Animated Marquee Ticker */}
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#E31E2F]" />
-              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 HOMEPAGE ANIMATED MARQUEE TEXT
               </h2>
             </div>
-            <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Scroll-Animated Ticker</span>
+            <span className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Scroll-Animated Ticker</span>
           </div>
 
-          <p className="text-neutral-400 text-xs leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
             This bold athletic ticker animates smoothly left-to-right beneath the hero and trust strip on the landing page, repeating your brand name across the screen.
           </p>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Marquee Primary Line (Animated Left-to-Right)
             </label>
             <input
@@ -1058,15 +1058,15 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               value={settings.marquee_line1_text || "THE FITNESS STORE"}
               onChange={(e) => handleChange("marquee_line1_text", e.target.value)}
               placeholder="THE FITNESS STORE"
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
-            <p className="text-[10px] text-neutral-500 mt-1">
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1">
               Repeated continuously with red athletic divider dots moving left-to-right.
             </p>
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
               Marquee Secondary Line (Stylized Outline Text)
             </label>
             <input
@@ -1077,9 +1077,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               }
               onChange={(e) => handleChange("marquee_line2_text", e.target.value)}
               placeholder="THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT"
-              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
-            <p className="text-[10px] text-neutral-500 mt-1">
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1">
               Rendered in stylized outline typographic stroke gliding in parallel.
             </p>
           </div>

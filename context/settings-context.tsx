@@ -33,17 +33,28 @@ const FONT_MAP: Record<string, string> = {
 export function applyThemeStyles(s: Partial<StoreSettingsMap>) {
   if (typeof document === "undefined") return;
   const root = document.documentElement;
+  const isLight = root.classList.contains("light") || root.getAttribute("data-theme") === "light";
 
   if (s.theme_primary_color) {
     root.style.setProperty("--brand-primary", s.theme_primary_color);
     root.style.setProperty("--brand-red", s.theme_primary_color);
   }
-  if (s.theme_text_color) {
-    root.style.setProperty("--text-primary", s.theme_text_color);
+
+  // In light theme, do NOT set inline --text-primary or --text-secondary,
+  // as that would override the light theme design tokens (--text-primary: #171717).
+  // In dark theme, if the user explicitly provided custom colors, apply them.
+  if (isLight) {
+    root.style.removeProperty("--text-primary");
+    root.style.removeProperty("--text-secondary");
+  } else {
+    if (s.theme_text_color) {
+      root.style.setProperty("--text-primary", s.theme_text_color);
+    }
+    if (s.theme_muted_text_color) {
+      root.style.setProperty("--text-secondary", s.theme_muted_text_color);
+    }
   }
-  if (s.theme_muted_text_color) {
-    root.style.setProperty("--text-secondary", s.theme_muted_text_color);
-  }
+
   if (s.theme_heading_font) {
     const fontVal = FONT_MAP[s.theme_heading_font] || FONT_MAP.bebas;
     root.style.setProperty("--font-display-custom", fontVal);

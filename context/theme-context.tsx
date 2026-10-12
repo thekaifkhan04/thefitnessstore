@@ -25,11 +25,21 @@ function applyThemeClasses(resolved: ResolvedTheme) {
     root.classList.remove("light");
     root.setAttribute("data-theme", "dark");
     root.style.colorScheme = "dark";
+    try {
+      const cached = localStorage.getItem("tfs_settings_cache");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed.theme_text_color) root.style.setProperty("--text-primary", parsed.theme_text_color);
+        if (parsed.theme_muted_text_color) root.style.setProperty("--text-secondary", parsed.theme_muted_text_color);
+      }
+    } catch {}
   } else {
     root.classList.add("light");
     root.classList.remove("dark");
     root.setAttribute("data-theme", "light");
     root.style.colorScheme = "light";
+    root.style.removeProperty("--text-primary");
+    root.style.removeProperty("--text-secondary");
   }
 }
 
