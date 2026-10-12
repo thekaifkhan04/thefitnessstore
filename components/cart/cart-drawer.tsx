@@ -5,8 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/cart-context";
+import { useSettings } from "@/context/settings-context";
 import { formatINR } from "@/lib/utils";
-import { generateCartOrderMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { generateCartOrderMessage } from "@/lib/whatsapp";
 import { X, ShoppingBag, Plus, Minus, Trash2, ArrowRight, MessageSquareQuote, CheckCircle2 } from "lucide-react";
 
 export function CartDrawer() {
@@ -20,6 +21,7 @@ export function CartDrawer() {
     removeItem,
     clearCart,
   } = useCart();
+  const { settings, getWhatsAppUrl } = useSettings();
 
   const [customerName, setCustomerName] = useState("");
   const [customerNote, setCustomerNote] = useState("");
@@ -78,10 +80,11 @@ export function CartDrawer() {
         reference: enquiryRef,
         customerName: customerName.trim() || undefined,
         customerNote: customerNote.trim() || undefined,
+        storeName: settings.store_name,
       }
     );
 
-    const whatsappUrl = buildWhatsAppUrl(message);
+    const whatsappUrl = getWhatsAppUrl(message);
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     setIsSubmitting(false);
   };

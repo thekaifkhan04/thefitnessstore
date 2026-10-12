@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
@@ -50,8 +51,21 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Bust server cache across all affected routes and layouts
+    revalidatePath("/", "layout");
+    revalidatePath("/");
+    revalidatePath("/contact");
+    revalidatePath("/shop");
+    revalidatePath("/bulk-orders");
+    revalidatePath("/offers");
+    revalidatePath("/admin/settings");
+
     return NextResponse.json({ success: true, message: "Settings updated successfully" });
-  } catch (error) {
+  } catch (error: any) {
+    console.error("Settings update error:", error);
+    if (error?.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }

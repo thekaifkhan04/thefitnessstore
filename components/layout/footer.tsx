@@ -1,12 +1,18 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { TFSLogo } from "@/components/brand/tfs-logo";
-import { MessageSquare, Phone, Mail, MapPin, ExternalLink, ShieldAlert } from "lucide-react";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { MessageSquare, Phone, Mail, MapPin, ExternalLink } from "lucide-react";
+import { useSettings } from "@/context/settings-context";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const whatsappUrl = buildWhatsAppUrl("Hello THE FITNESS STORE! I would like to enquire about your products and wholesale availability.");
+  const { settings, getWhatsAppUrl } = useSettings();
+
+  const whatsappUrl = getWhatsAppUrl(
+    `Hello ${settings.store_name}! I would like to enquire about your products and wholesale availability.`
+  );
 
   return (
     <footer className="bg-[#060606] border-t border-[#1f1f1f] text-neutral-400 text-sm">
@@ -16,7 +22,9 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-5">
             <TFSLogo size="lg" />
             <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-sm">
-              THE FITNESS STORE (TFS) is a leading retailer and wholesaler of sports goods, gym equipment, weightlifting accessories, fitness wear, and genuine supplements.
+              {settings.store_tagline
+                ? `${settings.store_name} — ${settings.store_tagline}`
+                : `${settings.store_name} (TFS) is a leading retailer and wholesaler of sports goods, gym equipment, weightlifting accessories, fitness wear, and genuine supplements.`}
             </p>
             <div className="pt-2">
               <a
@@ -72,15 +80,15 @@ export function Footer() {
             <div className="space-y-3 text-xs">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#E31E2F] shrink-0 mt-0.5" />
-                <span>Shop 12, Prime Fitness Hub, Commercial Plaza, India</span>
+                <span>{settings.store_address || "Shop 12, Prime Fitness Hub, Commercial Plaza, India"}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-[#E31E2F] shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>{settings.contact_phone || "+91 98765 43210"}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#E31E2F] shrink-0" />
-                <span>contact@thefitnessstore.com</span>
+                <span>{settings.support_email || "contact@thefitnessstore.com"}</span>
               </div>
               <div className="pt-2 text-[11px] text-neutral-500">
                 <p>Timings: Mon – Sat: 10:00 AM – 8:30 PM</p>
@@ -99,7 +107,7 @@ export function Footer() {
             <Link href="/returns-policy" className="hover:text-neutral-300 transition-colors">Return & Replacement Policy</Link>
           </div>
           <div>
-            &copy; {currentYear} THE FITNESS STORE (TFS). All Rights Reserved.
+            &copy; {currentYear} {settings.store_name} (TFS). All Rights Reserved.
           </div>
         </div>
       </div>

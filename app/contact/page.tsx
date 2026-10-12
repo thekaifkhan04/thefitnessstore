@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { MessageSquare, Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useSettings } from "@/context/settings-context";
 
 export default function ContactPage() {
+  const { settings, getWhatsAppUrl } = useSettings();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [query, setQuery] = useState("");
@@ -14,7 +15,7 @@ export default function ContactPage() {
     if (!query.trim()) return;
 
     const message = [
-      `Hello THE FITNESS STORE!`,
+      `Hello ${settings.store_name}!`,
       ``,
       name ? `Name: ${name}` : null,
       phone ? `Phone: ${phone}` : null,
@@ -25,10 +26,12 @@ export default function ContactPage() {
       `Please let me know availability and pricing. Thank you!`,
     ].filter(Boolean).join("\n");
 
-    window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
+    window.open(getWhatsAppUrl(message), "_blank", "noopener,noreferrer");
   };
 
-  const directChatUrl = buildWhatsAppUrl("Hello THE FITNESS STORE! I have a general query regarding product stock.");
+  const directChatUrl = getWhatsAppUrl(
+    `Hello ${settings.store_name}! I have a general query regarding product stock.`
+  );
 
   return (
     <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
@@ -79,7 +82,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm text-white">Phone Support</h3>
-                  <p className="text-xs text-neutral-300 mt-1 font-mono">+91 98765 43210</p>
+                  <p className="text-xs text-neutral-300 mt-1 font-mono">{settings.contact_phone || "+91 98765 43210"}</p>
                   <p className="text-[11px] text-neutral-500 mt-0.5">Mon – Sat: 10:00 AM – 8:30 PM</p>
                 </div>
               </div>
@@ -90,7 +93,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm text-white">Email Address</h3>
-                  <p className="text-xs text-neutral-300 mt-1 font-mono">support@thefitnessstore.com</p>
+                  <p className="text-xs text-neutral-300 mt-1 font-mono">{settings.support_email || "support@thefitnessstore.com"}</p>
                   <p className="text-[11px] text-neutral-500 mt-0.5">For B2B proposals & supplier enquiries</p>
                 </div>
               </div>
@@ -102,7 +105,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-sm text-white">Showroom & Warehouse</h3>
                   <p className="text-xs text-neutral-300 mt-1">
-                    Shop 12, Prime Fitness Hub, MG Road, Commercial Plaza, India
+                    {settings.store_address || "Shop 12, Prime Fitness Hub, Commercial Plaza, India"}
                   </p>
                 </div>
               </div>

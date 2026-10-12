@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
-import { generateWholesaleMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { generateWholesaleMessage } from "@/lib/whatsapp";
+import { useSettings } from "@/context/settings-context";
 import { MessageSquare, Building2, Package, Truck, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function BulkOrdersPage() {
+  const { settings, getWhatsAppUrl } = useSettings();
   const [name, setName] = useState("");
   const [organization, setOrganization] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,7 +25,7 @@ export default function BulkOrdersPage() {
       requirement: requirement.trim(),
     });
 
-    const url = buildWhatsAppUrl(message);
+    const url = getWhatsAppUrl(message);
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -35,8 +37,14 @@ export default function BulkOrdersPage() {
             <span>B2B & COMMERCIAL WHOLESALE</span>
           </div>
           <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-white leading-tight">
-            BUY FOR YOUR GYM. <br />
-            EQUIP YOUR BUSINESS.
+            {(settings.wholesale_banner_headline || "BUY FOR YOUR GYM. EQUIP YOUR BUSINESS.")
+              .split("\n")
+              .map((line, idx, arr) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  {idx < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
           </h1>
           <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
             Looking for fitness equipment in bulk? THE FITNESS STORE supplies commercial gym franchises, fitness studios, sports academies, and corporate gyms across India with verified inventory and direct dealer pricing.

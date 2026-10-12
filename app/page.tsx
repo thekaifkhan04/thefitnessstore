@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { prisma } from "@/lib/prisma";
+import { getStoreSettings } from "@/lib/settings";
 import { ProductCard } from "@/components/product/product-card";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import {
@@ -20,8 +21,8 @@ import {
 export const revalidate = 60; // ISR cache revalidation every minute
 
 export default async function HomePage() {
-  // Query data from PostgreSQL
-  const [categories, featuredProducts, banners, offers] = await Promise.all([
+  // Query data and settings from PostgreSQL
+  const [categories, featuredProducts, banners, offers, settings] = await Promise.all([
     prisma.category.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: "asc" },
@@ -45,11 +46,18 @@ export default async function HomePage() {
       where: { isActive: true },
       take: 2,
     }),
+    getStoreSettings(),
   ]);
 
   const wholesaleWhatsAppUrl = buildWhatsAppUrl(
-    "Hello THE FITNESS STORE! I am interested in wholesale/bulk commercial fitness equipment pricing and catalogue."
+    `Hello ${settings.store_name}! I am interested in wholesale/bulk commercial fitness equipment pricing and catalogue.`,
+    settings.whatsapp_number
   );
+
+  const headlineRaw = settings.hero_headline || "YOUR TRAINING. YOUR EQUIPMENT. YOUR LIMITS.";
+  const headlineLines = headlineRaw.includes("\n")
+    ? headlineRaw.split("\n")
+    : headlineRaw.split(/(?<=\.)\s+/);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#080808] text-white">
@@ -72,20 +80,46 @@ export default async function HomePage() {
               <div className="inline-flex items-center gap-3">
                 <div className="w-10 h-1 bg-[#E31E2F] rounded-full" />
                 <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#E31E2F]">
-                  BUILT FOR EVERY REP · RETAIL & WHOLESALE
+                  {settings.hero_eyebrow || "BUILT FOR EVERY REP · RETAIL & WHOLESALE"}
                 </span>
               </div>
 
               {/* Oversized Athletic Headline */}
               <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.92] text-white">
-                YOUR TRAINING. <br />
-                YOUR EQUIPMENT. <br />
-                YOUR <span className="text-[#E31E2F] underline decoration-2 decoration-[#E31E2F]/40 underline-offset-8">LIMITS.</span>
+                {headlineLines.map((line, idx) => {
+                  const isLast = idx === headlineLines.length - 1;
+                  if (isLast) {
+                    const words = line.trim().split(" ");
+                    if (words.length > 1) {
+                      const lastWord = words.pop();
+                      return (
+                        <React.Fragment key={idx}>
+                          {words.join(" ")}{" "}
+                          <span className="text-[#E31E2F] underline decoration-2 decoration-[#E31E2F]/40 underline-offset-8">
+                            {lastWord}
+                          </span>
+                        </React.Fragment>
+                      );
+                    }
+                    return (
+                      <span key={idx} className="text-[#E31E2F] underline decoration-2 decoration-[#E31E2F]/40 underline-offset-8">
+                        {line}
+                      </span>
+                    );
+                  }
+                  return (
+                    <React.Fragment key={idx}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  );
+                })}
               </h1>
 
               {/* Description */}
               <p className="text-neutral-300 text-base sm:text-lg max-w-2xl leading-relaxed font-normal">
-                From everyday gym essentials to performance-driven equipment, find everything you need to train harder. We equip passionate athletes, home gyms, and commercial fitness centers.
+                {settings.hero_description ||
+                  "From everyday gym essentials to performance-driven equipment, find everything you need to train harder. We equip passionate athletes, home gyms, and commercial fitness centers."}
               </p>
 
               {/* Action Buttons */}
@@ -520,8 +554,14 @@ export default async function HomePage() {
             COMMERCIAL SUPPLY & BULK ORDERS
           </span>
           <h2 className="font-display font-extrabold text-5xl sm:text-6xl uppercase tracking-tight text-white leading-tight">
-            BUY FOR YOUR GYM. <br />
-            EQUIP YOUR BUSINESS.
+            {(settings.wholesale_banner_headline || "BUY FOR YOUR GYM. EQUIP YOUR BUSINESS.")
+              .split("\n")
+              .map((line, idx, arr) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  {idx < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
           </h2>
           <p className="text-neutral-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Looking for fitness equipment in bulk? Contact our team to discuss product availability and wholesale enquiries.

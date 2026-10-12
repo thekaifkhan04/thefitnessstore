@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
+import { SettingsProvider } from "@/context/settings-context";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
+import { getStoreSettings } from "@/lib/settings";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -46,21 +48,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getStoreSettings();
+
   return (
     <html lang="en" className={`${bebasNeue.variable} ${inter.variable} dark`}>
       <body className="min-h-screen bg-[#080808] text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
-        <CartProvider>
-          <Navbar />
-          <CartDrawer />
-          <FloatingWhatsApp />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </CartProvider>
+        <SettingsProvider initialSettings={settings}>
+          <CartProvider>
+            <Navbar />
+            <CartDrawer />
+            <FloatingWhatsApp />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </CartProvider>
+        </SettingsProvider>
       </body>
     </html>
   );

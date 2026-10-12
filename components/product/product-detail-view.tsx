@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatINR, calculateDiscount } from "@/lib/utils";
 import { useCart } from "@/context/cart-context";
-import { generateSingleProductMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useSettings } from "@/context/settings-context";
+import { generateSingleProductMessage } from "@/lib/whatsapp";
 import {
   ShoppingBag,
   MessageSquare,
@@ -62,6 +63,7 @@ interface ProductDetailProps {
 
 export function ProductDetailView({ product }: ProductDetailProps) {
   const { addItem } = useCart();
+  const { settings, getWhatsAppUrl } = useSettings();
 
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
@@ -99,15 +101,18 @@ export function ProductDetailView({ product }: ProductDetailProps) {
   };
 
   const handleOrderOnWhatsApp = () => {
-    const message = generateSingleProductMessage({
-      id: product.id,
-      name: product.name,
-      sku: selectedVariant?.sku || product.sku,
-      variantName: selectedVariant?.name,
-      unitPricePaise: activePricePaise,
-      quantity,
-    });
-    const url = buildWhatsAppUrl(message);
+    const message = generateSingleProductMessage(
+      {
+        id: product.id,
+        name: product.name,
+        sku: selectedVariant?.sku || product.sku,
+        variantName: selectedVariant?.name,
+        unitPricePaise: activePricePaise,
+        quantity,
+      },
+      settings.store_name
+    );
+    const url = getWhatsAppUrl(message);
     window.open(url, "_blank", "noopener,noreferrer");
   };
 

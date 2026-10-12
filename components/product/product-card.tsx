@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { formatINR, calculateDiscount } from "@/lib/utils";
 import { useCart } from "@/context/cart-context";
-import { generateSingleProductMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useSettings } from "@/context/settings-context";
+import { generateSingleProductMessage } from "@/lib/whatsapp";
 import { ShoppingBag, MessageSquare, ArrowRight, Check } from "lucide-react";
 
 export interface ProductCardData {
@@ -25,6 +26,7 @@ export interface ProductCardData {
 
 export function ProductCard({ product }: { product: ProductCardData }) {
   const { addItem } = useCart();
+  const { settings, getWhatsAppUrl } = useSettings();
   const [added, setAdded] = React.useState(false);
 
   const discountPercent = calculateDiscount(
@@ -51,14 +53,17 @@ export function ProductCard({ product }: { product: ProductCardData }) {
   const handleQuickWhatsApp = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const msg = generateSingleProductMessage({
-      id: product.id,
-      name: product.name,
-      sku: product.sku,
-      unitPricePaise: product.sellingPricePaise,
-      quantity: 1,
-    });
-    window.open(buildWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
+    const msg = generateSingleProductMessage(
+      {
+        id: product.id,
+        name: product.name,
+        sku: product.sku,
+        unitPricePaise: product.sellingPricePaise,
+        quantity: 1,
+      },
+      settings.store_name
+    );
+    window.open(getWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
   };
 
   return (

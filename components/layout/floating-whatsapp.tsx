@@ -3,16 +3,19 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { MessageSquare, X } from "lucide-react";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useSettings } from "@/context/settings-context";
 
 export function FloatingWhatsApp() {
   const pathname = usePathname();
   const [showTooltip, setShowTooltip] = useState(false);
+  const { settings, getWhatsAppUrl } = useSettings();
 
   // Hide on admin routes
   if (pathname?.startsWith("/admin")) return null;
 
-  const whatsappUrl = buildWhatsAppUrl("Hello THE FITNESS STORE! I have a question about product availability and ordering.");
+  const whatsappUrl = getWhatsAppUrl(
+    `Hello ${settings.store_name}! I have a question about product availability and ordering.`
+  );
 
   return (
     <div className="fixed bottom-6 right-6 z-30 flex items-center gap-3">
