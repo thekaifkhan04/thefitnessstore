@@ -49,19 +49,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <div className="py-4 flex items-center gap-2 text-xs text-neutral-400 uppercase tracking-wider">
-          <Link href="/" className="hover:text-white">Home</Link>
+        <div className="py-4 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
+          <Link href="/" className="hover:text-[#E31E2F]">Home</Link>
           <span>/</span>
-          <Link href="/shop" className="hover:text-white">Catalogue</Link>
+          <Link href="/shop" className="hover:text-[#E31E2F]">Catalogue</Link>
           <span>/</span>
           <span className="text-[#E31E2F] font-semibold">{category.name}</span>
         </div>
 
         {/* Category Header Banner */}
-        <div className="relative rounded-3xl bg-gradient-to-r from-[#171717] via-[#121212] to-[#0c0c0c] border border-[#262626] p-8 sm:p-12 mb-10 overflow-hidden">
+        <div className="relative rounded-3xl bg-gradient-to-r from-neutral-100 via-neutral-50 to-white dark:from-[#171717] dark:via-[#121212] dark:to-[#0c0c0c] border border-neutral-200 dark:border-[#262626] p-8 sm:p-12 mb-10 overflow-hidden">
           <div className="relative z-10 max-w-2xl space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[10px] font-bold uppercase tracking-wider">
               <span>CATEGORY CATALOGUE</span>

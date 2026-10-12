@@ -30,13 +30,13 @@ export default function BulkOrdersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-8 border-b border-[#1f1f1f] text-center max-w-3xl mx-auto space-y-4">
+        <div className="py-8 border-b border-neutral-200 dark:border-[#1f1f1f] text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E31E2F]/15 border border-[#E31E2F]/40 text-[#E31E2F] text-xs font-bold uppercase tracking-wider">
             <span>B2B & COMMERCIAL WHOLESALE</span>
           </div>
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-white leading-tight">
+          <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-neutral-900 dark:text-white leading-tight">
             {(settings.wholesale_banner_headline || "BUY FOR YOUR GYM. EQUIP YOUR BUSINESS.")
               .split("\n")
               .map((line, idx, arr) => (
@@ -46,7 +46,7 @@ export default function BulkOrdersPage() {
                 </React.Fragment>
               ))}
           </h1>
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
             Looking for fitness equipment in bulk? THE FITNESS STORE supplies commercial gym franchises, fitness studios, sports academies, and corporate gyms across India with verified inventory and direct dealer pricing.
           </p>
         </div>

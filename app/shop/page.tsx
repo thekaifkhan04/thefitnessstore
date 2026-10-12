@@ -124,10 +124,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Breadcrumbs & Title */}
-        <div className="py-6 border-b border-[#1f1f1f] flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="py-6 border-b border-neutral-200 dark:border-[#1f1f1f] flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-xs text-neutral-400 uppercase tracking-wider mb-2">
               <Link href="/" className="hover:text-white">Home</Link>

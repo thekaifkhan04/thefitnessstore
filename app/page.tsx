@@ -63,13 +63,13 @@ export default async function HomePage() {
     : headlineRaw.split(/(?<=\.)\s+/);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#080808] text-white">
+    <div className="flex flex-col min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white">
       {/* SECTION B: HERO */}
       <section className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
-        {/* Cinematic dark fitness background overlay */}
+        {/* Cinematic dark/light fitness background overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080808] via-[#080808]/85 to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-[#080808]/80 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-transparent dark:from-[#080808] dark:via-[#080808]/85 dark:to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white/80 dark:from-[#080808] dark:via-transparent dark:to-[#080808]/80 z-10" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-950/20 via-transparent to-transparent z-10" />
           {/* Subtle geometric grid backdrop */}
           <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -202,7 +202,7 @@ export default async function HomePage() {
       </section>
 
       {/* SECTION C: TRUST STRIP */}
-      <section className="border-y border-[#1f1f1f] bg-[#0c0c0c] py-6">
+      <section className="border-y border-neutral-200 dark:border-[#1f1f1f] bg-neutral-100 dark:bg-[#0c0c0c] py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center justify-center space-y-1">
@@ -311,7 +311,7 @@ export default async function HomePage() {
       </section>
 
       {/* SECTION E: FEATURED PRODUCTS - Compact, high-density layout */}
-      <section className="py-10 sm:py-14 bg-[#0c0c0c] border-y border-[#1c1c1c]">
+      <section className="py-10 sm:py-14 bg-neutral-50 dark:bg-[#0c0c0c] border-y border-neutral-200 dark:border-[#1c1c1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8">
             <div>
@@ -476,7 +476,7 @@ export default async function HomePage() {
       </section>
 
       {/* SECTION H: WHY THE FITNESS STORE? */}
-      <section className="py-20 bg-[#0c0c0c] border-t border-[#1c1c1c]">
+      <section className="py-20 bg-neutral-50 dark:bg-[#0c0c0c] border-t border-neutral-200 dark:border-[#1c1c1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 mb-2 justify-center">
@@ -535,7 +535,7 @@ export default async function HomePage() {
       </section>
 
       {/* SECTION I: WHOLESALE CTA */}
-      <section className="py-20 bg-[#080808] border-t border-[#1c1c1c]">
+      <section className="py-20 bg-white dark:bg-[#080808] border-t border-neutral-200 dark:border-[#1c1c1c]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#E31E2F]">
             COMMERCIAL SUPPLY & BULK ORDERS

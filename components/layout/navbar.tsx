@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   Flame,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 interface CategoryLink {
   name: string;
@@ -105,8 +106,8 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? "bg-[#080808]/90 backdrop-blur-md border-b border-[#222222] py-3 shadow-xl"
-            : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-4.5"
+            ? "bg-white/90 dark:bg-[#080808]/90 backdrop-blur-md border-b border-neutral-200 dark:border-[#222222] py-3 shadow-sm dark:shadow-xl"
+            : "bg-gradient-to-b from-white/90 via-white/50 dark:from-black/80 dark:via-black/40 to-transparent py-4.5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,7 +116,7 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
             <TFSLogo size="md" href="/" />
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-7 text-xs font-semibold uppercase tracking-wider text-neutral-300">
+            <nav className="hidden lg:flex items-center space-x-7 text-xs font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
               <Link
                 href="/"
                 className={`hover:text-[#E31E2F] transition-colors ${
@@ -161,13 +162,13 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
                       className="fixed inset-0 z-10"
                       onClick={() => setCategoriesDropdownOpen(false)}
                     />
-                    <div className="absolute top-full -left-20 w-[480px] sm:w-[520px] max-h-[72vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#333] p-4 bg-[#111111]/95 backdrop-blur-xl border border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150 z-20">
+                    <div className="absolute top-full -left-20 w-[480px] sm:w-[520px] max-h-[72vh] overflow-y-auto scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#333] p-4 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-xl border border-neutral-200 dark:border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150 z-20">
                       {categories.map((cat) => (
                         <Link
                           key={cat.slug}
                           href={`/shop/${cat.slug}`}
                           onClick={() => setCategoriesDropdownOpen(false)}
-                          className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#1a1a1a] hover:border-l-2 hover:border-[#E31E2F] transition-all flex items-center justify-between group"
+                          className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#1a1a1a] hover:border-l-2 hover:border-[#E31E2F] transition-all flex items-center justify-between group"
                         >
                           <span className="truncate pr-1">{cat.name}</span>
                           <span className="text-[#E31E2F] opacity-0 group-hover:opacity-100 text-[10px]">
@@ -175,7 +176,7 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
                           </span>
                         </Link>
                       ))}
-                      <div className="col-span-2 pt-2 border-t border-[#222222] mt-1 flex justify-between items-center text-[11px] text-neutral-400">
+                      <div className="col-span-2 pt-2 border-t border-neutral-200 dark:border-[#222222] mt-1 flex justify-between items-center text-[11px] text-neutral-500 dark:text-neutral-400">
                         <span>Total {categories.length} Categories</span>
                         <Link
                           href="/shop"
@@ -246,12 +247,15 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
               </Link>
             </nav>
 
-            {/* Right Side Actions: Search, Cart, Mobile Menu */}
-            <div className="flex items-center space-x-3">
+            {/* Right Side Actions: ThemeToggle, Search, Cart, Mobile Menu */}
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              {/* Theme Selector Toggle */}
+              <ThemeToggle align="right" />
+
               {/* Search Button */}
               <Link
                 href="/search"
-                className="p-2.5 rounded-lg text-neutral-300 hover:text-white hover:bg-[#181818] transition-colors"
+                className="p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
                 aria-label="Search products"
               >
                 <Search className="w-5 h-5" />
@@ -260,12 +264,12 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
               {/* Cart Trigger */}
               <button
                 onClick={openCart}
-                className="relative p-2.5 rounded-lg text-neutral-300 hover:text-white hover:bg-[#181818] transition-colors cursor-pointer"
+                className="relative p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
                 aria-label="Shopping bag"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#080808] animate-in zoom-in-50">
+                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#080808] animate-in zoom-in-50">
                     {itemCount}
                   </span>
                 )}
@@ -274,7 +278,7 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen((p) => !p)}
-                className="lg:hidden p-2.5 rounded-lg text-neutral-300 hover:text-white hover:bg-[#181818] transition-colors"
+                className="lg:hidden p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
                 aria-label="Toggle mobile menu"
               >
                 {mobileMenuOpen ? (
@@ -290,54 +294,62 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-30 lg:hidden pt-20 bg-[#080808]/98 backdrop-blur-2xl flex flex-col p-6 overflow-y-auto border-b border-[#222222]">
-          <div className="flex flex-col space-y-4 text-base font-semibold uppercase tracking-wider text-neutral-200">
+        <div className="fixed inset-0 z-30 lg:hidden pt-20 bg-white/98 dark:bg-[#080808]/98 backdrop-blur-2xl flex flex-col p-6 overflow-y-auto border-b border-neutral-200 dark:border-[#222222]">
+          <div className="flex flex-col space-y-4 text-base font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-200">
+            {/* Mobile Theme Switcher Bar */}
+            <div className="pb-4 border-b border-neutral-200 dark:border-[#1c1c1c] flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                Appearance
+              </span>
+              <ThemeToggle variant="segmented" />
+            </div>
+
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] hover:text-[#E31E2F]"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] hover:text-[#E31E2F]"
             >
               Home
             </Link>
             <Link
               href="/shop"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] hover:text-[#E31E2F]"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] hover:text-[#E31E2F]"
             >
               All Products
             </Link>
             <Link
               href="/offers"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] text-[#E31E2F] flex items-center gap-2"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] text-[#E31E2F] flex items-center gap-2"
             >
               <Flame className="w-4 h-4" /> Deals & Offers
             </Link>
             <Link
               href="/bulk-orders"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] hover:text-[#E31E2F]"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] hover:text-[#E31E2F]"
             >
               Wholesale & Gym Bulk Enquiries
             </Link>
             <Link
               href="/about"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] hover:text-[#E31E2F]"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] hover:text-[#E31E2F]"
             >
               About TFS
             </Link>
             <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2 border-b border-[#1c1c1c] hover:text-[#E31E2F]"
+              className="py-2 border-b border-neutral-200 dark:border-[#1c1c1c] hover:text-[#E31E2F]"
             >
               Contact Us
             </Link>
 
             <div className="pt-2">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-neutral-500 tracking-widest block">
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 tracking-widest block">
                   CATEGORIES ({categories.length})
                 </span>
                 <Link
@@ -348,13 +360,13 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
                   View All &rarr;
                 </Link>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-xs normal-case font-normal text-neutral-300 max-h-60 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[#333]">
+              <div className="grid grid-cols-2 gap-2 text-xs normal-case font-normal text-neutral-700 dark:text-neutral-300 max-h-60 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#333]">
                 {categories.map((cat) => (
                   <Link
                     key={cat.slug}
                     href={`/shop/${cat.slug}`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded bg-[#131313] border border-[#222222] hover:border-[#E31E2F] truncate"
+                    className="p-2 rounded bg-neutral-100 dark:bg-[#131313] border border-neutral-200 dark:border-[#222222] hover:border-[#E31E2F] truncate"
                   >
                     {cat.name}
                   </Link>

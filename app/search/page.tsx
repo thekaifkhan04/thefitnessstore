@@ -42,16 +42,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     : [];
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-6 border-b border-[#1f1f1f] space-y-4">
-          <div className="flex items-center gap-2 text-xs text-neutral-400 uppercase tracking-wider">
-            <Link href="/" className="hover:text-white">Home</Link>
+        <div className="py-6 border-b border-neutral-200 dark:border-[#1f1f1f] space-y-4">
+          <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
+            <Link href="/" className="hover:text-[#E31E2F]">Home</Link>
             <span>/</span>
             <span className="text-[#E31E2F] font-semibold">Search</span>
           </div>
 
-          <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+          <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white">
             SEARCH THE CATALOGUE
           </h1>
 
@@ -63,12 +63,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               defaultValue={query}
               placeholder="Search by product name, SKU, category (e.g. lever belt, dumbbells, technosport)..."
               autoFocus
-              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-[#141414] border border-[#2d2d2d] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-lg"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-neutral-100 dark:bg-[#141414] border border-neutral-300 dark:border-[#2d2d2d] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-md dark:shadow-lg"
             />
-            <Search className="w-5 h-5 text-neutral-400 absolute left-4 top-4.5" />
+            <Search className="w-5 h-5 text-neutral-400 dark:text-neutral-500 absolute left-4 top-4.5" />
             <button
               type="submit"
-              className="absolute right-3 top-2.5 px-4 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white text-xs font-bold uppercase tracking-wider transition-colors"
+              className="absolute right-3 top-2.5 px-4 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
             >
               SEARCH
             </button>

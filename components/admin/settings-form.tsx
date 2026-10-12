@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { TFSLogo, TFSLogoEmblem } from "@/components/brand/tfs-logo";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useSettings } from "@/context/settings-context";
 import {
   Save,
@@ -245,6 +246,24 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
+        {/* Section 0: Theme Mode (System, Light, Dark) */}
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <Palette className="w-4 h-4 text-[#E31E2F]" />
+                <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
+                  INTERFACE APPEARANCE & THEME MODE
+                </h2>
+              </div>
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                Website follows user device theme by default (System mode). You can preview or switch between Light Mode and Dark Mode instantly.
+              </p>
+            </div>
+            <ThemeToggle variant="segmented" />
+          </div>
+        </div>
+
         {/* Section 1: Store Logo & Visual Branding */}
         <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-5">
           <div className="flex items-center gap-2">

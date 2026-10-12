@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white mb-6">
+        <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white mb-6">
           TERMS & CONDITIONS
         </h1>
         <div className="text-xs text-neutral-500 mb-8">Effective Date: October 2026</div>
 
-        <div className="prose prose-invert max-w-none text-neutral-300 text-sm leading-relaxed space-y-6">
+        <div className="max-w-none text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed space-y-6">
           <section className="space-y-3">
             <h2 className="font-display text-xl text-white uppercase tracking-wider">1. Nature of the Service</h2>
             <p>

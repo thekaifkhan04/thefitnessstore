@@ -14,7 +14,7 @@ export default async function AdminLayout({
 
   // The login page manages its own unauthenticated state
   return (
-    <div className="min-h-screen bg-[#080808] text-white flex flex-col">
+    <div className="min-h-screen bg-neutral-50 dark:bg-[#080808] text-neutral-900 dark:text-white flex flex-col">
       {session && <AdminNavbar userEmail={session.email} />}
       <div className="flex-1">{children}</div>
     </div>

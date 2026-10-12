@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TFSLogo } from "@/components/brand/tfs-logo";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Lock, Mail, ArrowRight, AlertCircle, Shield } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -45,7 +46,11 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-neutral-50 dark:bg-[#080808] flex items-center justify-center p-4 relative">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+        <ThemeToggle align="right" />
+      </div>
+
       <div className="w-full max-w-md space-y-6">
         {/* Logo & Heading */}
         <div className="text-center space-y-3">
@@ -53,27 +58,27 @@ export default function AdminLoginPage() {
             <TFSLogo size="lg" />
           </div>
           <div>
-            <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white">
+            <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
               ADMIN CONTROL PANEL
             </h1>
-            <p className="text-xs text-neutral-400 mt-1">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
               Sign in with authorized administrator credentials
             </p>
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="rounded-3xl bg-[#121212] border border-[#262626] p-8 shadow-2xl space-y-6">
+        <div className="rounded-3xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#262626] p-8 shadow-xl dark:shadow-2xl space-y-6">
           {error && (
-            <div className="p-3.5 rounded-xl bg-red-950/50 border border-red-800 text-red-200 text-xs flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+            <div className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 text-xs flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 shrink-0 text-red-500 dark:text-red-400" />
               <span>{error}</span>
             </div>
           )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Admin Email
               </label>
               <div className="relative">
@@ -83,14 +88,14 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@thefitnessstore.com"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#181818] border border-[#2d2d2d] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
                 />
-                <Mail className="w-4 h-4 text-neutral-500 absolute left-3.5 top-3.5" />
+                <Mail className="w-4 h-4 text-neutral-400 dark:text-neutral-500 absolute left-3.5 top-3.5" />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -100,9 +105,9 @@ export default function AdminLoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-[#181818] border border-[#2d2d2d] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
                 />
-                <Lock className="w-4 h-4 text-neutral-500 absolute left-3.5 top-3.5" />
+                <Lock className="w-4 h-4 text-neutral-400 dark:text-neutral-500 absolute left-3.5 top-3.5" />
               </div>
             </div>
 
@@ -117,11 +122,11 @@ export default function AdminLoginPage() {
           </form>
 
           {/* Quick Demo Fill Helper */}
-          <div className="pt-4 border-t border-[#1e1e1e] text-center">
+          <div className="pt-4 border-t border-neutral-200 dark:border-[#1e1e1e] text-center">
             <button
               type="button"
               onClick={handleFillDemo}
-              className="text-[11px] text-neutral-400 hover:text-white underline"
+              className="text-[11px] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white underline cursor-pointer"
             >
               Quick-fill default seeded admin credentials
             </button>

@@ -37,19 +37,19 @@ export default async function OffersPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-6 border-b border-[#1f1f1f]">
+        <div className="py-6 border-b border-neutral-200 dark:border-[#1f1f1f]">
           <div className="inline-flex items-center gap-2 mb-2">
             <Flame className="w-4 h-4 text-[#E31E2F]" />
             <span className="text-xs font-bold uppercase tracking-widest text-[#E31E2F]">
               SPECIAL PROMOTIONS
             </span>
           </div>
-          <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-white">
+          <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-neutral-900 dark:text-white">
             DEALS & FEATURED OFFERS
           </h1>
-          <p className="text-neutral-400 text-xs sm:text-sm mt-1 max-w-xl">
+          <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm mt-1 max-w-xl">
             Take advantage of limited-time discounts and wholesale package deals. All prices verified directly on WhatsApp.
           </p>
         </div>

@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 export function AdminNavbar({ userEmail }: { userEmail?: string }) {
   const pathname = usePathname();
@@ -67,16 +68,16 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
   };
 
   return (
-    <header className="bg-[#0b0b0b] border-b border-[#222222] sticky top-0 z-50 shadow-md">
+    <header className="bg-white dark:bg-[#0b0b0b] border-b border-neutral-200 dark:border-[#222222] sticky top-0 z-50 shadow-sm dark:shadow-md">
       {/* Top Bar: Brand & User Actions */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Brand */}
           <Link href="/admin" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="p-1 rounded bg-[#161616] border border-[#262626] group-hover:border-[#E31E2F] transition-colors">
+            <div className="p-1 rounded bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-[#262626] group-hover:border-[#E31E2F] transition-colors">
               <TFSLogoEmblem className="w-6 h-6" logoUrl={settings?.store_logo_url} />
             </div>
-            <span className="font-display font-extrabold text-lg uppercase tracking-wider text-white">
+            <span className="font-display font-extrabold text-lg uppercase tracking-wider text-neutral-900 dark:text-white">
               {settings?.store_name ? (
                 <>
                   {settings.store_name} <span className="text-[#E31E2F]">ADMIN</span>
@@ -92,23 +93,25 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
           {/* Right actions */}
           <div className="flex items-center space-x-3 text-xs shrink-0">
             {userEmail && (
-              <span className="hidden sm:inline text-neutral-400 font-mono text-[11px] truncate max-w-[180px]">
+              <span className="hidden sm:inline text-neutral-500 dark:text-neutral-400 font-mono text-[11px] truncate max-w-[180px]">
                 {userEmail}
               </span>
             )}
 
+            <ThemeToggle align="right" />
+
             <Link
               href="/"
               target="_blank"
-              className="px-3 py-1.5 rounded-lg bg-[#141414] hover:bg-[#1e1e1e] border border-[#2b2b2b] text-neutral-300 hover:text-white transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-[#141414] hover:bg-neutral-200 dark:hover:bg-[#1e1e1e] border border-neutral-200 dark:border-[#2b2b2b] text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors flex items-center gap-1.5"
             >
               <span>View Store</span>
-              <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
+              <ExternalLink className="w-3.5 h-3.5 text-neutral-400" />
             </Link>
 
             <button
               onClick={handleLogout}
-              className="p-2 rounded-lg bg-[#141414] hover:bg-red-950/40 hover:text-red-400 border border-[#2b2b2b] text-neutral-400 transition-colors cursor-pointer"
+              className="p-2 rounded-lg bg-neutral-100 dark:bg-[#141414] hover:bg-red-50 dark:hover:bg-red-950/40 hover:text-red-600 dark:hover:text-red-400 border border-neutral-200 dark:border-[#2b2b2b] text-neutral-500 dark:text-neutral-400 transition-colors cursor-pointer"
               title="Sign out of Admin"
               aria-label="Sign out"
             >
@@ -119,13 +122,13 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
       </div>
 
       {/* Scrollable Navigation Bar with Horizontal Controls */}
-      <div className="border-t border-[#1a1a1a] bg-[#0e0e0e]/95 backdrop-blur-md">
+      <div className="border-t border-neutral-200 dark:border-[#1a1a1a] bg-neutral-50/95 dark:bg-[#0e0e0e]/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center relative">
           {/* Scroll Left Button (shown if scrolled right) */}
           {canScrollLeft && (
             <button
               onClick={() => scrollBy(-150)}
-              className="absolute left-1 z-10 p-1.5 rounded-full bg-black/90 text-white border border-[#333] hover:border-[#E31E2F] shadow-lg"
+              className="absolute left-1 z-10 p-1.5 rounded-full bg-white dark:bg-black/90 text-neutral-900 dark:text-white border border-neutral-300 dark:border-[#333] hover:border-[#E31E2F] shadow-lg"
               title="Scroll left"
               aria-label="Scroll left"
             >
@@ -137,7 +140,7 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
           <nav
             ref={scrollContainerRef}
             onScroll={checkScroll}
-            className="flex items-center gap-1.5 overflow-x-auto py-2.5 px-2 w-full flex-nowrap scrollbar-thin scrollbar-thumb-[#2c2c2c] hover:scrollbar-thumb-[#444] scrollbar-track-transparent scroll-smooth"
+            className="flex items-center gap-1.5 overflow-x-auto py-2.5 px-2 w-full flex-nowrap scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#2c2c2c] hover:scrollbar-thumb-neutral-400 dark:hover:scrollbar-thumb-[#444] scrollbar-track-transparent scroll-smooth"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {navLinks.map((link) => {
@@ -152,7 +155,7 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
                     isActive
                       ? "bg-[#E31E2F] text-white shadow-md red-glow-subtle font-bold"
-                      : "bg-[#141414] text-neutral-400 hover:text-white hover:bg-[#1c1c1c] border border-[#242424]"
+                      : "bg-white dark:bg-[#141414] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#1c1c1c] border border-neutral-200 dark:border-[#242424]"
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5 shrink-0" />
@@ -166,7 +169,7 @@ export function AdminNavbar({ userEmail }: { userEmail?: string }) {
           {canScrollRight && (
             <button
               onClick={() => scrollBy(150)}
-              className="absolute right-1 z-10 p-1.5 rounded-full bg-black/90 text-white border border-[#333] hover:border-[#E31E2F] shadow-lg"
+              className="absolute right-1 z-10 p-1.5 rounded-full bg-white dark:bg-black/90 text-neutral-900 dark:text-white border border-neutral-300 dark:border-[#333] hover:border-[#E31E2F] shadow-lg"
               title="Scroll right"
               aria-label="Scroll right"
             >

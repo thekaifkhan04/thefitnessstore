@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { RouteProgressBar } from "@/components/layout/route-progress-bar";
+import { ThemeProvider } from "@/context/theme-context";
 import { getStoreSettings } from "@/lib/settings";
 import { prisma } from "@/lib/prisma";
 
@@ -95,33 +96,72 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${inter.variable} ${oswald.variable} ${montserrat.variable} dark`}
+      suppressHydrationWarning
+      className={`${bebasNeue.variable} ${inter.variable} ${oswald.variable} ${montserrat.variable}`}
     >
       <head>
+        <script
+          id="tfs-theme-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var mode = localStorage.getItem('tfs_theme');
+                  var isDark = true;
+                  if (mode === 'light') {
+                    isDark = false;
+                  } else if (mode === 'dark') {
+                    isDark = true;
+                  } else {
+                    isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  }
+                  var root = document.documentElement;
+                  if (isDark) {
+                    root.classList.add('dark');
+                    root.classList.remove('light');
+                    root.setAttribute('data-theme', 'dark');
+                    root.style.colorScheme = 'dark';
+                  } else {
+                    root.classList.add('light');
+                    root.classList.remove('dark');
+                    root.setAttribute('data-theme', 'light');
+                    root.style.colorScheme = 'light';
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
               :root {
                 --brand-primary: ${primaryColor};
+                --font-display-custom: ${headingFont};
+                --heading-style-custom: ${headingStyle};
+              }
+              html.dark {
+                --brand-primary: ${primaryColor};
                 --brand-red: ${primaryColor};
                 --text-primary: ${textColor};
                 --text-secondary: ${mutedTextColor};
               }
+              html.light {
+                --brand-primary: ${primaryColor !== "#E31E2F" ? primaryColor : "#D7192D"};
+                --brand-red: ${primaryColor !== "#E31E2F" ? primaryColor : "#D7192D"};
+                --text-primary: #171717;
+                --text-secondary: #60646C;
+              }
               body {
-                color: var(--text-primary) !important;
-              }
-              .text-white {
-                color: var(--text-primary) !important;
-              }
-              .text-neutral-400, .text-neutral-300, .text-neutral-500 {
-                color: var(--text-secondary) !important;
+                color: var(--text-primary);
+                background-color: var(--background);
               }
               .font-display {
                 font-family: var(--font-display-custom, ${headingFont}) !important;
                 text-transform: var(--heading-style-custom, ${headingStyle}) !important;
               }
               .bg-\\[\\#E31E2F\\] { background-color: var(--brand-primary) !important; }
-              .bg-\\[\\#E31E2F\\] .text-white, .bg-\\[\\#E31E2F\\] * { color: #ffffff !important; }
+              .bg-\\[\\#E31E2F\\] .text-white, .bg-\\[\\#E31E2F\\] *, html.light .bg-\\[\\#E31E2F\\] * { color: #ffffff !important; }
               .text-\\[\\#E31E2F\\] { color: var(--brand-primary) !important; }
               .border-\\[\\#E31E2F\\] { border-color: var(--brand-primary) !important; }
               .hover\\:bg-\\[\\#c51826\\]:hover { filter: brightness(0.85); }
@@ -135,16 +175,18 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-[#080808] text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
+      <body className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
         <RouteProgressBar />
         <SettingsProvider initialSettings={settings}>
-          <CartProvider>
-            <Navbar initialCategories={categories} />
-            <CartDrawer />
-            <FloatingWhatsApp />
-            <main className="flex-1">{children}</main>
-            <Footer categories={categories} />
-          </CartProvider>
+          <ThemeProvider>
+            <CartProvider>
+              <Navbar initialCategories={categories} />
+              <CartDrawer />
+              <FloatingWhatsApp />
+              <main className="flex-1">{children}</main>
+              <Footer categories={categories} />
+            </CartProvider>
+          </ThemeProvider>
         </SettingsProvider>
       </body>
     </html>

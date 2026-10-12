@@ -93,7 +93,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-white pt-24 pb-20">
+    <div className="min-h-screen bg-white dark:bg-[#080808] text-neutral-900 dark:text-white pt-24 pb-20">
       {/* Inject JSON-LD */}
       <script
         type="application/ld+json"

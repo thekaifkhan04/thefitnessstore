@@ -33,13 +33,13 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
   );
 
   return (
-    <footer className="bg-[#060606] border-t border-[#1f1f1f] text-neutral-400 text-sm">
+    <footer className="bg-neutral-100 dark:bg-[#060606] border-t border-neutral-200 dark:border-[#1f1f1f] text-neutral-600 dark:text-neutral-400 text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-5">
             <TFSLogo size="lg" />
-            <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+            <p className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm leading-relaxed max-w-sm">
               {settings.store_tagline
                 ? `${settings.store_name} — ${settings.store_tagline}`
                 : `${settings.store_name} (TFS) is a leading retailer and wholesaler of sports goods, gym equipment, weightlifting accessories, fitness wear, and genuine supplements.`}
@@ -49,18 +49,18 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#141414] border border-[#2b2b2b] hover:border-[#E31E2F] hover:text-white transition-all text-xs font-semibold uppercase tracking-wider text-neutral-200"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white dark:bg-[#141414] border border-neutral-300 dark:border-[#2b2b2b] hover:border-[#E31E2F] hover:text-neutral-900 dark:hover:text-white transition-all text-xs font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 shadow-sm"
               >
                 <MessageSquare className="w-4 h-4 text-[#25D366]" />
                 <span>Chat On WhatsApp</span>
-                <ExternalLink className="w-3.5 h-3.5 text-neutral-500" />
+                <ExternalLink className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
               </a>
             </div>
           </div>
 
           {/* Categories */}
           <div className="space-y-4">
-            <h4 className="font-display text-white text-base font-bold uppercase tracking-wider">
+            <h4 className="font-display text-neutral-900 dark:text-white text-base font-bold uppercase tracking-wider">
               CATEGORIES
             </h4>
             <ul className="space-y-2 text-xs">
@@ -76,7 +76,7 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-display text-white text-base font-bold uppercase tracking-wider">
+            <h4 className="font-display text-neutral-900 dark:text-white text-base font-bold uppercase tracking-wider">
               QUICK LINKS
             </h4>
             <ul className="space-y-2 text-xs">
@@ -85,13 +85,13 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
               <li><Link href="/bulk-orders" className="hover:text-[#E31E2F] transition-colors">Wholesale & Gym Setup</Link></li>
               <li><Link href="/about" className="hover:text-[#E31E2F] transition-colors">About TFS</Link></li>
               <li><Link href="/contact" className="hover:text-[#E31E2F] transition-colors">Contact Details</Link></li>
-              <li><Link href="/admin/login" className="hover:text-white transition-colors text-neutral-500">Admin Portal</Link></li>
+              <li><Link href="/admin/login" className="hover:text-neutral-900 dark:hover:text-white transition-colors text-neutral-500">Admin Portal</Link></li>
             </ul>
           </div>
 
           {/* Store Contact */}
           <div className="space-y-4">
-            <h4 className="font-display text-white text-base font-bold uppercase tracking-wider">
+            <h4 className="font-display text-neutral-900 dark:text-white text-base font-bold uppercase tracking-wider">
               CONTACT & SHOWROOM
             </h4>
             <div className="space-y-3 text-xs">
@@ -116,12 +116,12 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
         </div>
 
         {/* Policies and Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-[#181818] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+        <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-[#181818] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Link href="/privacy-policy" className="hover:text-neutral-300 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-neutral-300 transition-colors">Terms of Service</Link>
-            <Link href="/shipping-policy" className="hover:text-neutral-300 transition-colors">Shipping Information</Link>
-            <Link href="/returns-policy" className="hover:text-neutral-300 transition-colors">Return & Replacement Policy</Link>
+            <Link href="/privacy-policy" className="hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors">Terms of Service</Link>
+            <Link href="/shipping-policy" className="hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors">Shipping Information</Link>
+            <Link href="/returns-policy" className="hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors">Return & Replacement Policy</Link>
           </div>
           <div>
             &copy; {currentYear} {settings.store_name} (TFS). All Rights Reserved.
