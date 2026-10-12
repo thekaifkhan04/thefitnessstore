@@ -83,7 +83,7 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold text-sm text-white">Phone Support</h3>
                   <p className="text-xs text-neutral-300 mt-1 font-mono">{settings.contact_phone || "+91 98765 43210"}</p>
-                  <p className="text-[11px] text-neutral-500 mt-0.5">Mon – Sat: 10:30 AM – 9:00 PM</p>
+                  <p className="text-[11px] text-neutral-500 mt-0.5">Mon – Sun: 10:30 AM – 9:00 PM</p>
                 </div>
               </div>
 

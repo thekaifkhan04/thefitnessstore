@@ -108,7 +108,7 @@ export function Footer({ categories }: { categories?: FooterCategory[] }) {
                 <span>{settings.support_email || "contact@thefitnessstore.com"}</span>
               </div>
               <div className="pt-2 text-[11px] text-neutral-500">
-                <p>Timings: Mon – Sat: 10:30 AM – 9:00 PM</p>
+                <p>Timings: Mon – Sun: 10:30 AM – 9:00 PM</p>
                 <p>Retail & Wholesale enquiries welcome.</p>
               </div>
             </div>
