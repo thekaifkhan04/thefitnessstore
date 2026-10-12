@@ -47,6 +47,19 @@ export async function POST(req: NextRequest) {
           "theme_muted_text_color",
           "theme_heading_font",
           "theme_heading_style",
+          "hero_featured_badge",
+          "hero_featured_title",
+          "hero_featured_subtitle",
+          "hero_featured_metric1_val",
+          "hero_featured_metric1_lbl",
+          "hero_featured_metric2_val",
+          "hero_featured_metric2_lbl",
+          "hero_featured_metric3_val",
+          "hero_featured_metric3_lbl",
+          "hero_featured_btn_text",
+          "hero_featured_btn_url",
+          "marquee_line1_text",
+          "marquee_line2_text",
         ].includes(key)
       ) {
         await prisma.storeSetting.upsert({

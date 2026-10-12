@@ -20,6 +20,19 @@ export interface StoreSettingsMap {
   theme_muted_text_color: string;
   theme_heading_font: string;
   theme_heading_style: string;
+  hero_featured_badge: string;
+  hero_featured_title: string;
+  hero_featured_subtitle: string;
+  hero_featured_metric1_val: string;
+  hero_featured_metric1_lbl: string;
+  hero_featured_metric2_val: string;
+  hero_featured_metric2_lbl: string;
+  hero_featured_metric3_val: string;
+  hero_featured_metric3_lbl: string;
+  hero_featured_btn_text: string;
+  hero_featured_btn_url: string;
+  marquee_line1_text: string;
+  marquee_line2_text: string;
 }
 
 export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
@@ -43,6 +56,19 @@ export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   theme_muted_text_color: "#A6A6A6",
   theme_heading_font: "bebas",
   theme_heading_style: "uppercase",
+  hero_featured_badge: "FEATURED CATEGORY",
+  hero_featured_title: "IPF-SPEC LEVER BELTS",
+  hero_featured_subtitle: "13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM",
+  hero_featured_metric1_val: "13mm",
+  hero_featured_metric1_lbl: "IPF Spec",
+  hero_featured_metric2_val: "Steel",
+  hero_featured_metric2_lbl: "Lever Cast",
+  hero_featured_metric3_val: "₹4,200",
+  hero_featured_metric3_lbl: "From",
+  hero_featured_btn_text: "VIEW LEVER BELTS",
+  hero_featured_btn_url: "/shop/gym-belts",
+  marquee_line1_text: "THE FITNESS STORE",
+  marquee_line2_text: "THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT",
 };
 
 /**

@@ -15,6 +15,9 @@ import {
   Phone,
   Mail,
   MapPin,
+  Layers,
+  Flame,
+  Sparkles,
   Image as ImageIcon,
 } from "lucide-react";
 
@@ -678,6 +681,232 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
               onChange={(e) => handleChange("wholesale_banner_headline", e.target.value)}
               className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
             />
+          </div>
+        </div>
+
+        {/* Section 5: Homepage Hero Featured Category Card */}
+        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-[#E31E2F]" />
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+                HOMEPAGE HERO FEATURED CATEGORY CARD
+              </h2>
+            </div>
+            <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Top of Homepage</span>
+          </div>
+
+          <p className="text-neutral-400 text-xs leading-relaxed">
+            Customize the prominent athletic showcase card displayed in the right column of the landing page hero section.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div>
+              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                Badge Label
+              </label>
+              <input
+                type="text"
+                value={settings.hero_featured_badge || "FEATURED CATEGORY"}
+                onChange={(e) => handleChange("hero_featured_badge", e.target.value)}
+                placeholder="FEATURED CATEGORY"
+                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                Category Card Title
+              </label>
+              <input
+                type="text"
+                value={settings.hero_featured_title || "IPF-SPEC LEVER BELTS"}
+                onChange={(e) => handleChange("hero_featured_title", e.target.value)}
+                placeholder="IPF-SPEC LEVER BELTS"
+                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              Subtitle / Specification Line
+            </label>
+            <input
+              type="text"
+              value={
+                settings.hero_featured_subtitle ||
+                "13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM"
+              }
+              onChange={(e) => handleChange("hero_featured_subtitle", e.target.value)}
+              placeholder="13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM"
+              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+            />
+          </div>
+
+          {/* 3 Metrics Grid */}
+          <div className="pt-2 border-t border-[#1e1e1e] space-y-2">
+            <span className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+              3 Highlights / Specifications Strip
+            </span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Metric 1 */}
+              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
+                <span className="text-[10px] uppercase font-bold text-neutral-400 block">Spec 1</span>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric1_val || "13mm"}
+                    onChange={(e) => handleChange("hero_featured_metric1_val", e.target.value)}
+                    placeholder="13mm"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric1_lbl || "IPF Spec"}
+                    onChange={(e) => handleChange("hero_featured_metric1_lbl", e.target.value)}
+                    placeholder="IPF Spec"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Metric 2 */}
+              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
+                <span className="text-[10px] uppercase font-bold text-neutral-400 block">Spec 2</span>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric2_val || "Steel"}
+                    onChange={(e) => handleChange("hero_featured_metric2_val", e.target.value)}
+                    placeholder="Steel"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric2_lbl || "Lever Cast"}
+                    onChange={(e) => handleChange("hero_featured_metric2_lbl", e.target.value)}
+                    placeholder="Lever Cast"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Metric 3 */}
+              <div className="p-3 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
+                <span className="text-[10px] uppercase font-bold text-[#E31E2F] block">Spec 3 / Price</span>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Value</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric3_val || "₹4,200"}
+                    onChange={(e) => handleChange("hero_featured_metric3_val", e.target.value)}
+                    placeholder="₹4,200"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs font-semibold focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-neutral-500 uppercase block">Label</label>
+                  <input
+                    type="text"
+                    value={settings.hero_featured_metric3_lbl || "From"}
+                    onChange={(e) => handleChange("hero_featured_metric3_lbl", e.target.value)}
+                    placeholder="From"
+                    className="w-full px-2.5 py-1.5 rounded-lg bg-[#1f1f1f] border border-[#333] text-white text-xs focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Button CTA */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#1e1e1e]">
+            <div>
+              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                Button CTA Label
+              </label>
+              <input
+                type="text"
+                value={settings.hero_featured_btn_text || "VIEW LEVER BELTS"}
+                onChange={(e) => handleChange("hero_featured_btn_text", e.target.value)}
+                placeholder="VIEW LEVER BELTS"
+                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                Button Target Link / URL
+              </label>
+              <input
+                type="text"
+                value={settings.hero_featured_btn_url || "/shop/gym-belts"}
+                onChange={(e) => handleChange("hero_featured_btn_url", e.target.value)}
+                placeholder="/shop/gym-belts"
+                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono text-xs focus:outline-none focus:border-neutral-400"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 6: Homepage Animated Marquee Ticker */}
+        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#E31E2F]" />
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+                HOMEPAGE ANIMATED MARQUEE TEXT
+              </h2>
+            </div>
+            <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Scroll-Animated Ticker</span>
+          </div>
+
+          <p className="text-neutral-400 text-xs leading-relaxed">
+            This bold athletic ticker animates smoothly left-to-right beneath the hero and trust strip on the landing page, repeating your brand name across the screen.
+          </p>
+
+          <div>
+            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              Marquee Primary Line (Animated Left-to-Right)
+            </label>
+            <input
+              type="text"
+              value={settings.marquee_line1_text || "THE FITNESS STORE"}
+              onChange={(e) => handleChange("marquee_line1_text", e.target.value)}
+              placeholder="THE FITNESS STORE"
+              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+            />
+            <p className="text-[10px] text-neutral-500 mt-1">
+              Repeated continuously with red athletic divider dots moving left-to-right.
+            </p>
+          </div>
+
+          <div>
+            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              Marquee Secondary Line (Stylized Outline Text)
+            </label>
+            <input
+              type="text"
+              value={
+                settings.marquee_line2_text ||
+                "THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT"
+              }
+              onChange={(e) => handleChange("marquee_line2_text", e.target.value)}
+              placeholder="THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT"
+              className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-neutral-400"
+            />
+            <p className="text-[10px] text-neutral-500 mt-1">
+              Rendered in stylized outline typographic stroke gliding in parallel.
+            </p>
           </div>
         </div>
       </div>

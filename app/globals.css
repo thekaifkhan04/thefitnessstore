@@ -48,6 +48,44 @@
   color: rgba(227, 30, 47, 0.1);
 }
 
+/* Animated Marquee for Homepage - Smooth Left-to-Right and Right-to-Left */
+@keyframes marquee-to-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-to-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-right 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-left 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right:hover,
+.animate-marquee-left:hover {
+  animation-play-state: paused;
+}
+
 /* Glow filters */
 .red-glow {
   box-shadow: 0 0 25px rgba(227, 30, 47, 0.35);

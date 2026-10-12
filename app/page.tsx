@@ -141,42 +141,55 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Right Column: Hero Showcase Card inspired by RYNOX Next Up card */}
+            {/* Right Column: Hero Showcase Card - Dynamically editable from admin settings */}
             <div className="lg:col-span-4">
               <div className="relative rounded-2xl bg-[#121212]/90 border border-[#262626] p-6 backdrop-blur-xl shadow-2xl hover:border-[#383838] transition-all">
                 {/* Pill tag */}
                 <div className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[11px] font-bold uppercase tracking-wider mb-4">
-                  FEATURED CATEGORY
+                  {settings.hero_featured_badge || "FEATURED CATEGORY"}
                 </div>
 
                 <h3 className="font-display text-3xl font-bold uppercase text-white tracking-wide">
-                  IPF-SPEC LEVER BELTS
+                  {settings.hero_featured_title || "IPF-SPEC LEVER BELTS"}
                 </h3>
                 <p className="text-xs text-neutral-400 mt-1 mb-4">
-                  13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM
+                  {settings.hero_featured_subtitle ||
+                    "13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM"}
                 </p>
 
                 {/* Metrics strip inside card */}
                 <div className="grid grid-cols-3 gap-2 py-4 border-y border-[#222222] text-center my-4">
                   <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
-                    <div className="font-display text-2xl text-white font-bold">13mm</div>
-                    <div className="text-[10px] text-neutral-400 uppercase">IPF Spec</div>
+                    <div className="font-display text-2xl text-white font-bold">
+                      {settings.hero_featured_metric1_val || "13mm"}
+                    </div>
+                    <div className="text-[10px] text-neutral-400 uppercase">
+                      {settings.hero_featured_metric1_lbl || "IPF Spec"}
+                    </div>
                   </div>
                   <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
-                    <div className="font-display text-2xl text-white font-bold">Steel</div>
-                    <div className="text-[10px] text-neutral-400 uppercase">Lever Cast</div>
+                    <div className="font-display text-2xl text-white font-bold">
+                      {settings.hero_featured_metric2_val || "Steel"}
+                    </div>
+                    <div className="text-[10px] text-neutral-400 uppercase">
+                      {settings.hero_featured_metric2_lbl || "Lever Cast"}
+                    </div>
                   </div>
                   <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
-                    <div className="font-display text-2xl text-[#E31E2F] font-bold">₹4,200</div>
-                    <div className="text-[10px] text-neutral-400 uppercase">From</div>
+                    <div className="font-display text-2xl text-[#E31E2F] font-bold">
+                      {settings.hero_featured_metric3_val || "₹4,200"}
+                    </div>
+                    <div className="text-[10px] text-neutral-400 uppercase">
+                      {settings.hero_featured_metric3_lbl || "From"}
+                    </div>
                   </div>
                 </div>
 
                 <Link
-                  href="/shop/gym-belts"
+                  href={settings.hero_featured_btn_url || "/shop/gym-belts"}
                   className="w-full py-3 px-4 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-display text-lg uppercase tracking-wider flex items-center justify-center gap-2 transition-colors mt-2"
                 >
-                  <span>VIEW LEVER BELTS</span>
+                  <span>{settings.hero_featured_btn_text || "VIEW LEVER BELTS"}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -228,40 +241,29 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TYPOGRAPHIC MARQUEE STRIP inspired by RYNOX */}
-      <section className="py-8 bg-[#080808] overflow-hidden select-none border-b border-[#181818]">
+      {/* TYPOGRAPHIC MARQUEE STRIP - THE FITNESS STORE Animated Left-to-Right */}
+      <section className="py-7 bg-[#080808] overflow-hidden select-none border-b border-[#181818]">
+        {/* Line 1: Moving Smoothly Left-to-Right */}
         <div className="flex whitespace-nowrap overflow-hidden">
-          <div className="flex items-center gap-8 text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest animate-none text-neutral-200">
-            <span>RUN</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span className="text-[#E31E2F]">LIFT</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span>CARRY</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span className="text-[#E31E2F]">FLIP</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span>REPEAT</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span className="text-[#E31E2F]">OUTLAST</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span>TRAIN</span>
-            <span className="text-[#E31E2F]">·</span>
-            <span className="text-[#E31E2F]">CONQUER</span>
+          <div className="animate-marquee-right flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-neutral-100">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} className="inline-flex items-center shrink-0">
+                <span>{settings.marquee_line1_text || "THE FITNESS STORE"}</span>
+                <span className="text-[#E31E2F] mx-6 sm:mx-8">·</span>
+              </span>
+            ))}
           </div>
         </div>
-        <div className="flex whitespace-nowrap overflow-hidden mt-2">
-          <div className="flex items-center gap-8 text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-stroke">
-            <span>ENDURANCE</span>
-            <span>·</span>
-            <span>STRENGTH</span>
-            <span>·</span>
-            <span>PERFORMANCE</span>
-            <span>·</span>
-            <span>POWER</span>
-            <span>·</span>
-            <span>DISCIPLINE</span>
-            <span>·</span>
-            <span>PRECISION</span>
+
+        {/* Line 2: Moving Smoothly in Outline Style */}
+        <div className="flex whitespace-nowrap overflow-hidden mt-2 sm:mt-3">
+          <div className="animate-marquee-left flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-stroke">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span key={i} className="inline-flex items-center shrink-0">
+                <span>{settings.marquee_line2_text || "THE FITNESS STORE"}</span>
+                <span className="text-[#E31E2F] mx-6 sm:mx-8">·</span>
+              </span>
+            ))}
           </div>
         </div>
       </section>

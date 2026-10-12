@@ -122,3 +122,31 @@ test("Typography and text styling settings are supported and retrieved correctly
     });
   }
 });
+
+test("Hero featured category and marquee settings are supported and retrieved correctly", async () => {
+  const customTitle = "OLYMPIC BARBELL SETS";
+  const customMarquee = "THE FITNESS STORE · UNLEASH POWER";
+
+  try {
+    await prisma.storeSetting.upsert({
+      where: { key: "hero_featured_title" },
+      update: { value: customTitle },
+      create: { key: "hero_featured_title", value: customTitle },
+    });
+    await prisma.storeSetting.upsert({
+      where: { key: "marquee_line1_text" },
+      update: { value: customMarquee },
+      create: { key: "marquee_line1_text", value: customMarquee },
+    });
+
+    const settings = await getStoreSettings();
+    assert.equal(settings.hero_featured_title, customTitle);
+    assert.equal(settings.marquee_line1_text, customMarquee);
+  } finally {
+    await prisma.storeSetting.deleteMany({
+      where: {
+        key: { in: ["hero_featured_title", "marquee_line1_text"] },
+      },
+    });
+  }
+});
