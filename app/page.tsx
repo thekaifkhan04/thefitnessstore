@@ -88,7 +88,7 @@ export default async function HomePage() {
               </div>
 
               {/* Oversized Athletic Headline */}
-              <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.92] text-white">
+              <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.92] text-neutral-900 dark:text-white">
                 {headlineLines.map((line, idx) => {
                   const isLast = idx === headlineLines.length - 1;
                   if (isLast) {
@@ -120,7 +120,7 @@ export default async function HomePage() {
               </h1>
 
               {/* Description */}
-              <p className="text-neutral-300 text-base sm:text-lg max-w-2xl leading-relaxed font-normal">
+              <p className="text-neutral-600 dark:text-neutral-300 text-base sm:text-lg max-w-2xl leading-relaxed font-normal">
                 {settings.hero_description ||
                   "From everyday gym essentials to performance-driven equipment, find everything you need to train harder. We equip passionate athletes, home gyms, and commercial fitness centers."}
               </p>
@@ -137,7 +137,7 @@ export default async function HomePage() {
 
                 <a
                   href="#categories"
-                  className="px-7 py-4 rounded-xl bg-[#141414] hover:bg-[#1f1f1f] border border-[#2d2d2d] hover:border-neutral-500 font-display text-xl uppercase tracking-wider text-neutral-200 hover:text-white transition-all flex items-center gap-2"
+                  className="px-7 py-4 rounded-xl bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 hover:border-neutral-400 dark:bg-[#141414] dark:hover:bg-[#1f1f1f] dark:border-[#2d2d2d] dark:hover:border-neutral-500 font-display text-xl uppercase tracking-wider text-neutral-800 dark:text-neutral-200 hover:text-neutral-900 dark:hover:text-white transition-all flex items-center gap-2"
                 >
                   EXPLORE CATEGORIES
                 </a>
@@ -146,43 +146,43 @@ export default async function HomePage() {
 
             {/* Right Column: Hero Showcase Card - Dynamically editable from admin settings */}
             <div className="lg:col-span-4">
-              <div className="relative rounded-2xl bg-[#121212]/90 border border-[#262626] p-6 backdrop-blur-xl shadow-2xl hover:border-[#383838] transition-all">
+              <div className="relative rounded-2xl bg-white/90 dark:bg-[#121212]/90 border border-neutral-200 dark:border-[#262626] p-6 backdrop-blur-xl shadow-2xl hover:border-neutral-300 dark:hover:border-[#383838] transition-all">
                 {/* Pill tag */}
                 <div className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[11px] font-bold uppercase tracking-wider mb-4">
                   {settings.hero_featured_badge || "FEATURED CATEGORY"}
                 </div>
 
-                <h3 className="font-display text-3xl font-bold uppercase text-white tracking-wide">
+                <h3 className="font-display text-3xl font-bold uppercase text-neutral-900 dark:text-white tracking-wide">
                   {settings.hero_featured_title || "IPF-SPEC LEVER BELTS"}
                 </h3>
-                <p className="text-xs text-neutral-400 mt-1 mb-4">
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 mb-4">
                   {settings.hero_featured_subtitle ||
                     "13MM & 11MM HEAVY-DUTY GENUINE LEATHER · STEEL LEVER MECHANISM"}
                 </p>
 
                 {/* Metrics strip inside card */}
-                <div className="grid grid-cols-3 gap-2 py-4 border-y border-[#222222] text-center my-4">
-                  <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
-                    <div className="font-display text-2xl text-white font-bold">
+                <div className="grid grid-cols-3 gap-2 py-4 border-y border-neutral-200 dark:border-[#222222] text-center my-4">
+                  <div className="bg-neutral-50 dark:bg-[#181818] p-2.5 rounded-lg border border-neutral-200 dark:border-[#242424]">
+                    <div className="font-display text-2xl text-neutral-900 dark:text-white font-bold">
                       {settings.hero_featured_metric1_val || "13mm"}
                     </div>
-                    <div className="text-[10px] text-neutral-400 uppercase">
+                    <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase">
                       {settings.hero_featured_metric1_lbl || "IPF Spec"}
                     </div>
                   </div>
-                  <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
-                    <div className="font-display text-2xl text-white font-bold">
+                  <div className="bg-neutral-50 dark:bg-[#181818] p-2.5 rounded-lg border border-neutral-200 dark:border-[#242424]">
+                    <div className="font-display text-2xl text-neutral-900 dark:text-white font-bold">
                       {settings.hero_featured_metric2_val || "Steel"}
                     </div>
-                    <div className="text-[10px] text-neutral-400 uppercase">
+                    <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase">
                       {settings.hero_featured_metric2_lbl || "Lever Cast"}
                     </div>
                   </div>
-                  <div className="bg-[#181818] p-2.5 rounded-lg border border-[#242424]">
+                  <div className="bg-neutral-50 dark:bg-[#181818] p-2.5 rounded-lg border border-neutral-200 dark:border-[#242424]">
                     <div className="font-display text-2xl text-[#E31E2F] font-bold">
                       {settings.hero_featured_metric3_val || "₹4,200"}
                     </div>
-                    <div className="text-[10px] text-neutral-400 uppercase">
+                    <div className="text-[10px] text-neutral-500 dark:text-neutral-400 uppercase">
                       {settings.hero_featured_metric3_lbl || "From"}
                     </div>
                   </div>
@@ -206,37 +206,37 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="flex flex-col items-center justify-center space-y-1">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+              <div className="font-display text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-wide">
                 17+
               </div>
-              <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
+              <div className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-medium">
                 Product Categories
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center space-y-1 border-l border-[#222222] pl-4">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-white tracking-wide">
+            <div className="flex flex-col items-center justify-center space-y-1 border-l border-neutral-200 dark:border-[#222222] pl-4">
+              <div className="font-display text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white tracking-wide">
                 100%
               </div>
-              <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
+              <div className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-medium">
                 Verified Fitness Goods
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center space-y-1 border-l border-[#222222] pl-4">
+            <div className="flex flex-col items-center justify-center space-y-1 border-l border-neutral-200 dark:border-[#222222] pl-4">
               <div className="font-display text-3xl sm:text-4xl font-bold text-[#E31E2F] tracking-wide">
                 B2B & B2C
               </div>
-              <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
+              <div className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-medium">
                 Retail & Wholesale Enquiries
               </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center space-y-1 border-l border-[#222222] pl-4">
-              <div className="font-display text-3xl sm:text-4xl font-bold text-emerald-400 tracking-wide">
+            <div className="flex flex-col items-center justify-center space-y-1 border-l border-neutral-200 dark:border-[#222222] pl-4">
+              <div className="font-display text-3xl sm:text-4xl font-bold text-emerald-600 dark:text-emerald-400 tracking-wide">
                 DIRECT
               </div>
-              <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
+              <div className="text-xs uppercase tracking-wider text-neutral-500 dark:text-neutral-400 font-medium">
                 WhatsApp Order Enquiry
               </div>
             </div>
@@ -263,7 +263,7 @@ export default async function HomePage() {
                 CATALOGUE EXPLORER
               </span>
             </div>
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white">
               SHOP BY CATEGORY
             </h2>
           </div>
@@ -282,9 +282,9 @@ export default async function HomePage() {
             <Link
               key={cat.id}
               href={`/shop/${cat.slug}`}
-              className="group relative flex flex-col rounded-xl bg-[#121212] border border-[#222222] hover:border-[#E31E2F]/60 overflow-hidden transition-all duration-300 hover:translate-y-[-3px] hover:shadow-xl"
+              className="group relative flex flex-col rounded-xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#222222] hover:border-[#E31E2F]/60 overflow-hidden transition-all duration-300 hover:translate-y-[-3px] hover:shadow-lg dark:hover:shadow-xl"
             >
-              <div className="relative aspect-square bg-[#171717] overflow-hidden p-3 flex items-center justify-center">
+              <div className="relative aspect-square bg-neutral-50 dark:bg-[#171717] overflow-hidden p-3 flex items-center justify-center">
                 {cat.image ? (
                   <Image
                     src={cat.image}
@@ -294,11 +294,11 @@ export default async function HomePage() {
                     className="object-contain p-2 group-hover:scale-110 transition-transform duration-300"
                   />
                 ) : (
-                  <Dumbbell className="w-10 h-10 text-neutral-600" />
+                  <Dumbbell className="w-10 h-10 text-neutral-400 dark:text-neutral-600" />
                 )}
               </div>
-              <div className="p-3 text-center border-t border-[#1e1e1e]">
-                <h3 className="font-display text-sm font-bold uppercase text-white group-hover:text-[#E31E2F] transition-colors line-clamp-1">
+              <div className="p-3 text-center border-t border-neutral-100 dark:border-[#1e1e1e]">
+                <h3 className="font-display text-sm font-bold uppercase text-neutral-900 dark:text-white group-hover:text-[#E31E2F] transition-colors line-clamp-1">
                   {cat.name}
                 </h3>
                 <span className="text-[10px] text-neutral-500 uppercase tracking-wider">
@@ -321,13 +321,13 @@ export default async function HomePage() {
                   TOP PICKS
                 </span>
               </div>
-              <h2 className="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight text-white">
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight text-neutral-900 dark:text-white">
                 FEATURED PRODUCTS
               </h2>
             </div>
             <Link
               href="/shop"
-              className="mt-3 md:mt-0 px-4 py-2 rounded-lg bg-[#181818] border border-[#2d2d2d] hover:border-[#E31E2F] text-xs font-semibold uppercase tracking-wider text-neutral-200 hover:text-white transition-all flex items-center gap-1.5 self-start md:self-auto"
+              className="mt-3 md:mt-0 px-4 py-2 rounded-lg bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2d2d2d] hover:border-[#E31E2F] text-xs font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 hover:text-neutral-900 dark:hover:text-white transition-all flex items-center gap-1.5 self-start md:self-auto shadow-sm"
             >
               <span>VIEW ALL PRODUCTS</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -368,32 +368,32 @@ export default async function HomePage() {
             </span>
             <div className="w-6 h-1 bg-[#E31E2F]" />
           </div>
-          <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+          <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white">
             EQUIP YOUR DISCIPLINE
           </h2>
-          <p className="text-neutral-400 text-sm mt-3">
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-3">
             Hand-curated equipment sets tailored for serious strength athletes, functional fitness, and commercial fitness centers.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Powerlifting Belts & Strength */}
-          <div className="group relative rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden">
+          <div className="group relative rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-[#E31E2F]">
                 STRENGTH ESSENTIALS
               </span>
-              <h3 className="font-display text-3xl font-extrabold uppercase text-white leading-tight">
+              <h3 className="font-display text-3xl font-extrabold uppercase text-neutral-900 dark:text-white leading-tight">
                 LEVER BELTS & WRIST WRAPS
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 IPF-spec 13mm leather lever belts, thumb loop wraps, and heavy-duty joint supports built for PRs.
               </p>
             </div>
             <div className="pt-8">
               <Link
                 href="/shop/gym-belts"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#E31E2F] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white group-hover:text-[#E31E2F] transition-colors"
               >
                 <span>EXPLORE GEAR</span> &rarr;
               </Link>
@@ -401,22 +401,22 @@ export default async function HomePage() {
           </div>
 
           {/* Card 2: Commercial Equipment */}
-          <div className="group relative rounded-2xl bg-[#161616] border border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden red-glow-subtle">
+          <div className="group relative rounded-2xl bg-white dark:bg-[#161616] border border-neutral-200 dark:border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg">
             <div className="space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
                 COMMERCIAL GRADE
               </span>
-              <h3 className="font-display text-3xl font-extrabold uppercase text-white leading-tight">
+              <h3 className="font-display text-3xl font-extrabold uppercase text-neutral-900 dark:text-white leading-tight">
                 FLAT BENCHES & DEADLIFT PLATFORMS
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 50mm heavy-duty platforms, bumper stands, and competition benches for commercial facilities.
               </p>
             </div>
             <div className="pt-8">
               <Link
                 href="/shop/gym-equipment"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#E31E2F] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white group-hover:text-[#E31E2F] transition-colors"
               >
                 <span>VIEW GYM EQUIPMENT</span> &rarr;
               </Link>
@@ -424,22 +424,22 @@ export default async function HomePage() {
           </div>
 
           {/* Card 3: Free Weights */}
-          <div className="group relative rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden">
+          <div className="group relative rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] hover:border-[#E31E2F] p-8 flex flex-col justify-between transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-[#E31E2F]">
                 FREE WEIGHTS
               </span>
-              <h3 className="font-display text-3xl font-extrabold uppercase text-white leading-tight">
+              <h3 className="font-display text-3xl font-extrabold uppercase text-neutral-900 dark:text-white leading-tight">
                 DUMBBELLS, PLATES & BARBELLS
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 High-density rubber bouncers, 28mm plates, and precision threaded curl & straight rods.
               </p>
             </div>
             <div className="pt-8">
               <Link
                 href="/shop/dumbbells"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white group-hover:text-[#E31E2F] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white group-hover:text-[#E31E2F] transition-colors"
               >
                 <span>EXPLORE WEIGHTS</span> &rarr;
               </Link>
@@ -486,47 +486,47 @@ export default async function HomePage() {
               </span>
               <div className="w-6 h-1 bg-[#E31E2F]" />
             </div>
-            <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+            <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white">
               WHY THE FITNESS STORE?
             </h2>
-            <p className="text-neutral-400 text-sm mt-3">
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm mt-3">
               We provide athletes and gym owners with commercial-grade fitness goods and transparent direct communication.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#222222] space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-red-950/40 border border-red-800/50 flex items-center justify-center text-[#E31E2F]">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#222222] space-y-4 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 flex items-center justify-center text-[#E31E2F]">
                 <PackageCheck className="w-6 h-6" />
               </div>
-              <h3 className="font-display text-2xl uppercase font-bold text-white">
+              <h3 className="font-display text-2xl uppercase font-bold text-neutral-900 dark:text-white">
                 VERIFIED INVENTORY
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Every trackpant, belt, dumbell, and accessory is physically stocked and inspected in our facility prior to dispatch.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#222222] space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-red-950/40 border border-red-800/50 flex items-center justify-center text-[#E31E2F]">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#222222] space-y-4 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 flex items-center justify-center text-[#E31E2F]">
                 <Layers className="w-6 h-6" />
               </div>
-              <h3 className="font-display text-2xl uppercase font-bold text-white">
+              <h3 className="font-display text-2xl uppercase font-bold text-neutral-900 dark:text-white">
                 RETAIL & WHOLESALE
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Whether you need a single 13mm lever belt or 50 pairs of bouncer dumbbells to equip a commercial club, we offer tier pricing.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#222222] space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-red-950/40 border border-red-800/50 flex items-center justify-center text-[#E31E2F]">
+            <div className="p-6 rounded-2xl bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#222222] space-y-4 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 flex items-center justify-center text-[#E31E2F]">
                 <MessageSquare className="w-6 h-6" />
               </div>
-              <h3 className="font-display text-2xl uppercase font-bold text-white">
+              <h3 className="font-display text-2xl uppercase font-bold text-neutral-900 dark:text-white">
                 DIRECT WHATSAPP CONFIRMATION
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 No automated payment gateways or lost packages. Chat directly with the store management to confirm sizes, stock, and local delivery.
               </p>
             </div>
@@ -540,7 +540,7 @@ export default async function HomePage() {
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#E31E2F]">
             COMMERCIAL SUPPLY & BULK ORDERS
           </span>
-          <h2 className="font-display font-extrabold text-5xl sm:text-6xl uppercase tracking-tight text-white leading-tight">
+          <h2 className="font-display font-extrabold text-5xl sm:text-6xl uppercase tracking-tight text-neutral-900 dark:text-white leading-tight">
             {(settings.wholesale_banner_headline || "BUY FOR YOUR GYM. EQUIP YOUR BUSINESS.")
               .split("\n")
               .map((line, idx, arr) => (
@@ -550,7 +550,7 @@ export default async function HomePage() {
                 </React.Fragment>
               ))}
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
             Looking for fitness equipment in bulk? Contact our team to discuss product availability and wholesale enquiries.
           </p>
           <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
@@ -558,14 +558,14 @@ export default async function HomePage() {
               href={wholesaleWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-xl uppercase tracking-wider text-white transition-all red-glow flex items-center gap-3 cursor-pointer"
+              className="px-8 py-4 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-xl uppercase tracking-wider text-white transition-all red-glow flex items-center gap-3 cursor-pointer shadow-md"
             >
               <MessageSquare className="w-5 h-5 text-white" />
               <span>ENQUIRE ON WHATSAPP</span>
             </a>
             <Link
               href="/bulk-orders"
-              className="px-8 py-4 rounded-xl bg-[#141414] hover:bg-[#1f1f1f] border border-[#2c2c2c] text-neutral-200 hover:text-white font-display text-xl uppercase tracking-wider transition-colors"
+              className="px-8 py-4 rounded-xl bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 dark:bg-[#141414] dark:hover:bg-[#1f1f1f] dark:border-[#2c2c2c] text-neutral-800 dark:text-neutral-200 hover:text-neutral-900 dark:hover:text-white font-display text-xl uppercase tracking-wider transition-colors"
             >
               WHOLESALE DETAILS
             </Link>

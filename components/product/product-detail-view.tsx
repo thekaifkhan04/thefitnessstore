@@ -129,7 +129,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
       {/* Left: Product Images Gallery */}
       <div className="lg:col-span-7 space-y-4">
         {/* Main Image Display */}
-        <div className="relative aspect-square w-full rounded-3xl bg-[#111111] border border-[#262626] overflow-hidden flex items-center justify-center p-6 shadow-2xl">
+        <div className="relative aspect-square w-full rounded-3xl bg-neutral-50 dark:bg-[#111111] border border-neutral-200 dark:border-[#262626] overflow-hidden flex items-center justify-center p-6 shadow-2xl">
           <Image
             src={activeImage.url}
             alt={activeImage.alt || product.name}
@@ -147,13 +147,13 @@ export function ProductDetailView({ product }: ProductDetailProps) {
 
           <button
             onClick={handleShare}
-            className="absolute top-4 right-4 p-2.5 rounded-full bg-[#1c1c1c]/80 backdrop-blur-md border border-[#333333] text-neutral-300 hover:text-white transition-colors"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-white/80 dark:bg-[#1c1c1c]/80 backdrop-blur-md border border-neutral-200 dark:border-[#333333] text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors"
             title="Share Product"
           >
             <Share2 className="w-4 h-4" />
           </button>
           {copiedLink && (
-            <span className="absolute top-16 right-4 px-3 py-1 rounded-md bg-[#25D366] text-black font-bold text-[10px] uppercase shadow-md animate-in fade-in">
+            <span className="absolute top-16 right-4 px-3 py-1 rounded-md bg-[#25D366] text-white font-bold text-[10px] uppercase shadow-md animate-in fade-in">
               Link Copied!
             </span>
           )}
@@ -166,10 +166,10 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               <button
                 key={img.id}
                 onClick={() => setSelectedImageIndex(idx)}
-                className={`relative w-20 h-20 rounded-xl bg-[#141414] border-2 overflow-hidden shrink-0 transition-all ${
+                className={`relative w-20 h-20 rounded-xl bg-white dark:bg-[#141414] border-2 overflow-hidden shrink-0 transition-all ${
                   selectedImageIndex === idx
                     ? "border-[#E31E2F] scale-95"
-                    : "border-[#292929] opacity-70 hover:opacity-100"
+                    : "border-neutral-200 dark:border-[#292929] opacity-70 hover:opacity-100"
                 }`}
               >
                 <Image
@@ -199,11 +199,11 @@ export function ProductDetailView({ product }: ProductDetailProps) {
             {product.brand && (
               <>
                 <span>·</span>
-                <span className="text-neutral-300">{product.brand}</span>
+                <span className="text-neutral-600 dark:text-neutral-300">{product.brand}</span>
               </>
             )}
           </div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight text-white leading-tight">
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight text-neutral-900 dark:text-white leading-tight">
             {product.name}
           </h1>
           <div className="flex items-center gap-3 mt-2 text-xs text-neutral-500">
@@ -211,7 +211,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
             <span>·</span>
             <span
               className={`font-semibold ${
-                product.isAvailable ? "text-emerald-400" : "text-amber-400"
+                product.isAvailable ? "text-emerald-600 dark:text-emerald-400" : "text-amber-600 dark:text-amber-400"
               }`}
             >
               {product.isAvailable ? "In Stock (Confirm via WhatsApp)" : "Limited Stock"}
@@ -220,19 +220,19 @@ export function ProductDetailView({ product }: ProductDetailProps) {
         </div>
 
         {/* Pricing Box */}
-        <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] flex items-baseline justify-between">
+        <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] flex items-baseline justify-between">
           <div>
             <div className="flex items-baseline gap-3">
-              <span className="font-display text-4xl font-extrabold text-white tracking-wide">
+              <span className="font-display text-4xl font-extrabold text-neutral-900 dark:text-white tracking-wide">
                 {formatINR(activePricePaise)}
               </span>
               {activeOriginalPricePaise && activeOriginalPricePaise > activePricePaise && (
-                <span className="text-sm text-neutral-500 line-through">
+                <span className="text-sm text-neutral-400 dark:text-neutral-500 line-through">
                   {formatINR(activeOriginalPricePaise)}
                 </span>
               )}
             </div>
-            <p className="text-[11px] text-neutral-400 mt-1">
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1">
               *Taxes included. Delivery charges confirmed on WhatsApp based on destination.
             </p>
           </div>
@@ -245,7 +245,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
 
         {/* Short Description */}
         {product.shortDescription && (
-          <p className="text-sm text-neutral-300 leading-relaxed">
+          <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
             {product.shortDescription}
           </p>
         )}
@@ -266,7 +266,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
                     className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all border ${
                       isSelected
                         ? "bg-[#E31E2F] text-white border-[#E31E2F] shadow-md red-glow-subtle"
-                        : "bg-[#161616] text-neutral-300 border-[#2b2b2b] hover:border-neutral-500 hover:text-white"
+                        : "bg-white dark:bg-[#161616] text-neutral-700 dark:text-neutral-300 border-neutral-200 dark:border-[#2b2b2b] hover:border-neutral-400 dark:hover:border-neutral-500 hover:text-neutral-900 dark:hover:text-white"
                     }`}
                   >
                     <span>{v.name}</span>
@@ -284,29 +284,29 @@ export function ProductDetailView({ product }: ProductDetailProps) {
 
         {/* Quantity Selector */}
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-neutral-400 block">
+          <label className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 block">
             QUANTITY:
           </label>
           <div className="flex items-center gap-3">
-            <div className="flex items-center border border-[#2e2e2e] rounded-xl bg-[#141414]">
+            <div className="flex items-center border border-neutral-200 dark:border-[#2e2e2e] rounded-xl bg-white dark:bg-[#141414]">
               <button
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                className="p-3 text-neutral-400 hover:text-white transition-colors"
+                className="p-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                 aria-label="Decrease quantity"
               >
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="px-4 text-sm font-bold text-white">{quantity}</span>
+              <span className="px-4 text-sm font-bold text-neutral-900 dark:text-white">{quantity}</span>
               <button
                 onClick={() => setQuantity((q) => q + 1)}
-                className="p-3 text-neutral-400 hover:text-white transition-colors"
+                className="p-3 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
                 aria-label="Increase quantity"
               >
                 <Plus className="w-4 h-4" />
               </button>
             </div>
             <span className="text-xs text-neutral-500">
-              Subtotal: <strong className="text-white">{formatINR(activePricePaise * quantity)}</strong>
+              Subtotal: <strong className="text-neutral-900 dark:text-white">{formatINR(activePricePaise * quantity)}</strong>
             </span>
           </div>
         </div>
@@ -328,7 +328,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
             className={`w-full py-3.5 px-6 rounded-xl border text-sm font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
               addedToCart
                 ? "bg-emerald-600 text-white border-emerald-500"
-                : "bg-[#181818] hover:bg-[#222222] text-white border-[#2e2e2e]"
+                : "bg-neutral-100 hover:bg-neutral-200 text-neutral-900 dark:bg-[#181818] dark:hover:bg-[#222222] dark:text-white border-neutral-200 dark:border-[#2e2e2e]"
             }`}
           >
             {addedToCart ? (
@@ -338,7 +338,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
               </>
             ) : (
               <>
-                <ShoppingBag className="w-4 h-4 text-neutral-300" />
+                <ShoppingBag className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
                 <span>ADD TO SHOPPING BAG</span>
               </>
             )}
@@ -346,7 +346,7 @@ export function ProductDetailView({ product }: ProductDetailProps) {
         </div>
 
         {/* Trust Points */}
-        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#1f1f1f] text-xs text-neutral-400">
+        <div className="grid grid-cols-2 gap-3 pt-4 border-t border-neutral-200 dark:border-[#1f1f1f] text-xs text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-[#E31E2F]" />
             <span>100% Genuine Quality</span>

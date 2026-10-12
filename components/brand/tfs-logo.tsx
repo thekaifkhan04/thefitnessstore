@@ -106,15 +106,15 @@ export function TFSLogo({
 
   const content = (
     <div className={`flex items-center gap-3 select-none ${className}`}>
-      <div className="relative flex items-center justify-center p-1 rounded bg-[#111111] border border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors shrink-0">
+      <div className="relative flex items-center justify-center p-1 rounded bg-white dark:bg-[#111111] border border-neutral-200 dark:border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors shrink-0">
         <TFSLogoEmblem className={emblemSizes[size]} logoUrl={effectiveLogoUrl} />
       </div>
       {shouldShowWordmark && (
         <div className="flex flex-col leading-none">
-          <span className={`font-display font-extrabold uppercase text-white ${wordmarkSizes[size]}`}>
+          <span className={`font-display font-extrabold uppercase text-neutral-900 dark:text-white ${wordmarkSizes[size]}`}>
             {firstName} {lastName && <span className="text-[#E31E2F]">{lastName}</span>}
           </span>
-          <span className="text-[9px] uppercase tracking-widest text-[#A6A6A6] font-medium mt-0.5">
+          <span className="text-[9px] uppercase tracking-widest text-neutral-500 dark:text-[#A6A6A6] font-medium mt-0.5">
             TFS · SPORTS & FITNESS
           </span>
         </div>

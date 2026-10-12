@@ -21,11 +21,11 @@ export function FloatingWhatsApp() {
     <div className="fixed bottom-6 right-6 z-30 flex items-center gap-3">
       {/* Tooltip speech bubble */}
       {showTooltip && (
-        <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-[#181818] border border-[#2d2d2d] rounded-xl text-xs text-white shadow-xl animate-in fade-in slide-in-from-right-3 duration-200">
+        <div className="hidden sm:flex items-center gap-2 px-3 py-2 bg-white dark:bg-[#181818] border border-neutral-200 dark:border-[#2d2d2d] rounded-xl text-xs text-neutral-900 dark:text-white shadow-xl animate-in fade-in slide-in-from-right-3 duration-200">
           <span>Need help or wholesale price? Chat with us!</span>
           <button
             onClick={() => setShowTooltip(false)}
-            className="text-neutral-400 hover:text-white"
+            className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white cursor-pointer"
           >
             <X className="w-3.5 h-3.5" />
           </button>

@@ -102,7 +102,7 @@ export default async function OffersPage() {
 
         {/* Discounted Catalogue Grid */}
         <div className="pt-6 space-y-6">
-          <h2 className="font-display font-bold text-3xl uppercase tracking-wider text-white">
+          <h2 className="font-display font-bold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
             PRODUCTS ON SALE
           </h2>
 

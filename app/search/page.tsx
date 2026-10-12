@@ -79,16 +79,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <div className="py-10">
           {query ? (
             <div className="space-y-6">
-              <p className="text-sm text-neutral-400">
-                Found <strong>{products.length}</strong> {products.length === 1 ? "result" : "results"} for &ldquo;<span className="text-white">{query}</span>&rdquo;
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Found <strong>{products.length}</strong> {products.length === 1 ? "result" : "results"} for &ldquo;<span className="text-neutral-900 dark:text-white font-semibold">{query}</span>&rdquo;
               </p>
 
               {products.length === 0 ? (
-                <div className="text-center py-20 rounded-2xl bg-[#121212] border border-[#222222] p-8 space-y-3">
-                  <h3 className="font-display text-2xl uppercase text-white">
+                <div className="text-center py-20 rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#222222] p-8 space-y-3">
+                  <h3 className="font-display text-2xl uppercase text-neutral-900 dark:text-white">
                     NO MATCHING GEAR FOUND
                   </h3>
-                  <p className="text-xs text-neutral-400 max-w-sm mx-auto">
+                  <p className="text-xs text-neutral-500 dark:text-neutral-400 max-w-sm mx-auto">
                     Try searching for general keywords like &ldquo;Belt&rdquo;, &ldquo;Shaker&rdquo;, &ldquo;Dumbbell&rdquo;, or browse our full catalogue.
                   </p>
                   <Link

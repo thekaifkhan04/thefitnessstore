@@ -33,13 +33,13 @@ export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
   return (
     <section
       ref={containerRef}
-      className="py-7 sm:py-9 bg-[#080808] overflow-hidden select-none border-b border-[#181818]"
+      className="py-7 sm:py-9 bg-white dark:bg-[#080808] overflow-hidden select-none border-b border-neutral-200 dark:border-[#181818]"
     >
       {/* Line 1: Primary Brand Line - Moves Left to Right on Scroll */}
       <div className="flex whitespace-nowrap overflow-hidden">
         <motion.div
           style={{ x: x1 }}
-          className="flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-white will-change-transform"
+          className="flex items-center text-4xl sm:text-6xl font-display font-extrabold uppercase tracking-widest text-neutral-900 dark:text-white will-change-transform"
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="inline-flex items-center shrink-0">
@@ -61,11 +61,11 @@ export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
       <div className="flex whitespace-nowrap overflow-hidden mt-2.5 sm:mt-3.5">
         <motion.div
           style={{ x: x2 }}
-          className="flex items-center text-3xl sm:text-5xl font-display font-bold uppercase tracking-wider text-neutral-300 will-change-transform"
+          className="flex items-center text-3xl sm:text-5xl font-display font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-300 will-change-transform"
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="inline-flex items-center shrink-0">
-              <span className="text-neutral-400 hover:text-white transition-colors">
+              <span className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                 {line2Text}
               </span>
               <span

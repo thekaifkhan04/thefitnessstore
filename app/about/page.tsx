@@ -58,26 +58,26 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#242424] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] flex items-center justify-center">
+            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#242424] space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] flex items-center justify-center">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-xl uppercase font-bold text-white">
+              <h3 className="font-display text-xl uppercase font-bold text-neutral-900 dark:text-white">
                 NO FAKE PROMISES
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Real photographs, accurate specifications, transparent pricing, and direct stock confirmation.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#141414] border border-[#242424] space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] flex items-center justify-center">
+            <div className="p-6 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#242424] space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] flex items-center justify-center">
                 <Target className="w-5 h-5" />
               </div>
-              <h3 className="font-display text-xl uppercase font-bold text-white">
+              <h3 className="font-display text-xl uppercase font-bold text-neutral-900 dark:text-white">
                 WHOLESALE & RETAIL
               </h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Competitive pricing whether you order a single pair of wrist wraps or outfit an entire 5,000 sq ft facility.
               </p>
             </div>

@@ -102,15 +102,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
-        <div className="py-4 flex items-center gap-2 text-xs text-neutral-400 uppercase tracking-wider mb-6">
-          <Link href="/" className="hover:text-white">Home</Link>
-          <ChevronRight className="w-3 h-3 text-neutral-600" />
-          <Link href="/shop" className="hover:text-white">Catalogue</Link>
-          <ChevronRight className="w-3 h-3 text-neutral-600" />
-          <Link href={`/shop/${product.category.slug}`} className="hover:text-white">
+        <div className="py-4 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-6">
+          <Link href="/" className="hover:text-neutral-900 dark:hover:text-white">Home</Link>
+          <ChevronRight className="w-3 h-3 text-neutral-400 dark:text-neutral-600" />
+          <Link href="/shop" className="hover:text-neutral-900 dark:hover:text-white">Catalogue</Link>
+          <ChevronRight className="w-3 h-3 text-neutral-400 dark:text-neutral-600" />
+          <Link href={`/shop/${product.category.slug}`} className="hover:text-neutral-900 dark:hover:text-white">
             {product.category.name}
           </Link>
-          <ChevronRight className="w-3 h-3 text-neutral-600" />
+          <ChevronRight className="w-3 h-3 text-neutral-400 dark:text-neutral-600" />
           <span className="text-[#E31E2F] font-semibold line-clamp-1">{product.name}</span>
         </div>
 
@@ -118,15 +118,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <ProductDetailView product={product} />
 
         {/* Specifications & Detailed Info */}
-        <div className="mt-16 pt-12 border-t border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="mt-16 pt-12 border-t border-neutral-200 dark:border-[#1f1f1f] grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Specifications */}
           <div className="lg:col-span-7 space-y-4">
-            <h2 className="font-display font-extrabold text-2xl uppercase tracking-wider text-white">
+            <h2 className="font-display font-extrabold text-2xl uppercase tracking-wider text-neutral-900 dark:text-white">
               PRODUCT SPECIFICATIONS
             </h2>
             {specLines.length > 0 ? (
-              <div className="rounded-2xl bg-[#121212] border border-[#242424] overflow-hidden">
-                <div className="divide-y divide-[#1e1e1e]">
+              <div className="rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] overflow-hidden shadow-sm">
+                <div className="divide-y divide-neutral-200 dark:divide-[#1e1e1e]">
                   {specLines.map((line, idx) => {
                     const parts = line.split(":");
                     return (
@@ -136,15 +136,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                       >
                         {parts.length === 2 ? (
                           <>
-                            <span className="font-semibold text-neutral-400 uppercase tracking-wider">
+                            <span className="font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                               {parts[0].trim()}
                             </span>
-                            <span className="text-white font-medium sm:text-right">
+                            <span className="text-neutral-900 dark:text-white font-medium sm:text-right">
                               {parts[1].trim()}
                             </span>
                           </>
                         ) : (
-                          <span className="text-neutral-300 font-medium">{line}</span>
+                          <span className="text-neutral-700 dark:text-neutral-300 font-medium">{line}</span>
                         )}
                       </div>
                     );
@@ -152,27 +152,27 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </div>
               </div>
             ) : (
-              <p className="text-sm text-neutral-400">Specifications available on enquiry.</p>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">Specifications available on enquiry.</p>
             )}
           </div>
 
           {/* Full Description & Ordering Policy */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-3">
-              <h2 className="font-display font-extrabold text-2xl uppercase tracking-wider text-white">
+              <h2 className="font-display font-extrabold text-2xl uppercase tracking-wider text-neutral-900 dark:text-white">
                 ABOUT THIS ITEM
               </h2>
-              <div className="text-xs sm:text-sm text-neutral-300 leading-relaxed space-y-3">
+              <div className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed space-y-3">
                 <p>{product.fullDescription || product.shortDescription}</p>
               </div>
             </div>
 
             {/* WhatsApp Ordering Process Explanation */}
-            <div className="p-5 rounded-2xl bg-[#141414] border border-[#2b2b2b] space-y-2.5">
-              <h3 className="font-display text-base font-bold uppercase tracking-wider text-white">
+            <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#2b2b2b] space-y-2.5 shadow-sm">
+              <h3 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 HOW TO ORDER AT TFS:
               </h3>
-              <ol className="list-decimal list-inside text-xs text-neutral-400 space-y-1.5 leading-relaxed">
+              <ol className="list-decimal list-inside text-xs text-neutral-600 dark:text-neutral-400 space-y-1.5 leading-relaxed">
                 <li>Select your desired variant and quantity above.</li>
                 <li>Click <strong>&ldquo;Order on WhatsApp&rdquo;</strong> to generate a direct enquiry.</li>
                 <li>Our showroom executive confirms live inventory and shipping charge for your location.</li>
@@ -184,19 +184,19 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         {/* Related Products Section */}
         {relatedProducts.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-[#1f1f1f] space-y-8">
+          <div className="mt-20 pt-12 border-t border-neutral-200 dark:border-[#1f1f1f] space-y-8">
             <div className="flex items-end justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-[#E31E2F]">
                   MORE IN THIS CATEGORY
                 </span>
-                <h3 className="font-display font-extrabold text-3xl uppercase tracking-tight text-white mt-1">
+                <h3 className="font-display font-extrabold text-3xl uppercase tracking-tight text-neutral-900 dark:text-white mt-1">
                   RELATED GEAR
                 </h3>
               </div>
               <Link
                 href={`/shop/${product.category.slug}`}
-                className="text-xs font-semibold text-neutral-400 hover:text-white uppercase tracking-wider"
+                className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white uppercase tracking-wider"
               >
                 View Category &rarr;
               </Link>

@@ -17,21 +17,21 @@ export default function ReturnsPolicyPage() {
 
         <div className="max-w-none text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed space-y-6">
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">1. Transit Damage Guarantee</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">1. Transit Damage Guarantee</h2>
             <p>
               In the unlikely event that any gear arrives damaged or defective in transit, please record an unboxing video or photograph the defect and notify our WhatsApp support team within 48 hours of delivery. We will arrange a prompt replacement.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">2. Size Exchanges (Belts & Apparel)</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">2. Size Exchanges (Belts & Apparel)</h2>
             <p>
               If your Technosport trackpant or weightlifting lever belt sizing needs an exchange, we support size replacement provided the item is unused, in original condition with tags intact.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">3. Non-Returnable Items</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">3. Non-Returnable Items</h2>
             <p>
               Opened food/supplement packages (peanut butter, protein jars) and custom-ordered gym equipment fabrications cannot be returned once unsealed or manufactured.
             </p>

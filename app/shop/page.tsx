@@ -129,14 +129,14 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         {/* Header Breadcrumbs & Title */}
         <div className="py-6 border-b border-neutral-200 dark:border-[#1f1f1f] flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs text-neutral-400 uppercase tracking-wider mb-2">
-              <Link href="/" className="hover:text-white">Home</Link>
+            <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2">
+              <Link href="/" className="hover:text-neutral-900 dark:hover:text-white">Home</Link>
               <span>/</span>
               <span className="text-[#E31E2F] font-semibold">Catalogue</span>
               {currentCategorySlug && (
                 <>
                   <span>/</span>
-                  <span className="text-white">
+                  <span className="text-neutral-900 dark:text-white">
                     {categories.find((c) => c.slug === currentCategorySlug)?.name}
                   </span>
                 </>
@@ -148,14 +148,14 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 </>
               )}
             </div>
-            <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+            <h1 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white">
               {currentCategorySlug
                 ? categories.find((c) => c.slug === currentCategorySlug)?.name || "SHOP CATALOGUE"
                 : currentBrand
                 ? `${currentBrand} GEAR`
                 : "ALL FITNESS GEAR"}
             </h1>
-            <p className="text-neutral-400 text-xs sm:text-sm mt-1">
+            <p className="text-neutral-500 dark:text-neutral-400 text-xs sm:text-sm mt-1">
               Showing {products.length} of {totalCount} authentic products
             </p>
           </div>
@@ -171,15 +171,15 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                 name="q"
                 defaultValue={searchQuery || ""}
                 placeholder="Search products..."
-                className="pl-9 pr-4 py-2 rounded-xl bg-[#141414] border border-[#2b2b2b] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] w-48 sm:w-60"
+                className="pl-9 pr-4 py-2 rounded-xl bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#2b2b2b] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] w-48 sm:w-60 shadow-sm"
               />
-              <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-neutral-400 dark:text-neutral-500 absolute left-3 top-2.5" />
             </form>
 
             {/* Sort Dropdown Link */}
-            <div className="flex items-center gap-1.5 text-xs bg-[#141414] border border-[#2b2b2b] rounded-xl px-3 py-2">
+            <div className="flex items-center gap-1.5 text-xs bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#2b2b2b] rounded-xl px-3 py-2 shadow-sm">
               <ArrowUpDown className="w-3.5 h-3.5 text-neutral-400" />
-              <span className="text-neutral-400">Sort:</span>
+              <span className="text-neutral-500 dark:text-neutral-400">Sort:</span>
               <div className="flex gap-2">
                 <Link
                   href={`/shop?${new URLSearchParams({
@@ -188,7 +188,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                     ...(searchQuery ? { q: searchQuery } : {}),
                     sort: "featured",
                   }).toString()}`}
-                  className={`hover:text-white ${currentSort === "featured" ? "text-[#E31E2F] font-bold" : "text-neutral-400"}`}
+                  className={`hover:text-neutral-900 dark:hover:text-white ${currentSort === "featured" ? "text-[#E31E2F] font-bold" : "text-neutral-500 dark:text-neutral-400"}`}
                 >
                   Featured
                 </Link>
@@ -200,7 +200,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                     ...(searchQuery ? { q: searchQuery } : {}),
                     sort: "price_asc",
                   }).toString()}`}
-                  className={`hover:text-white ${currentSort === "price_asc" ? "text-[#E31E2F] font-bold" : "text-neutral-400"}`}
+                  className={`hover:text-neutral-900 dark:hover:text-white ${currentSort === "price_asc" ? "text-[#E31E2F] font-bold" : "text-neutral-500 dark:text-neutral-400"}`}
                 >
                   Price &uarr;
                 </Link>
@@ -212,7 +212,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                     ...(searchQuery ? { q: searchQuery } : {}),
                     sort: "price_desc",
                   }).toString()}`}
-                  className={`hover:text-white ${currentSort === "price_desc" ? "text-[#E31E2F] font-bold" : "text-neutral-400"}`}
+                  className={`hover:text-neutral-900 dark:hover:text-white ${currentSort === "price_desc" ? "text-[#E31E2F] font-bold" : "text-neutral-500 dark:text-neutral-400"}`}
                 >
                   Price &darr;
                 </Link>
@@ -228,42 +228,42 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           <div className="py-3 flex flex-wrap items-center gap-2 text-xs">
             <span className="text-neutral-500 uppercase tracking-wider text-[10px]">Active Filters:</span>
             {currentCategorySlug && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#181818] border border-[#333] text-neutral-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-[#181818] border border-neutral-200 dark:border-[#333] text-neutral-800 dark:text-neutral-200 shadow-sm">
                 <span>Category: {categories.find((c) => c.slug === currentCategorySlug)?.name}</span>
                 <Link
                   href={`/shop?${new URLSearchParams({
                     ...(currentBrand ? { brand: currentBrand } : {}),
                     ...(searchQuery ? { q: searchQuery } : {}),
                   }).toString()}`}
-                  className="hover:text-red-400"
+                  className="hover:text-red-500"
                 >
                   <X className="w-3 h-3" />
                 </Link>
               </span>
             )}
             {currentBrand && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#181818] border border-[#333] text-neutral-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-[#181818] border border-neutral-200 dark:border-[#333] text-neutral-800 dark:text-neutral-200 shadow-sm">
                 <span>Brand: {currentBrand}</span>
                 <Link
                   href={`/shop?${new URLSearchParams({
                     ...(currentCategorySlug ? { category: currentCategorySlug } : {}),
                     ...(searchQuery ? { q: searchQuery } : {}),
                   }).toString()}`}
-                  className="hover:text-red-400"
+                  className="hover:text-red-500"
                 >
                   <X className="w-3 h-3" />
                 </Link>
               </span>
             )}
             {searchQuery && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#181818] border border-[#333] text-neutral-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-[#181818] border border-neutral-200 dark:border-[#333] text-neutral-800 dark:text-neutral-200 shadow-sm">
                 <span>Search: &ldquo;{searchQuery}&rdquo;</span>
                 <Link
                   href={`/shop?${new URLSearchParams({
                     ...(currentCategorySlug ? { category: currentCategorySlug } : {}),
                     ...(currentBrand ? { brand: currentBrand } : {}),
                   }).toString()}`}
-                  className="hover:text-red-400"
+                  className="hover:text-red-500"
                 >
                   <X className="w-3 h-3" />
                 </Link>
@@ -278,25 +278,25 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         {/* Main Content Layout: Left Sidebar (Categories & Brands) + Right Products Grid */}
         <div className="flex flex-row gap-3 sm:gap-6 py-6 items-start">
           {/* Left Sidebar: Categories & Brands (Always fixed on the left side of the page) */}
-          <aside className="w-28 sm:w-52 md:w-60 lg:w-64 shrink-0 space-y-4 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[#292929] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent">
+          <aside className="w-28 sm:w-52 md:w-60 lg:w-64 shrink-0 space-y-4 sticky top-24 self-start max-h-[calc(100vh-7rem)] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#292929] hover:scrollbar-thumb-neutral-400 dark:hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent">
             {/* Filter by Category with Dedicated Vertical Scrollbar */}
-            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#121212] border border-[#242424] space-y-2">
+            <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-2 shadow-sm">
               <div className="flex items-center justify-between">
-                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white flex items-center gap-1.5">
                   <Layers className="w-3.5 h-3.5 text-[#E31E2F]" />
                   <span>CATEGORIES</span>
                 </h3>
-                <span className="text-[9px] text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
+                <span className="text-[9px] text-neutral-400 dark:text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
               </div>
 
               {/* Scrollable list container */}
-              <div className="max-h-64 sm:max-h-72 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
+              <div className="max-h-64 sm:max-h-72 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 dark:hover:scrollbar-thumb-neutral-400 scrollbar-track-neutral-100 dark:scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
                 <Link
                   href={`/shop${currentBrand ? `?brand=${encodeURIComponent(currentBrand)}` : ""}`}
                   className={`block px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                     !currentCategorySlug
                       ? "bg-[#E31E2F] text-white font-bold"
-                      : "text-neutral-400 hover:text-white hover:bg-[#181818]"
+                      : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818]"
                   }`}
                 >
                   All ({totalCount})
@@ -314,7 +314,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                       className={`flex items-center justify-between px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                         isSelected
                           ? "bg-[#E31E2F] text-white font-bold"
-                          : "text-neutral-400 hover:text-white hover:bg-[#181818]"
+                          : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818]"
                       }`}
                     >
                       <span className="truncate pr-1">{cat.name}</span>
@@ -329,23 +329,23 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
             {/* Filter by Brand with Dedicated Vertical Scrollbar */}
             {brands.length > 0 && (
-              <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#121212] border border-[#242424] space-y-2">
+              <div className="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-2 shadow-sm">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                  <h3 className="font-display text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white flex items-center gap-1.5">
                     <Award className="w-3.5 h-3.5 text-[#E31E2F]" />
                     <span>BRANDS</span>
                   </h3>
-                  <span className="text-[9px] text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
+                  <span className="text-[9px] text-neutral-400 dark:text-neutral-500 uppercase tracking-wider hidden sm:inline">Scrollable</span>
                 </div>
 
                 {/* Scrollable brands container */}
-                <div className="max-h-52 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
+                <div className="max-h-52 overflow-y-auto pr-1 space-y-1 scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-400 dark:hover:scrollbar-thumb-neutral-400 scrollbar-track-neutral-100 dark:scrollbar-track-[#151515] rounded-xl p-0.5 sm:p-1">
                   <Link
                     href={`/shop${currentCategorySlug ? `?category=${currentCategorySlug}` : ""}`}
                     className={`block px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                       !currentBrand
                         ? "bg-[#E31E2F] text-white font-bold"
-                        : "text-neutral-400 hover:text-white hover:bg-[#181818]"
+                        : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818]"
                     }`}
                   >
                     All Brands
@@ -363,7 +363,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                         className={`flex items-center justify-between px-2 sm:px-2.5 py-1.5 rounded-lg text-[11px] sm:text-xs transition-colors ${
                           isSelected
                             ? "bg-[#E31E2F] text-white font-bold"
-                            : "text-neutral-400 hover:text-white hover:bg-[#181818]"
+                            : "text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818]"
                         }`}
                       >
                         <span className="truncate pr-1">{b}</span>
@@ -380,16 +380,16 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           <div className="flex-1 min-w-0 space-y-6">
             {/* Main Product Grid */}
             {products.length === 0 ? (
-              <div className="py-20 text-center rounded-2xl bg-[#121212] border border-[#222222] p-8 space-y-4">
-                <div className="font-display text-3xl uppercase tracking-wider text-white">
+              <div className="py-20 text-center rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#222222] p-8 space-y-4">
+                <div className="font-display text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
                   NO PRODUCTS FOUND
                 </div>
-                <p className="text-sm text-neutral-400 max-w-sm mx-auto">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-sm mx-auto">
                   We could not find any products matching your current filters. Try resetting your search or category filter.
                 </p>
                 <Link
                   href="/shop"
-                  className="inline-block px-6 py-2.5 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-base uppercase tracking-wider text-white transition-colors"
+                  className="inline-block px-6 py-2.5 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-base uppercase tracking-wider text-white transition-colors cursor-pointer shadow-md"
                 >
                   RESET FILTERS
                 </Link>
@@ -420,7 +420,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="pt-8 border-t border-[#1f1f1f] flex items-center justify-center gap-2">
+                  <div className="pt-8 border-t border-neutral-200 dark:border-[#1f1f1f] flex items-center justify-center gap-2">
                     {Array.from({ length: totalPages }).map((_, i) => {
                       const pageNum = i + 1;
                       const isActive = pageNum === page;
@@ -436,8 +436,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
                           }).toString()}`}
                           className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-semibold transition-colors ${
                             isActive
-                              ? "bg-[#E31E2F] text-white"
-                              : "bg-[#141414] border border-[#262626] text-neutral-400 hover:text-white hover:border-[#E31E2F]"
+                              ? "bg-[#E31E2F] text-white shadow-sm"
+                              : "bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#262626] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:border-[#E31E2F]"
                           }`}
                         >
                           {pageNum}

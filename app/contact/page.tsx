@@ -51,7 +51,7 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 my-12 items-start">
           {/* Contact Details */}
           <div className="lg:col-span-5 space-y-6">
-            <h2 className="font-display font-bold text-2xl uppercase tracking-wider text-white">
+            <h2 className="font-display font-bold text-2xl uppercase tracking-wider text-neutral-900 dark:text-white">
               STORE DETAILS
             </h2>
 
@@ -60,51 +60,51 @@ export default function ContactPage() {
                 href={directChatUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-5 rounded-2xl bg-[#141414] border border-[#262626] hover:border-[#25D366] flex items-start gap-4 transition-all group"
+                className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#262626] hover:border-[#25D366] flex items-start gap-4 transition-all group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-800/50 text-[#25D366] shrink-0 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-emerald-100 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 text-[#25D366] shrink-0 group-hover:scale-105 transition-transform">
                   <MessageSquare className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white flex items-center gap-1.5">
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white flex items-center gap-1.5">
                     <span>Direct WhatsApp Chat</span>
-                    <span className="text-[10px] text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800">Fastest</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">Fastest</span>
                   </h3>
-                  <p className="text-xs text-neutral-400 mt-1">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
                     Click to start an immediate chat with our store manager.
                   </p>
                 </div>
               </a>
 
-              <div className="p-5 rounded-2xl bg-[#141414] border border-[#262626] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#262626] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Phone Support</h3>
-                  <p className="text-xs text-neutral-300 mt-1 font-mono">{settings.contact_phone || "+91 98765 43210"}</p>
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Phone Support</h3>
+                  <p className="text-xs text-neutral-700 dark:text-neutral-300 mt-1 font-mono">{settings.contact_phone || "+91 98765 43210"}</p>
                   <p className="text-[11px] text-neutral-500 mt-0.5">Mon – Sun: 10:30 AM – 9:00 PM</p>
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#141414] border border-[#262626] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#262626] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Email Address</h3>
-                  <p className="text-xs text-neutral-300 mt-1 font-mono">{settings.support_email || "support@thefitnessstore.com"}</p>
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Email Address</h3>
+                  <p className="text-xs text-neutral-700 dark:text-neutral-300 mt-1 font-mono">{settings.support_email || "support@thefitnessstore.com"}</p>
                   <p className="text-[11px] text-neutral-500 mt-0.5">For B2B proposals & supplier enquiries</p>
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#141414] border border-[#262626] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#141414] border border-neutral-200 dark:border-[#262626] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Showroom & Warehouse</h3>
-                  <p className="text-xs text-neutral-300 mt-1">
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Showroom & Warehouse</h3>
+                  <p className="text-xs text-neutral-700 dark:text-neutral-300 mt-1">
                     {settings.store_address || "Shop 12, Prime Fitness Hub, Commercial Plaza, India"}
                   </p>
                 </div>
@@ -114,17 +114,17 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-[#131313] border border-[#292929] p-8 sm:p-10 shadow-2xl">
-              <h2 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white mb-2">
+            <div className="rounded-3xl bg-neutral-50 dark:bg-[#131313] border border-neutral-200 dark:border-[#292929] p-8 sm:p-10 shadow-xl">
+              <h2 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white mb-2">
                 SEND A MESSAGE
               </h2>
-              <p className="text-xs text-neutral-400 mb-8">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8">
                 Send your question or feedback. We will connect with you via WhatsApp immediately.
               </p>
 
               <form onSubmit={handleWhatsAppContact} className="space-y-4">
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                     Your Name
                   </label>
                   <input
@@ -132,12 +132,12 @@ export default function ContactPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Aman Verma"
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                     Phone Number
                   </label>
                   <input
@@ -145,12 +145,12 @@ export default function ContactPage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="e.g. +91 98765 43210"
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                     Message or Product Inquiry *
                   </label>
                   <textarea
@@ -159,7 +159,7 @@ export default function ContactPage() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Describe what product or information you need..."
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                   />
                 </div>
 

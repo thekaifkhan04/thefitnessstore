@@ -17,28 +17,28 @@ export default function TermsPage() {
 
         <div className="max-w-none text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed space-y-6">
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">1. Nature of the Service</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">1. Nature of the Service</h2>
             <p>
               THE FITNESS STORE (TFS) operates as a retailer and wholesaler of sports goods, gym equipment, and accessories. Our website is a digital product catalogue designed to facilitate direct business and retail communication via WhatsApp.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">2. Order Enquiries & Confirmation</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">2. Order Enquiries & Confirmation</h2>
             <p>
               Submitting an item to cart or clicking &ldquo;Order on WhatsApp&rdquo; creates an order enquiry. An order is only confirmed once store management verifies physical inventory, confirms final shipping costs, and mutually agrees on payment terms directly with the customer.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">3. Pricing & Specifications</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">3. Pricing & Specifications</h2>
             <p>
               While we strive for 100% accurate catalogue listings, prices and weights may occasionally be subject to manufacturer updates or raw material fluctuations. Final applicable prices are always confirmed prior to dispatch.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">4. Wholesale Orders</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">4. Wholesale Orders</h2>
             <p>
               Commercial gym orders and bulk equipment purchases are subject to specific freight agreements and dispatch schedules outlined during conversation with our B2B representative.
             </p>

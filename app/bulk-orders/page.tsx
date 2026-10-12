@@ -54,42 +54,42 @@ export default function BulkOrdersPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 my-12 items-start">
           {/* Left: Wholesale Advantages */}
           <div className="lg:col-span-5 space-y-6">
-            <h2 className="font-display font-bold text-2xl uppercase tracking-wide text-white">
+            <h2 className="font-display font-bold text-2xl uppercase tracking-wide text-neutral-900 dark:text-white">
               WHOLESALE BENEFITS
             </h2>
 
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <Building2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Full Facility Setup</h3>
-                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Full Facility Setup</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 leading-relaxed">
                     Bumper plates stands, flat benches, deadlift platforms, and multi-stations sourced directly.
                   </p>
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <Package className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Volume Tiered Pricing</h3>
-                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Volume Tiered Pricing</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 leading-relaxed">
                     Substantial discounts on bulk dumbbells, rubber weight plates, power bands, and shakers.
                   </p>
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-red-950/40 border border-red-800/50 text-[#E31E2F] shrink-0">
+              <div className="p-5 rounded-2xl bg-neutral-50 dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] flex items-start gap-4 shadow-sm">
+                <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-800/50 text-[#E31E2F] shrink-0">
                   <Truck className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm text-white">Reliable Freight & Transit</h3>
-                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
+                  <h3 className="font-semibold text-sm text-neutral-900 dark:text-white">Reliable Freight & Transit</h3>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 leading-relaxed">
                     Heavy equipment packed securely in wooden crates and dispatched via trusted road logistics.
                   </p>
                 </div>
@@ -99,18 +99,18 @@ export default function BulkOrdersPage() {
 
           {/* Right: Interactive Enquiry Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-[#131313] border border-[#292929] p-8 sm:p-10 shadow-2xl">
-              <h2 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white mb-2">
+            <div className="rounded-3xl bg-neutral-50 dark:bg-[#131313] border border-neutral-200 dark:border-[#292929] p-8 sm:p-10 shadow-xl">
+              <h2 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white mb-2">
                 SEND WHOLESALE ENQUIRY
               </h2>
-              <p className="text-xs text-neutral-400 mb-8">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8">
                 Fill in your equipment requirements below. Submitting will open WhatsApp with your customized enquiry pre-filled.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                       Your Full Name *
                     </label>
                     <input
@@ -119,12 +119,12 @@ export default function BulkOrdersPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="e.g. Rahul Sharma"
-                      className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                       Gym / Business Name
                     </label>
                     <input
@@ -132,14 +132,14 @@ export default function BulkOrdersPage() {
                       value={organization}
                       onChange={(e) => setOrganization(e.target.value)}
                       placeholder="e.g. Iron Clad Gym Club"
-                      className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                       Phone / WhatsApp Number
                     </label>
                     <input
@@ -147,18 +147,18 @@ export default function BulkOrdersPage() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="e.g. +91 98765 43210"
-                      className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                    <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                       Primary Interest
                     </label>
                     <select
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white focus:outline-none focus:border-[#E31E2F]"
+                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F] shadow-sm"
                     >
                       <option value="Commercial Gym Equipment">Commercial Gym Equipment</option>
                       <option value="Dumbbells & Weight Plates">Dumbbells & Weight Plates</option>
@@ -172,7 +172,7 @@ export default function BulkOrdersPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                     Estimated Quantities & Requirement Details *
                   </label>
                   <textarea
@@ -181,7 +181,7 @@ export default function BulkOrdersPage() {
                     value={requirement}
                     onChange={(e) => setRequirement(e.target.value)}
                     placeholder="e.g. Looking for 10 pairs of 5kg-20kg dumbbells, 2 flat benches, 1 deadlift platform, and delivery to Bangalore."
-                    className="w-full px-4 py-3 rounded-xl bg-[#1a1a1a] border border-[#2e2e2e] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#2e2e2e] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F] shadow-sm"
                   />
                 </div>
 

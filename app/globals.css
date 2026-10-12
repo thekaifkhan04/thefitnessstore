@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
 
 @layer base {
   /* LIGHT MODE DESIGN TOKENS (Default root) */
@@ -92,12 +92,15 @@
 /* LIGHT THEME ADAPTIVE OVERRIDES */
 html.light {
   /* Background mappings */
+  & .bg-\[\#060606\],
   & .bg-\[\#080808\],
   & .bg-\[\#0a0a0a\],
   & .bg-\[\#0b0b0b\],
   & .bg-\[\#0c0c0c\],
   & .bg-\[\#0d0d0d\],
   & .bg-\[\#0e0e0e\],
+  & .bg-\[\#0f0f0f\],
+  & .bg-\[\#101010\],
   & .bg-black {
     background-color: var(--background) !important;
   }
@@ -110,17 +113,31 @@ html.light {
 
   & .bg-\[\#141414\],
   & .bg-\[\#151515\],
-  & .bg-\[\#161616\] {
+  & .bg-\[\#161616\],
+  & .bg-\[\#171717\] {
     background-color: var(--card) !important;
   }
 
   & .bg-\[\#181818\],
+  & .bg-\[\#191919\],
   & .bg-\[\#1a1a1a\],
+  & .bg-\[\#1b1b1b\],
   & .bg-\[\#1c1c1c\],
+  & .bg-\[\#1d1d1d\],
   & .bg-\[\#1e1e1e\],
+  & .bg-\[\#1f1f1f\],
   & .bg-\[\#202020\],
   & .bg-\[\#222222\],
-  & .bg-\[\#252525\] {
+  & .bg-\[\#242424\],
+  & .bg-\[\#252525\],
+  & .bg-\[\#262626\],
+  & .bg-\[\#282828\],
+  & .bg-\[\#2a2a2a\],
+  & .bg-\[\#2c2c2c\],
+  & .bg-\[\#2d2d2d\],
+  & .bg-\[\#303030\],
+  & .bg-\[\#333\],
+  & .bg-\[\#333333\] {
     background-color: var(--surface-elevated) !important;
   }
 
@@ -129,7 +146,9 @@ html.light {
   & .border-\[\#181818\],
   & .border-\[\#1a1a1a\],
   & .border-\[\#1c1c1c\],
+  & .border-\[\#1e1e1e\],
   & .border-\[\#1f1f1f\],
+  & .border-\[\#222\],
   & .border-\[\#222222\],
   & .border-\[\#242424\],
   & .border-\[\#262626\],
@@ -137,10 +156,13 @@ html.light {
   & .border-\[\#292929\],
   & .border-\[\#2a2a2a\],
   & .border-\[\#2b2b2b\],
+  & .border-\[\#2c2c2c\],
+  & .border-\[\#2d2d2d\],
   & .border-\[\#2f2f2f\],
   & .border-\[\#333\],
   & .border-\[\#333333\],
   & .border-\[\#383838\],
+  & .border-\[\#3a3a3a\],
   & .border-neutral-800,
   & .border-neutral-700 {
     border-color: var(--border) !important;
@@ -180,7 +202,11 @@ html.light {
 .bg-\[\#E31E2F\],
 .bg-\[\#D7192D\],
 .bg-brand-red,
-.badge-red {
+.badge-red,
+html.light .bg-\[\#E31E2F\],
+html.light .bg-\[\#D7192D\],
+html.light .bg-brand-red,
+html.light .badge-red {
   background-color: var(--brand-red) !important;
   color: #FFFFFF !important;
 }
@@ -206,8 +232,24 @@ html.light .badge-red {
 /* Green WhatsApp and status badges preserve white text */
 .bg-emerald-600,
 .bg-emerald-500,
+.bg-emerald-700,
+.bg-\[\#25D366\],
+html.light .bg-emerald-600,
+html.light .bg-emerald-500,
+html.light .bg-emerald-700,
+html.light .bg-\[\#25D366\],
 html.light .bg-emerald-600 *,
-html.light .bg-emerald-500 * {
+html.light .bg-emerald-500 *,
+html.light .bg-emerald-700 *,
+html.light .bg-\[\#25D366\] * {
+  color: #FFFFFF !important;
+}
+
+/* Dynamic background buttons (custom theme color from settings) preserve white text */
+button[style*="background"],
+html.light button[style*="background"],
+html.light button[style*="background"] *,
+html.light button[style*="background"].text-white {
   color: #FFFFFF !important;
 }
 

@@ -17,21 +17,21 @@ export default function ShippingPolicyPage() {
 
         <div className="max-w-none text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed space-y-6">
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">1. Dispatch Timelines</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">1. Dispatch Timelines</h2>
             <p>
               Standard retail orders (belts, apparel, resistance bands, shakers) are dispatched within 24 to 48 hours of WhatsApp order confirmation. Heavy equipment orders (platforms, racks, plate sets) are scheduled for crate packing and dispatched within 2 to 4 business days.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">2. Freight & Logistics Partners</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">2. Freight & Logistics Partners</h2>
             <p>
               Lightweight parcels are shipped via trusted express air couriers. Heavy commercial equipment is transported via dedicated surface freight logistics. Tracking airway bill numbers (AWB) are shared directly on WhatsApp upon vehicle pickup.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-display text-xl text-white uppercase tracking-wider">3. Delivery Charges</h2>
+            <h2 className="font-display text-xl text-neutral-900 dark:text-white uppercase tracking-wider">3. Delivery Charges</h2>
             <p>
               Because sports equipment weight varies significantly (from a 200g jump rope to a 200kg dumbbell set), shipping charges are calculated transparently based on actual weight and destination pincode during your WhatsApp consultation.
             </p>

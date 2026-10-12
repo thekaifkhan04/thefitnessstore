@@ -262,15 +262,15 @@ export function ProductForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-8 pb-16">
       {/* Top action header */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#222222]">
+      <div className="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-[#222222]">
         <div className="flex items-center gap-3">
           <Link
             href="/admin/products"
-            className="p-2 rounded-lg bg-[#141414] hover:bg-[#1e1e1e] border border-[#2b2b2b] text-neutral-400 hover:text-white transition-colors"
+            className="p-2 rounded-lg bg-white dark:bg-[#141414] hover:bg-neutral-100 dark:hover:bg-[#1e1e1e] border border-neutral-200 dark:border-[#2b2b2b] text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="font-display font-extrabold text-2xl uppercase tracking-wider text-white">
+          <h1 className="font-display font-extrabold text-2xl uppercase tracking-wider text-neutral-900 dark:text-white">
             {isEditing ? `EDIT PRODUCT: ${formData.name}` : "CREATE NEW PRODUCT"}
           </h1>
         </div>
@@ -278,14 +278,14 @@ export function ProductForm({
         <div className="flex items-center gap-3">
           <Link
             href="/admin/products"
-            className="px-4 py-2 rounded-xl bg-[#141414] hover:bg-[#1e1e1e] border border-[#2b2b2b] text-xs font-semibold uppercase tracking-wider text-neutral-300"
+            className="px-4 py-2 rounded-xl bg-white dark:bg-[#141414] hover:bg-neutral-100 dark:hover:bg-[#1e1e1e] border border-neutral-200 dark:border-[#2b2b2b] text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-300 transition-colors"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2.5 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-base uppercase tracking-wider text-white transition-all red-glow-subtle flex items-center gap-2 disabled:opacity-60 cursor-pointer"
+            className="px-6 py-2.5 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] font-display text-base uppercase tracking-wider text-white transition-all red-glow-subtle flex items-center gap-2 disabled:opacity-60 cursor-pointer shadow-sm"
           >
             <Save className="w-4 h-4" />
             <span>{isSubmitting ? "SAVING..." : "SAVE PRODUCT"}</span>
@@ -294,15 +294,15 @@ export function ProductForm({
       </div>
 
       {error && (
-        <div className="p-4 rounded-xl bg-red-950/60 border border-red-800 text-red-200 text-xs flex items-center gap-3">
-          <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 text-xs flex items-center gap-3">
+          <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {success && (
-        <div className="p-4 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-200 text-xs flex items-center gap-3">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-200 text-xs flex items-center gap-3">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
           <span>Product saved successfully! Redirecting to catalogue...</span>
         </div>
       )}
@@ -312,13 +312,13 @@ export function ProductForm({
         {/* Left Column: Basic info, descriptions, specs, variants */}
         <div className="lg:col-span-8 space-y-6">
           {/* Card: Basic Info */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               GENERAL INFORMATION
             </h2>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Product Name *
               </label>
               <input
@@ -327,13 +327,13 @@ export function ProductForm({
                 value={formData.name}
                 onChange={(e) => handleNameChange(e.target.value)}
                 placeholder="e.g. Repex Lever Belt Imported 13mm"
-                className="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-[#2c2c2c] text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                className="w-full px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-sm text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   URL Slug *
                 </label>
                 <input
@@ -344,12 +344,12 @@ export function ProductForm({
                     setFormData({ ...formData, slug: e.target.value })
                   }
                   placeholder="repex-lever-belt-13mm"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   SKU / Code *
                 </label>
                 <input
@@ -360,12 +360,12 @@ export function ProductForm({
                     setFormData({ ...formData, sku: e.target.value })
                   }
                   placeholder="TFS-BELT-001"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   Brand
                 </label>
                 <input
@@ -375,13 +375,13 @@ export function ProductForm({
                     setFormData({ ...formData, brand: e.target.value })
                   }
                   placeholder="Repex / Technosport"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Category *
               </label>
               <select
@@ -390,7 +390,7 @@ export function ProductForm({
                 onChange={(e) =>
                   setFormData({ ...formData, categoryId: e.target.value })
                 }
-                className="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white focus:outline-none focus:border-[#E31E2F]"
+                className="w-full px-4 py-2.5 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -402,14 +402,14 @@ export function ProductForm({
           </div>
 
           {/* Card: Pricing & Stock */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               PRICING & STOCK
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   Selling Price (₹ INR) *
                 </label>
                 <input
@@ -424,12 +424,12 @@ export function ProductForm({
                       sellingPriceRupees: Number(e.target.value),
                     })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-sm text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-sm text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   Original Price (₹ MRP Strike)
                 </label>
                 <input
@@ -445,12 +445,12 @@ export function ProductForm({
                     })
                   }
                   placeholder="Optional comparison"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-sm text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-sm text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                   Stock Units *
                 </label>
                 <input
@@ -461,20 +461,20 @@ export function ProductForm({
                   onChange={(e) =>
                     setFormData({ ...formData, stock: Number(e.target.value) })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-sm text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-sm text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
             </div>
           </div>
 
           {/* Card: Descriptions & Specifications */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               DESCRIPTIONS & SPECIFICATIONS
             </h2>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Short Description (Card summary)
               </label>
               <textarea
@@ -484,12 +484,12 @@ export function ProductForm({
                   setFormData({ ...formData, shortDescription: e.target.value })
                 }
                 placeholder="Brief commercial description of sizes, weights, or features..."
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
               />
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Full Description
               </label>
               <textarea
@@ -499,12 +499,12 @@ export function ProductForm({
                   setFormData({ ...formData, fullDescription: e.target.value })
                 }
                 placeholder="In-depth details, materials, training benefits, and care instructions..."
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
               />
             </div>
 
             <div>
-              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-400 block mb-1.5">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1.5">
                 Specifications (Key: Value per line)
               </label>
               <textarea
@@ -514,21 +514,21 @@ export function ProductForm({
                   setFormData({ ...formData, specifications: e.target.value })
                 }
                 placeholder="Material: 13mm Full Grain Leather&#10;Buckle: Cast Alloy Steel&#10;Width: 4 Inches (10cm)"
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2c2c2c] font-mono text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
+                className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] font-mono text-xs text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:border-[#E31E2F]"
               />
             </div>
           </div>
 
           {/* Card: Variants */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
             <div className="flex items-center justify-between">
-              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                 PRODUCT VARIANTS (SIZES / WEIGHTS / COLORS)
               </h2>
               <button
                 type="button"
                 onClick={addVariant}
-                className="px-3 py-1 rounded-lg bg-[#202020] hover:bg-[#282828] text-xs font-semibold text-white flex items-center gap-1.5 border border-[#333333]"
+                className="px-3 py-1 rounded-lg bg-neutral-100 dark:bg-[#202020] hover:bg-neutral-200 dark:hover:bg-[#282828] text-xs font-semibold text-neutral-800 dark:text-white flex items-center gap-1.5 border border-neutral-200 dark:border-[#333333] transition-colors"
               >
                 <Plus className="w-3.5 h-3.5" /> Add Variant
               </button>
@@ -538,7 +538,7 @@ export function ProductForm({
               {formData.variants.map((variant, idx) => (
                 <div
                   key={idx}
-                  className="p-3.5 rounded-xl bg-[#181818] border border-[#2a2a2a] grid grid-cols-1 sm:grid-cols-6 gap-3 items-center"
+                  className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a] grid grid-cols-1 sm:grid-cols-6 gap-3 items-center"
                 >
                   <div className="sm:col-span-2">
                     <input
@@ -548,7 +548,7 @@ export function ProductForm({
                       onChange={(e) =>
                         updateVariant(idx, "name", e.target.value)
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-[#121212] border border-[#2f2f2f] text-white"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-[#121212] border border-neutral-300 dark:border-[#2f2f2f] text-neutral-900 dark:text-white"
                     />
                   </div>
 
@@ -560,7 +560,7 @@ export function ProductForm({
                       onChange={(e) =>
                         updateVariant(idx, "size", e.target.value)
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-[#121212] border border-[#2f2f2f] text-white"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-[#121212] border border-neutral-300 dark:border-[#2f2f2f] text-neutral-900 dark:text-white"
                     />
                   </div>
 
@@ -576,7 +576,7 @@ export function ProductForm({
                           e.target.value === "" ? "" : Number(e.target.value)
                         )
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-[#121212] border border-[#2f2f2f] text-white"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-[#121212] border border-neutral-300 dark:border-[#2f2f2f] text-neutral-900 dark:text-white"
                     />
                   </div>
 
@@ -588,7 +588,7 @@ export function ProductForm({
                       onChange={(e) =>
                         updateVariant(idx, "stock", Number(e.target.value))
                       }
-                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-[#121212] border border-[#2f2f2f] text-white"
+                      className="w-full px-3 py-1.5 text-xs rounded-lg bg-white dark:bg-[#121212] border border-neutral-300 dark:border-[#2f2f2f] text-neutral-900 dark:text-white"
                     />
                   </div>
 
@@ -596,7 +596,7 @@ export function ProductForm({
                     <button
                       type="button"
                       onClick={() => removeVariant(idx)}
-                      className="p-2 text-neutral-500 hover:text-red-400 transition-colors"
+                      className="p-2 text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       title="Remove variant"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -611,16 +611,16 @@ export function ProductForm({
         {/* Right Column: Status toggles, image gallery management */}
         <div className="lg:col-span-4 space-y-6">
           {/* Status & Visibility Card */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               STATUS & VISIBILITY
             </h2>
 
             <div className="space-y-3 text-xs">
-              <label className="flex items-center justify-between p-3 rounded-xl bg-[#181818] border border-[#2a2a2a] cursor-pointer">
+              <label className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a] cursor-pointer">
                 <div>
-                  <div className="font-semibold text-white">Published / Available</div>
-                  <div className="text-[10px] text-neutral-400">Visible to customer shopping</div>
+                  <div className="font-semibold text-neutral-900 dark:text-white">Published / Available</div>
+                  <div className="text-[10px] text-neutral-500 dark:text-neutral-400">Visible to customer shopping</div>
                 </div>
                 <input
                   type="checkbox"
@@ -632,10 +632,10 @@ export function ProductForm({
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3 rounded-xl bg-[#181818] border border-[#2a2a2a] cursor-pointer">
+              <label className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a] cursor-pointer">
                 <div>
-                  <div className="font-semibold text-white">Featured Product</div>
-                  <div className="text-[10px] text-neutral-400">Highlighted on Homepage</div>
+                  <div className="font-semibold text-neutral-900 dark:text-white">Featured Product</div>
+                  <div className="text-[10px] text-neutral-500 dark:text-neutral-400">Highlighted on Homepage</div>
                 </div>
                 <input
                   type="checkbox"
@@ -647,10 +647,10 @@ export function ProductForm({
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3 rounded-xl bg-[#181818] border border-[#2a2a2a] cursor-pointer">
+              <label className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a] cursor-pointer">
                 <div>
-                  <div className="font-semibold text-white">New Arrival</div>
-                  <div className="text-[10px] text-neutral-400">Badge as new addition</div>
+                  <div className="font-semibold text-neutral-900 dark:text-white">New Arrival</div>
+                  <div className="text-[10px] text-neutral-500 dark:text-neutral-400">Badge as new addition</div>
                 </div>
                 <input
                   type="checkbox"
@@ -662,10 +662,10 @@ export function ProductForm({
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3 rounded-xl bg-[#181818] border border-[#2a2a2a] cursor-pointer">
+              <label className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-200 dark:border-[#2a2a2a] cursor-pointer">
                 <div>
-                  <div className="font-semibold text-white">Special Deal / Offer</div>
-                  <div className="text-[10px] text-neutral-400">Display in Deals section</div>
+                  <div className="font-semibold text-neutral-900 dark:text-white">Special Deal / Offer</div>
+                  <div className="text-[10px] text-neutral-500 dark:text-neutral-400">Display in Deals section</div>
                 </div>
                 <input
                   type="checkbox"
@@ -680,8 +680,8 @@ export function ProductForm({
           </div>
 
           {/* Product Images Card */}
-          <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-4">
-            <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] space-y-4 shadow-sm">
+            <h2 className="font-display text-base font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
               PRODUCT IMAGES
             </h2>
 
@@ -692,19 +692,19 @@ export function ProductForm({
                     placeholder="Image URL or /images/products/..."
                     value={newImageUrl}
                     onChange={(e) => setNewImageUrl(e.target.value)}
-                    className="flex-1 px-3 py-2 text-xs rounded-xl bg-[#181818] border border-[#2c2c2c] text-white"
+                    className="flex-1 px-3 py-2 text-xs rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2c2c2c] text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500"
                   />
                   <button
                     type="button"
                     onClick={addImage}
-                    className="px-3 py-2 rounded-xl bg-[#222222] hover:bg-[#2b2b2b] text-xs font-semibold text-white"
+                    className="px-3 py-2 rounded-xl bg-neutral-100 dark:bg-[#222222] hover:bg-neutral-200 dark:hover:bg-[#2b2b2b] text-xs font-semibold text-neutral-800 dark:text-white border border-neutral-200 dark:border-[#333] transition-colors"
                   >
                     Add
                   </button>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <label className="flex-1 cursor-pointer py-2 px-3 rounded-xl bg-[#181818] hover:bg-[#202020] border border-dashed border-[#333333] hover:border-neutral-400 text-center text-xs text-neutral-400 hover:text-white transition-colors">
+                  <label className="flex-1 cursor-pointer py-2 px-3 rounded-xl bg-neutral-50 dark:bg-[#181818] hover:bg-neutral-100 dark:hover:bg-[#202020] border border-dashed border-neutral-300 dark:border-[#333333] hover:border-[#E31E2F] text-center text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                     <span>{isUploading ? "Uploading file..." : "📁 Upload from Computer (PNG/JPG)"}</span>
                     <input
                       type="file"
@@ -721,7 +721,7 @@ export function ProductForm({
                 {formData.images.map((url, idx) => (
                   <div
                     key={idx}
-                    className="relative aspect-square rounded-xl bg-[#181818] border border-[#2c2c2c] overflow-hidden group"
+                    className="relative aspect-square rounded-xl bg-neutral-100 dark:bg-[#181818] border border-neutral-200 dark:border-[#2c2c2c] overflow-hidden group"
                   >
                     <Image
                       src={url}

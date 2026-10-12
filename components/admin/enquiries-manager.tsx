@@ -39,11 +39,11 @@ interface OrderEnquiry {
 }
 
 const STATUS_OPTIONS = [
-  { value: "ENQUIRY_INITIATED", label: "Enquiry Initiated", color: "bg-blue-950/60 text-blue-400 border-blue-800" },
-  { value: "CONTACTED", label: "Customer Contacted", color: "bg-purple-950/60 text-purple-400 border-purple-800" },
-  { value: "CONFIRMED", label: "Confirmed on WhatsApp", color: "bg-emerald-950/60 text-emerald-400 border-emerald-800" },
-  { value: "COMPLETED", label: "Delivered / Completed", color: "bg-teal-950/60 text-teal-400 border-teal-800" },
-  { value: "CANCELLED", label: "Cancelled / Out of Stock", color: "bg-neutral-800 text-neutral-400 border-neutral-700" },
+  { value: "ENQUIRY_INITIATED", label: "Enquiry Initiated", color: "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-800" },
+  { value: "CONTACTED", label: "Customer Contacted", color: "bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-800" },
+  { value: "CONFIRMED", label: "Confirmed on WhatsApp", color: "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800" },
+  { value: "COMPLETED", label: "Delivered / Completed", color: "bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 border-teal-200 dark:border-teal-800" },
+  { value: "CANCELLED", label: "Cancelled / Out of Stock", color: "bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border-neutral-200 dark:border-neutral-700" },
 ];
 
 export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: OrderEnquiry[] }) {
@@ -90,19 +90,19 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f1f1f]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#1f1f1f]">
         <div>
-          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white">
+          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
             WHATSAPP ORDER ENQUIRIES
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
             Track customer enquiries initiated from the shopping cart. Statuses are updated manually by store staff.
           </p>
         </div>
 
         {/* Status Filter Tabs - Separated with generous bottom padding from scrollbar */}
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 text-xs scrollbar-thin scrollbar-thumb-[#2f2f2f] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap shrink-0"
+          className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 px-1 text-xs scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-[#2f2f2f] hover:scrollbar-thumb-neutral-400 dark:hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap shrink-0"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           <button
@@ -110,7 +110,7 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
             className={`px-3.5 py-2 rounded-xl font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filterStatus === "ALL"
                 ? "bg-[#E31E2F] text-white shadow-sm font-bold"
-                : "bg-[#141414] text-neutral-400 hover:text-white border border-[#262626]"
+                : "bg-white dark:bg-[#141414] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white border border-neutral-200 dark:border-[#262626]"
             }`}
           >
             All ({initialEnquiries.length})
@@ -124,7 +124,7 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
                 className={`px-3.5 py-2 rounded-xl font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
                   filterStatus === opt.value
                     ? "bg-[#E31E2F] text-white shadow-sm font-bold"
-                    : "bg-[#141414] text-neutral-400 hover:text-white border border-[#262626]"
+                    : "bg-white dark:bg-[#141414] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white border border-neutral-200 dark:border-[#262626]"
                 }`}
               >
                 {opt.label.split(" ")[0]} ({count})
@@ -136,7 +136,7 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
 
       {/* Enquiry Cards */}
       {filtered.length === 0 ? (
-        <div className="p-16 text-center rounded-2xl bg-[#121212] border border-[#222222] text-neutral-500 text-xs">
+        <div className="p-16 text-center rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#222222] text-neutral-400 dark:text-neutral-500 text-xs shadow-sm">
           No order enquiries found for this filter.
         </div>
       ) : (
@@ -146,11 +146,11 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
             return (
               <div
                 key={enq.id}
-                className="p-6 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#333333] transition-all space-y-4"
+                className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] hover:border-neutral-300 dark:hover:border-[#333333] transition-all space-y-4 shadow-sm"
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#1e1e1e]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200 dark:border-[#1e1e1e]">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono font-bold text-white text-sm bg-neutral-900 px-3 py-1 rounded-lg border border-[#2c2c2c]">
+                    <span className="font-mono font-bold text-neutral-900 dark:text-white text-sm bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-lg border border-neutral-200 dark:border-[#2c2c2c]">
                       {enq.reference}
                     </span>
                     <span className={`px-2.5 py-1 rounded-md text-[10px] font-bold uppercase border ${currentOpt.color}`}>
@@ -158,15 +158,15 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs text-neutral-400">
+                  <div className="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400">
                     <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-neutral-500" />
+                      <Clock className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
                       <span>{new Date(enq.createdAt).toLocaleString()}</span>
                     </div>
 
                     <button
                       onClick={() => handleDelete(enq.id, enq.reference)}
-                      className="p-1.5 text-neutral-500 hover:text-red-400 transition-colors"
+                      className="p-1.5 text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
                       title="Delete record"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -177,30 +177,30 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
                 {/* Customer and Note */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-neutral-500 block mb-1">
+                    <span className="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500 block mb-1">
                       CUSTOMER
                     </span>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <User className="w-3.5 h-3.5 text-neutral-400" />
+                    <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-medium">
+                      <User className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
                       <span>{enq.customerName || "Anonymous Shopper"}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-neutral-500 block mb-1">
+                    <span className="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500 block mb-1">
                       PHONE / WHATSAPP
                     </span>
-                    <div className="flex items-center gap-2 text-white font-medium">
-                      <Phone className="w-3.5 h-3.5 text-neutral-400" />
+                    <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-medium">
+                      <Phone className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500" />
                       <span>{enq.customerPhone || "Not specified in form"}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-neutral-500 block mb-1">
+                    <span className="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500 block mb-1">
                       NOTE / PINCODE
                     </span>
-                    <div className="text-neutral-300">
+                    <div className="text-neutral-700 dark:text-neutral-300">
                       {enq.customerNote || "None provided"}
                     </div>
                   </div>
@@ -208,31 +208,31 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
 
                 {/* Items Breakdown */}
                 <div className="pt-2">
-                  <span className="text-[10px] uppercase font-bold text-neutral-500 block mb-2">
+                  <span className="text-[10px] uppercase font-bold text-neutral-400 dark:text-neutral-500 block mb-2">
                     ITEMS REQUESTED ({enq.itemsCount} TOTAL QUANTITY)
                   </span>
 
-                  <div className="divide-y divide-[#1c1c1c] rounded-xl bg-[#171717] border border-[#222222] overflow-hidden">
+                  <div className="divide-y divide-neutral-200 dark:divide-[#1c1c1c] rounded-xl bg-neutral-50 dark:bg-[#171717] border border-neutral-200 dark:border-[#222222] overflow-hidden">
                     {enq.items.map((item) => (
                       <div
                         key={item.id}
-                        className="px-4 py-2.5 flex items-center justify-between text-xs text-neutral-300"
+                        className="px-4 py-2.5 flex items-center justify-between text-xs text-neutral-700 dark:text-neutral-300"
                       >
                         <div className="space-y-0.5">
-                          <div className="font-semibold text-white">
+                          <div className="font-semibold text-neutral-900 dark:text-white">
                             {item.productName}
                           </div>
-                          <div className="text-[10px] text-neutral-400">
+                          <div className="text-[10px] text-neutral-500 dark:text-neutral-400">
                             {item.productSku ? `Code: ${item.productSku} · ` : ""}
                             {item.variantName ? `Variant: ${item.variantName}` : "Standard"}
                           </div>
                         </div>
 
                         <div className="text-right">
-                          <div className="text-neutral-400">
-                            Qty: <strong className="text-white">{item.quantity}</strong> &times; {formatINR(item.unitPricePaise)}
+                          <div className="text-neutral-500 dark:text-neutral-400">
+                            Qty: <strong className="text-neutral-900 dark:text-white">{item.quantity}</strong> &times; {formatINR(item.unitPricePaise)}
                           </div>
-                          <div className="font-display text-sm font-bold text-white">
+                          <div className="font-display text-sm font-bold text-neutral-900 dark:text-white">
                             {formatINR(item.subtotalPaise)}
                           </div>
                         </div>
@@ -242,20 +242,20 @@ export function EnquiriesManager({ initialEnquiries }: { initialEnquiries: Order
                 </div>
 
                 {/* Subtotal & Status Action */}
-                <div className="pt-3 border-t border-[#1e1e1e] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="pt-3 border-t border-neutral-200 dark:border-[#1e1e1e] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-xs text-neutral-400">Enquiry Estimated Total:</span>
-                    <span className="font-display text-2xl font-bold text-white">
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400">Enquiry Estimated Total:</span>
+                    <span className="font-display text-2xl font-bold text-neutral-900 dark:text-white">
                       {formatINR(enq.totalAmountPaise)}
                     </span>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-neutral-400">Update Status:</span>
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400">Update Status:</span>
                     <select
                       value={enq.status}
                       onChange={(e) => handleUpdateStatus(enq.id, e.target.value)}
-                      className="px-3 py-1.5 rounded-lg bg-[#181818] border border-[#2f2f2f] text-xs text-white focus:outline-none focus:border-[#E31E2F]"
+                      className="px-3 py-1.5 rounded-lg bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2f2f2f] text-xs text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                     >
                       {STATUS_OPTIONS.map((opt) => (
                         <option key={opt.value} value={opt.value}>

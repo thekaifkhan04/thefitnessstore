@@ -134,12 +134,12 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
   return (
     <div className="space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f1f1f]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-200 dark:border-[#1f1f1f]">
         <div>
-          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white">
+          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
             CATEGORY MANAGEMENT
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
             Total {categories.length} product categories defined
           </p>
         </div>
@@ -158,10 +158,10 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="p-4 rounded-2xl bg-[#121212] border border-[#242424] hover:border-[#383838] transition-all flex flex-col justify-between"
+            className="p-4 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] hover:border-neutral-300 dark:hover:border-[#383838] transition-all flex flex-col justify-between shadow-sm"
           >
             <div className="flex items-start gap-3">
-              <div className="relative w-14 h-14 rounded-xl bg-[#181818] border border-[#282828] overflow-hidden shrink-0">
+              <div className="relative w-14 h-14 rounded-xl bg-neutral-100 dark:bg-[#181818] border border-neutral-200 dark:border-[#282828] overflow-hidden shrink-0">
                 {cat.image ? (
                   <Image
                     src={cat.image}
@@ -171,7 +171,7 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                     className="object-contain p-1"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-neutral-600">
+                  <div className="w-full h-full flex items-center justify-center text-neutral-400 dark:text-neutral-600">
                     <Layers className="w-6 h-6" />
                   </div>
                 )}
@@ -179,12 +179,12 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-bold text-sm text-white line-clamp-1">{cat.name}</h3>
+                  <h3 className="font-bold text-sm text-neutral-900 dark:text-white line-clamp-1">{cat.name}</h3>
                   <span
                     className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${
                       cat.isActive
-                        ? "bg-emerald-950/60 text-emerald-400 border border-emerald-800/60"
-                        : "bg-neutral-800 text-neutral-500"
+                        ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60"
+                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500"
                     }`}
                   >
                     {cat.isActive ? "Active" : "Hidden"}
@@ -193,25 +193,25 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                 <div className="text-[11px] text-neutral-500 font-mono mt-0.5">
                   /{cat.slug}
                 </div>
-                <div className="text-xs text-neutral-400 mt-1">
+                <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
                   {cat._count?.products ?? 0} Products
                 </div>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-[#1e1e1e] mt-3 flex items-center justify-between text-xs">
-              <span className="text-[10px] text-neutral-500">Order: {cat.displayOrder}</span>
+            <div className="pt-3 border-t border-neutral-200 dark:border-[#1e1e1e] mt-3 flex items-center justify-between text-xs">
+              <span className="text-[10px] text-neutral-400 dark:text-neutral-500">Order: {cat.displayOrder}</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => openEditModal(cat)}
-                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-[#202020] transition-colors"
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#202020] transition-colors"
                   title="Edit category"
                 >
                   <Edit3 className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => handleDelete(cat)}
-                  className="p-1.5 rounded-lg text-neutral-500 hover:text-red-400 hover:bg-red-950/30 transition-colors"
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
                   title="Delete category"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -224,30 +224,30 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
 
       {/* Modal / Dialog */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-3xl bg-[#121212] border border-[#282828] p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#222222]">
-              <h2 className="font-display font-bold text-xl uppercase tracking-wider text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#282828] p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-[#222222]">
+              <h2 className="font-display font-bold text-xl uppercase tracking-wider text-neutral-900 dark:text-white">
                 {editingCategory ? "EDIT CATEGORY" : "CREATE CATEGORY"}
               </h2>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-neutral-500 hover:text-white p-1"
+                className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white p-1 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {error && (
-              <div className="p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-200 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+              <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                   Category Name *
                 </label>
                 <input
@@ -256,13 +256,13 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                   value={name}
                   onChange={(e) => handleNameChange(e.target.value)}
                   placeholder="e.g. Weightlifting Belts"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Slug *
                   </label>
                   <input
@@ -271,25 +271,25 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
                     placeholder="weightlifting-belts"
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
 
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Display Order
                   </label>
                   <input
                     type="number"
                     value={displayOrder}
                     onChange={(e) => setDisplayOrder(Number(e.target.value))}
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                   Image Path / URL
                 </label>
                 <input
@@ -297,12 +297,12 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder="/images/products/repex_lever_belt_13mm.png"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div>
-                <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                   Description
                 </label>
                 <textarea
@@ -310,7 +310,7 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Brief summary of items in this category..."
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
@@ -321,21 +321,21 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
                   onChange={(e) => setIsActive(e.target.checked)}
                   className="w-4 h-4 accent-[#E31E2F]"
                 />
-                <span className="font-medium text-white">Active (Display in navigation & catalogue)</span>
+                <span className="font-medium text-neutral-800 dark:text-white">Active (Display in navigation & catalogue)</span>
               </label>
 
-              <div className="pt-3 border-t border-[#222222] flex items-center justify-end gap-2">
+              <div className="pt-3 border-t border-neutral-200 dark:border-[#222222] flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#181818] hover:bg-[#222222] text-neutral-300 font-semibold"
+                  className="px-4 py-2 rounded-xl bg-neutral-100 dark:bg-[#181818] hover:bg-neutral-200 dark:hover:bg-[#222222] text-neutral-700 dark:text-neutral-300 font-semibold transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-semibold flex items-center gap-2 disabled:opacity-60"
+                  className="px-5 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-semibold flex items-center gap-2 disabled:opacity-60 cursor-pointer shadow-sm"
                 >
                   <Check className="w-4 h-4" />
                   <span>{isSubmitting ? "Saving..." : "Save Category"}</span>

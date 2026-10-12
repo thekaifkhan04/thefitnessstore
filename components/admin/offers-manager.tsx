@@ -123,10 +123,10 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#1f1f1f]">
         <div>
-          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-white">
+          <h1 className="font-display font-extrabold text-3xl uppercase tracking-wider text-neutral-900 dark:text-white">
             PROMOTIONAL OFFERS & BANNERS
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
             Manage discount codes, homepage banners, and limited deal announcements
           </p>
         </div>
@@ -144,7 +144,7 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
         {offers.map((off) => (
           <div
             key={off.id}
-            className="p-6 rounded-2xl bg-[#121212] border border-[#242424] flex flex-col justify-between space-y-4"
+            className="p-6 rounded-2xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#242424] flex flex-col justify-between space-y-4 shadow-sm"
           >
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -156,20 +156,20 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                 <span
                   className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                     off.isActive
-                      ? "bg-emerald-950/60 text-emerald-400 border border-emerald-800/60"
-                      : "bg-neutral-800 text-neutral-500"
+                      ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60"
+                      : "bg-neutral-100 dark:bg-neutral-800 text-neutral-500"
                   }`}
                 >
                   {off.isActive ? "Active" : "Disabled"}
                 </span>
               </div>
 
-              <h3 className="font-display font-bold text-2xl uppercase text-white">
+              <h3 className="font-display font-bold text-2xl uppercase text-neutral-900 dark:text-white">
                 {off.title}
               </h3>
 
               {off.description && (
-                <p className="text-xs text-neutral-400 leading-relaxed">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                   {off.description}
                 </p>
               )}
@@ -177,25 +177,25 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
               {off.code && (
                 <div className="pt-1 text-xs">
                   <span className="text-neutral-500 mr-2 uppercase">Promo Code:</span>
-                  <span className="font-mono font-bold text-white bg-black/50 px-2 py-0.5 rounded border border-[#333]">
+                  <span className="font-mono font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-black/50 px-2 py-0.5 rounded border border-neutral-300 dark:border-[#333]">
                     {off.code}
                   </span>
                 </div>
               )}
             </div>
 
-            <div className="pt-4 border-t border-[#1e1e1e] flex items-center justify-between text-xs">
+            <div className="pt-4 border-t border-neutral-200 dark:border-[#1e1e1e] flex items-center justify-between text-xs">
               <span className="text-neutral-500">CTA: {off.ctaLabel} ({off.ctaUrl})</span>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => openEditModal(off)}
-                  className="p-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-[#202020]"
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#202020] transition-colors"
                 >
                   <Edit3 className="w-3.5 h-3.5" />
                 </button>
                 <button
                   onClick={() => handleDelete(off)}
-                  className="p-1.5 rounded-lg text-neutral-500 hover:text-red-400 hover:bg-red-950/30"
+                  className="p-1.5 rounded-lg text-neutral-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -207,27 +207,27 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-3xl bg-[#121212] border border-[#282828] p-6 shadow-2xl space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#222222]">
-              <h2 className="font-display font-bold text-xl uppercase tracking-wider text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#121212] border border-neutral-200 dark:border-[#282828] p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-neutral-200 dark:border-[#222222]">
+              <h2 className="font-display font-bold text-xl uppercase tracking-wider text-neutral-900 dark:text-white">
                 {editingOffer ? "EDIT PROMOTION" : "NEW PROMOTION"}
               </h2>
-              <button onClick={() => setIsModalOpen(false)} className="text-neutral-500 hover:text-white p-1">
+              <button onClick={() => setIsModalOpen(false)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white p-1 transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {error && (
-              <div className="p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-200 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+              <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-500 dark:text-red-400 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                   Offer Title *
                 </label>
                 <input
@@ -236,13 +236,13 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Flat 15% Off On Lever Belts"
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Badge Tag
                   </label>
                   <input
@@ -250,12 +250,12 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                     value={badge}
                     onChange={(e) => setBadge(e.target.value)}
                     placeholder="LIMITED OFFER / COMBO"
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
 
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Promo Code
                   </label>
                   <input
@@ -263,13 +263,13 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
                     placeholder="TFSBELT15"
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                   Offer Description
                 </label>
                 <textarea
@@ -277,32 +277,32 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Details of the promotion and WhatsApp ordering instructions..."
-                  className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                  className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Button Label
                   </label>
                   <input
                     type="text"
                     value={ctaLabel}
                     onChange={(e) => setCtaLabel(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
 
                 <div>
-                  <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-1">
                     Button Link
                   </label>
                   <input
                     type="text"
                     value={ctaUrl}
                     onChange={(e) => setCtaUrl(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white focus:outline-none focus:border-[#E31E2F]"
+                    className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                   />
                 </div>
               </div>
@@ -314,21 +314,21 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                   onChange={(e) => setIsActive(e.target.checked)}
                   className="w-4 h-4 accent-[#E31E2F]"
                 />
-                <span className="font-medium text-white">Active (Display on Homepage & Offers page)</span>
+                <span className="font-medium text-neutral-800 dark:text-white">Active (Display on Homepage & Offers page)</span>
               </label>
 
-              <div className="pt-3 border-t border-[#222222] flex items-center justify-end gap-2">
+              <div className="pt-3 border-t border-neutral-200 dark:border-[#222222] flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#181818] hover:bg-[#222222] text-neutral-300 font-semibold"
+                  className="px-4 py-2 rounded-xl bg-neutral-100 dark:bg-[#181818] hover:bg-neutral-200 dark:hover:bg-[#222222] text-neutral-700 dark:text-neutral-300 font-semibold transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-semibold flex items-center gap-2 disabled:opacity-60"
+                  className="px-5 py-2 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-semibold flex items-center gap-2 disabled:opacity-60 cursor-pointer shadow-sm"
                 >
                   <Check className="w-4 h-4" />
                   <span>{isSubmitting ? "Saving..." : "Save Offer"}</span>

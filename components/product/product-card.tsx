@@ -67,9 +67,9 @@ export function ProductCard({ product }: { product: ProductCardData }) {
   };
 
   return (
-    <div className="group relative flex flex-col rounded-xl sm:rounded-2xl bg-[#141414] border border-[#242424] hover:border-[#383838] hover:shadow-xl hover:shadow-black/60 transition-all duration-300 overflow-hidden">
+    <div className="group relative flex flex-col rounded-xl sm:rounded-2xl bg-white dark:bg-[#141414] border border-neutral-200 dark:border-[#242424] hover:border-neutral-300 dark:hover:border-[#383838] hover:shadow-lg hover:shadow-black/10 dark:hover:shadow-black/60 transition-all duration-300 overflow-hidden">
       {/* Product Image Area - Compact & optimized for phone screens */}
-      <Link href={`/product/${product.slug}`} className="relative block aspect-[4/3] sm:aspect-square bg-[#0d0d0d] overflow-hidden">
+      <Link href={`/product/${product.slug}`} className="relative block aspect-[4/3] sm:aspect-square bg-neutral-50 dark:bg-[#0d0d0d] overflow-hidden">
         {product.imageUrl ? (
           <Image
             src={product.imageUrl}
@@ -79,7 +79,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
             className="object-contain p-2 sm:p-3 group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-neutral-600">
+          <div className="w-full h-full flex items-center justify-center text-neutral-400 dark:text-neutral-600">
             <ShoppingBag className="w-8 h-8 sm:w-10 sm:h-10" />
           </div>
         )}
@@ -87,7 +87,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
         {/* Top Badges */}
         <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none gap-1">
           {product.categoryName && (
-            <span className="px-1.5 sm:px-2 py-0.5 rounded bg-[#0a0a0a]/90 backdrop-blur-md border border-[#2b2b2b] text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-neutral-300 truncate max-w-[65%]">
+            <span className="px-1.5 sm:px-2 py-0.5 rounded bg-white/90 dark:bg-[#0a0a0a]/90 backdrop-blur-md border border-neutral-200 dark:border-[#2b2b2b] text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 truncate max-w-[65%]">
               {product.categoryName}
             </span>
           )}
@@ -97,7 +97,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
               {discountPercent}% OFF
             </span>
           ) : !product.isAvailable ? (
-            <span className="px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 text-[9px] font-bold uppercase tracking-wider ml-auto">
+            <span className="px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-[9px] font-bold uppercase tracking-wider ml-auto">
               Stock
             </span>
           ) : null}
@@ -108,33 +108,33 @@ export function ProductCard({ product }: { product: ProductCardData }) {
       <div className="p-2.5 sm:p-3.5 flex flex-col flex-1 justify-between gap-2">
         <div>
           {product.brand && (
-            <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400 truncate mb-0.5">
+            <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400 truncate mb-0.5">
               {product.brand}
             </p>
           )}
           <Link
             href={`/product/${product.slug}`}
-            className="font-bold text-xs sm:text-sm text-white group-hover:text-[#E31E2F] transition-colors line-clamp-1 sm:line-clamp-2 leading-snug"
+            className="font-bold text-xs sm:text-sm text-neutral-900 dark:text-white group-hover:text-[#E31E2F] transition-colors line-clamp-1 sm:line-clamp-2 leading-snug"
           >
             {product.name}
           </Link>
-          <p className="text-[10px] text-neutral-500 mt-0.5 hidden sm:block">Code: {product.sku}</p>
+          <p className="text-[10px] text-neutral-400 dark:text-neutral-500 mt-0.5 hidden sm:block">Code: {product.sku}</p>
         </div>
 
         {/* Pricing */}
-        <div className="pt-1.5 border-t border-[#1f1f1f] flex items-baseline justify-between gap-1">
+        <div className="pt-1.5 border-t border-neutral-100 dark:border-[#1f1f1f] flex items-baseline justify-between gap-1">
           <div className="flex items-baseline gap-1.5">
-            <span className="font-display text-base sm:text-lg font-bold text-white tracking-wide">
+            <span className="font-display text-base sm:text-lg font-bold text-neutral-900 dark:text-white tracking-wide">
               {formatINR(product.sellingPricePaise)}
             </span>
             {product.originalPricePaise && product.originalPricePaise > product.sellingPricePaise && (
-              <span className="text-[10px] sm:text-xs text-neutral-500 line-through">
+              <span className="text-[10px] sm:text-xs text-neutral-400 dark:text-neutral-500 line-through">
                 {formatINR(product.originalPricePaise)}
               </span>
             )}
           </div>
           {product.variantCount && product.variantCount > 1 ? (
-            <span className="text-[9px] text-neutral-400 bg-[#1e1e1e] px-1.5 py-0.5 rounded shrink-0">
+            <span className="text-[9px] text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-[#1e1e1e] px-1.5 py-0.5 rounded shrink-0">
               {product.variantCount} opts
             </span>
           ) : null}
@@ -147,7 +147,7 @@ export function ProductCard({ product }: { product: ProductCardData }) {
             className={`py-1.5 px-2 rounded-lg text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1 cursor-pointer ${
               added
                 ? "bg-emerald-600 text-white"
-                : "bg-[#202020] hover:bg-[#282828] text-white border border-[#2f2f2f]"
+                : "bg-neutral-100 hover:bg-neutral-200 text-neutral-800 dark:bg-[#202020] dark:hover:bg-[#282828] dark:text-white border border-neutral-200 dark:border-[#2f2f2f]"
             }`}
             title="Add to shopping bag"
           >

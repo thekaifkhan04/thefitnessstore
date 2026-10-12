@@ -66,15 +66,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[10px] font-bold uppercase tracking-wider">
               <span>CATEGORY CATALOGUE</span>
             </div>
-            <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-white leading-tight">
+            <h1 className="font-display font-extrabold text-4xl sm:text-6xl uppercase tracking-tight text-neutral-900 dark:text-white leading-tight">
               {category.name}
             </h1>
             {category.description && (
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
                 {category.description}
               </p>
             )}
-            <div className="pt-2 text-xs text-neutral-400">
+            <div className="pt-2 text-xs text-neutral-500 dark:text-neutral-400">
               <span>{category.products.length} Products Available</span>
             </div>
           </div>
@@ -82,12 +82,12 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
         {/* Product Grid */}
         {category.products.length === 0 ? (
-          <div className="text-center py-20 bg-[#121212] rounded-2xl border border-[#222222] p-8 space-y-4">
-            <Dumbbell className="w-12 h-12 text-neutral-600 mx-auto" />
-            <h3 className="font-display text-2xl uppercase text-white">
+          <div className="text-center py-20 bg-neutral-50 dark:bg-[#121212] rounded-2xl border border-neutral-200 dark:border-[#222222] p-8 space-y-4">
+            <Dumbbell className="w-12 h-12 text-neutral-400 dark:text-neutral-600 mx-auto" />
+            <h3 className="font-display text-2xl uppercase text-neutral-900 dark:text-white">
               No products found in this category
             </h3>
-            <p className="text-xs text-neutral-400">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
               New inventory is arriving shortly. Contact our team on WhatsApp for catalogue updates.
             </p>
             <Link
