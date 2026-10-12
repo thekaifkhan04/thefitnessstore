@@ -202,7 +202,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
               {relatedProducts.map((p) => (
                 <ProductCard
                   key={p.id}

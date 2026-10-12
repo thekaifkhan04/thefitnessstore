@@ -16,6 +16,10 @@ export interface StoreSettingsMap {
   currency_symbol: string;
   instagram_url: string;
   facebook_url: string;
+  theme_text_color: string;
+  theme_muted_text_color: string;
+  theme_heading_font: string;
+  theme_heading_style: string;
 }
 
 export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
@@ -35,6 +39,10 @@ export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   currency_symbol: "₹",
   instagram_url: "https://instagram.com",
   facebook_url: "https://facebook.com",
+  theme_text_color: "#FFFFFF",
+  theme_muted_text_color: "#A6A6A6",
+  theme_heading_font: "bebas",
+  theme_heading_style: "uppercase",
 };
 
 /**

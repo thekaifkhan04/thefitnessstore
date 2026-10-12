@@ -43,6 +43,10 @@ export async function POST(req: NextRequest) {
           "currency_symbol",
           "instagram_url",
           "facebook_url",
+          "theme_text_color",
+          "theme_muted_text_color",
+          "theme_heading_font",
+          "theme_heading_style",
         ].includes(key)
       ) {
         await prisma.storeSetting.upsert({

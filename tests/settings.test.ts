@@ -80,3 +80,45 @@ test("Theme primary color and custom logo URL are supported in settings", async 
     });
   }
 });
+
+test("Typography and text styling settings are supported and retrieved correctly", async () => {
+  const customTextColor = "#F3F4F6";
+  const customMutedColor = "#94A3B8";
+  const customFont = "oswald";
+  const customStyle = "uppercase";
+
+  try {
+    await prisma.storeSetting.upsert({
+      where: { key: "theme_text_color" },
+      update: { value: customTextColor },
+      create: { key: "theme_text_color", value: customTextColor },
+    });
+    await prisma.storeSetting.upsert({
+      where: { key: "theme_muted_text_color" },
+      update: { value: customMutedColor },
+      create: { key: "theme_muted_text_color", value: customMutedColor },
+    });
+    await prisma.storeSetting.upsert({
+      where: { key: "theme_heading_font" },
+      update: { value: customFont },
+      create: { key: "theme_heading_font", value: customFont },
+    });
+    await prisma.storeSetting.upsert({
+      where: { key: "theme_heading_style" },
+      update: { value: customStyle },
+      create: { key: "theme_heading_style", value: customStyle },
+    });
+
+    const settings = await getStoreSettings();
+    assert.equal(settings.theme_text_color, customTextColor);
+    assert.equal(settings.theme_muted_text_color, customMutedColor);
+    assert.equal(settings.theme_heading_font, customFont);
+    assert.equal(settings.theme_heading_style, customStyle);
+  } finally {
+    await prisma.storeSetting.deleteMany({
+      where: {
+        key: { in: ["theme_text_color", "theme_muted_text_color", "theme_heading_font", "theme_heading_style"] },
+      },
+    });
+  }
+});

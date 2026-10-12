@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Bebas_Neue, Inter, Oswald, Montserrat } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { SettingsProvider } from "@/context/settings-context";
@@ -19,6 +19,18 @@ const bebasNeue = Bebas_Neue({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  variable: "--font-oswald",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -48,6 +60,14 @@ export const metadata: Metadata = {
   },
 };
 
+const FONT_MAP: Record<string, string> = {
+  bebas: "var(--font-bebas), 'Bebas Neue', Impact, sans-serif",
+  oswald: "var(--font-oswald), 'Oswald', sans-serif",
+  inter: "var(--font-inter), 'Inter', sans-serif",
+  montserrat: "var(--font-montserrat), 'Montserrat', sans-serif",
+  impact: "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif",
+};
+
 export default async function RootLayout({
   children,
 }: {
@@ -55,9 +75,16 @@ export default async function RootLayout({
 }) {
   const settings = await getStoreSettings();
   const primaryColor = settings.theme_primary_color || "#E31E2F";
+  const textColor = settings.theme_text_color || "#FFFFFF";
+  const mutedTextColor = settings.theme_muted_text_color || "#A6A6A6";
+  const headingFont = FONT_MAP[settings.theme_heading_font] || FONT_MAP.bebas;
+  const headingStyle = settings.theme_heading_style || "uppercase";
 
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${inter.variable} dark`}>
+    <html
+      lang="en"
+      className={`${bebasNeue.variable} ${inter.variable} ${oswald.variable} ${montserrat.variable} dark`}
+    >
       <head>
         <style
           dangerouslySetInnerHTML={{
@@ -65,8 +92,24 @@ export default async function RootLayout({
               :root {
                 --brand-primary: ${primaryColor};
                 --brand-red: ${primaryColor};
+                --text-primary: ${textColor};
+                --text-secondary: ${mutedTextColor};
+              }
+              body {
+                color: var(--text-primary) !important;
+              }
+              .text-white {
+                color: var(--text-primary) !important;
+              }
+              .text-neutral-400, .text-neutral-300, .text-neutral-500 {
+                color: var(--text-secondary) !important;
+              }
+              .font-display {
+                font-family: ${headingFont} !important;
+                text-transform: ${headingStyle} !important;
               }
               .bg-\\[\\#E31E2F\\] { background-color: var(--brand-primary) !important; }
+              .bg-\\[\\#E31E2F\\] .text-white, .bg-\\[\\#E31E2F\\] * { color: #ffffff !important; }
               .text-\\[\\#E31E2F\\] { color: var(--brand-primary) !important; }
               .border-\\[\\#E31E2F\\] { border-color: var(--brand-primary) !important; }
               .hover\\:bg-\\[\\#c51826\\]:hover { filter: brightness(0.85); }

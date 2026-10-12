@@ -91,7 +91,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     orderBy = { sellingPricePaise: "desc" };
   }
 
-  const [products, totalCount, categories, brandRecords, featuredRowProducts] = await Promise.all([
+  const [products, totalCount, categories, brandRecords] = await Promise.all([
     prisma.product.findMany({
       where,
       orderBy,
@@ -114,15 +114,6 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
       select: { brand: true },
       distinct: ["brand"],
       orderBy: { brand: "asc" },
-    }),
-    prisma.product.findMany({
-      where: { isAvailable: true, isFeatured: true },
-      include: {
-        category: true,
-        images: { orderBy: { displayOrder: "asc" }, take: 1 },
-        variants: true,
-      },
-      take: 6,
     }),
   ]);
 
@@ -230,96 +221,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           </div>
         </div>
 
-        {/* Horizontal Scrollable Categories Strip with Sleek Scrollbar */}
-        <div className="py-3 border-b border-[#181818]">
-          <div className="flex items-center justify-between text-xs text-neutral-400 mb-2">
-            <span className="font-semibold uppercase tracking-wider text-[11px] text-neutral-400 flex items-center gap-1.5">
-              <Layers className="w-3.5 h-3.5 text-[#E31E2F]" />
-              <span>Scroll Categories</span>
-            </span>
-            <span className="text-[10px] text-neutral-500">{categories.length} categories</span>
-          </div>
 
-          <div
-            className="overflow-x-auto flex items-center gap-2 pb-2.5 scrollbar-thin scrollbar-thumb-[#2c2c2c] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap"
-            style={{ WebkitOverflowScrolling: "touch" }}
-          >
-            <Link
-              href={`/shop${currentBrand ? `?brand=${encodeURIComponent(currentBrand)}` : ""}`}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
-                !currentCategorySlug
-                  ? "bg-[#E31E2F] text-white shadow-sm"
-                  : "bg-[#141414] text-neutral-400 hover:text-white border border-[#242424]"
-              }`}
-            >
-              All Products ({totalCount})
-            </Link>
-            {categories.map((c) => (
-              <Link
-                key={c.id}
-                href={`/shop?${new URLSearchParams({
-                  category: c.slug,
-                  ...(currentBrand ? { brand: currentBrand } : {}),
-                }).toString()}`}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
-                  currentCategorySlug === c.slug
-                    ? "bg-[#E31E2F] text-white shadow-sm font-bold"
-                    : "bg-[#141414] text-neutral-400 hover:text-white border border-[#242424]"
-                }`}
-              >
-                {c.name} ({c._count.products})
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Horizontal Scrollable Brands Strip with Sleek Scrollbar */}
-        {brands.length > 0 && (
-          <div className="py-2.5 border-b border-[#181818]">
-            <div className="flex items-center justify-between text-xs text-neutral-400 mb-2">
-              <span className="font-semibold uppercase tracking-wider text-[11px] text-neutral-400 flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-[#E31E2F]" />
-                <span>Scroll Brands</span>
-              </span>
-              <span className="text-[10px] text-neutral-500">{brands.length} brands</span>
-            </div>
-
-            <div
-              className="overflow-x-auto flex items-center gap-2 pb-2.5 scrollbar-thin scrollbar-thumb-[#2c2c2c] hover:scrollbar-thumb-neutral-500 scrollbar-track-transparent flex-nowrap"
-              style={{ WebkitOverflowScrolling: "touch" }}
-            >
-              <Link
-                href={`/shop${currentCategorySlug ? `?category=${currentCategorySlug}` : ""}`}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
-                  !currentBrand
-                    ? "bg-[#1e1e1e] text-white border border-neutral-400"
-                    : "bg-[#121212] text-neutral-400 hover:text-white border border-[#222222]"
-                }`}
-              >
-                All Brands
-              </Link>
-              {brands.map((b) => {
-                const isSelected = currentBrand?.toLowerCase() === b.toLowerCase();
-                return (
-                  <Link
-                    key={b}
-                    href={`/shop?${new URLSearchParams({
-                      ...(currentCategorySlug ? { category: currentCategorySlug } : {}),
-                      brand: b,
-                    }).toString()}`}
-                    className={`px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider shrink-0 transition-all ${
-                      isSelected
-                        ? "bg-[#E31E2F] text-white shadow-sm font-bold"
-                        : "bg-[#141414] text-neutral-400 hover:text-white border border-[#242424]"
-                    }`}
-                  >
-                    {b}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
         {/* Active Filters Bar if any filter is chosen */}
         {(currentCategorySlug || currentBrand || searchQuery) && (
@@ -493,50 +395,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </div>
           </aside>
 
-          {/* Products Column (Visible alongside the scrollable sidebar) */}
-          <div className="lg:col-span-3 space-y-8">
-            {/* Scrollable Featured Highlights Row (Shown when no strict search query) */}
-            {!searchQuery && !currentBrand && !currentCategorySlug && featuredRowProducts.length > 0 && (
-              <div className="p-5 rounded-2xl bg-[#121212] border border-[#242424] space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#E31E2F]" />
-                    <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
-                      FEATURED GEAR SPOTLIGHT
-                    </h2>
-                  </div>
-                  <span className="text-[10px] text-neutral-500 uppercase tracking-wider">Swipe &rarr;</span>
-                </div>
-
-                {/* Horizontal scrollable product cards row with visible scrollbar */}
-                <div
-                  className="overflow-x-auto flex gap-4 pb-3 scrollbar-thin scrollbar-thumb-[#333] hover:scrollbar-thumb-neutral-500 scrollbar-track-[#151515] flex-nowrap"
-                  style={{ WebkitOverflowScrolling: "touch" }}
-                >
-                  {featuredRowProducts.map((fp) => (
-                    <div key={fp.id} className="w-64 shrink-0">
-                      <ProductCard
-                        product={{
-                          id: fp.id,
-                          name: fp.name,
-                          slug: fp.slug,
-                          sku: fp.sku,
-                          brand: fp.brand,
-                          sellingPricePaise: fp.sellingPricePaise,
-                          originalPricePaise: fp.originalPricePaise,
-                          isAvailable: fp.isAvailable,
-                          categoryName: fp.category.name,
-                          categorySlug: fp.category.slug,
-                          imageUrl: fp.images[0]?.url,
-                          variantCount: fp.variants.length,
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
+          {/* Products Column (Directly visible alongside the scrollable category sidebar) */}
+          <div className="lg:col-span-3 space-y-6">
             {/* Main Product Grid */}
             {products.length === 0 ? (
               <div className="py-20 text-center rounded-2xl bg-[#121212] border border-[#222222] p-8 space-y-4">
@@ -555,7 +415,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-4">
                   {products.map((p) => (
                     <ProductCard
                       key={p.id}

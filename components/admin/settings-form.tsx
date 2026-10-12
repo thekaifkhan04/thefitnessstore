@@ -11,7 +11,7 @@ import {
   Upload,
   RotateCcw,
   Palette,
-  Sparkles,
+  Type,
   Phone,
   Mail,
   MapPin,
@@ -31,6 +31,35 @@ const THEME_PRESETS = [
   { name: "Blaze Performance Orange", color: "#F97316", class: "bg-[#F97316]" },
 ];
 
+const TEXT_COLOR_PRESETS = [
+  { name: "Pure White (Default)", color: "#FFFFFF" },
+  { name: "Soft Platinum", color: "#F3F4F6" },
+  { name: "Cool Silver", color: "#E2E8F0" },
+  { name: "Warm Cream", color: "#FEF3C7" },
+  { name: "Champagne Gold", color: "#FDE68A" },
+];
+
+const MUTED_COLOR_PRESETS = [
+  { name: "Silver Gray (Default)", color: "#A6A6A6" },
+  { name: "Cool Slate", color: "#94A3B8" },
+  { name: "Medium Neutral", color: "#737373" },
+  { name: "Warm Taupe", color: "#A8A29E" },
+];
+
+const FONT_OPTIONS = [
+  { id: "bebas", name: "Bebas Neue", desc: "Athletic Display & Impact (Store Default)" },
+  { id: "oswald", name: "Oswald", desc: "Condensed Heavyweight Athletic" },
+  { id: "montserrat", name: "Montserrat", desc: "Modern Geometric Bold" },
+  { id: "inter", name: "Inter", desc: "Clean Minimalist Sans" },
+  { id: "impact", name: "Impact", desc: "Industrial Heavyweight Bold" },
+];
+
+const STYLE_OPTIONS = [
+  { id: "uppercase", name: "ALL UPPERCASE", desc: "Aggressive athletic bold (Default)" },
+  { id: "none", name: "Normal Case", desc: "Original text capitalization" },
+  { id: "capitalize", name: "Capitalize", desc: "Title Case Each Word" },
+];
+
 export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const router = useRouter();
   const [settings, setSettings] = useState<Record<string, string>>(initialSettings);
@@ -40,6 +69,10 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const [error, setError] = useState<string | null>(null);
 
   const activeColor = settings.theme_primary_color || "#E31E2F";
+  const activeTextColor = settings.theme_text_color || "#FFFFFF";
+  const activeMutedColor = settings.theme_muted_text_color || "#A6A6A6";
+  const activeFont = settings.theme_heading_font || "bebas";
+  const activeStyle = settings.theme_heading_style || "uppercase";
 
   const handleChange = (key: string, value: string) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
@@ -296,52 +329,236 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           {/* Custom Color Inputs */}
-          <div className="pt-2 border-t border-[#1e1e1e] flex items-center gap-3">
-            <div>
-              <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
-                Custom Color Picker
+          <div className="pt-2 border-t border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-400 block mb-1">
+              Custom Color Picker
+            </label>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={activeColor}
+                onChange={(e) => handleChange("theme_primary_color", e.target.value)}
+                className="w-10 h-10 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+              />
+              <input
+                type="text"
+                value={activeColor}
+                onChange={(e) => handleChange("theme_primary_color", e.target.value)}
+                placeholder="#E31E2F"
+                className="w-28 px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+              />
+              <span className="text-[11px] text-neutral-500">Pick any custom hex code</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3: Website Typography & Text Styling Customizer */}
+        <div className="p-6 rounded-2xl bg-[#121212] border border-[#242424] space-y-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Type className="w-4 h-4 text-neutral-400" />
+              <h2 className="font-display text-base font-bold uppercase tracking-wider text-white">
+                WEBSITE TYPOGRAPHY & TEXT STYLING
+              </h2>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                handleChange("theme_text_color", "#FFFFFF");
+                handleChange("theme_muted_text_color", "#A6A6A6");
+                handleChange("theme_heading_font", "bebas");
+                handleChange("theme_heading_style", "uppercase");
+              }}
+              className="text-[11px] text-neutral-400 hover:text-white flex items-center gap-1 hover:underline cursor-pointer"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Reset Typography</span>
+            </button>
+          </div>
+
+          <p className="text-neutral-400 text-xs leading-relaxed">
+            Customize the dedicated primary text color, muted/secondary text color, heading display font family, and typography styling for the entire website.
+          </p>
+
+          {/* Primary Text Color */}
+          <div className="space-y-3 pt-1">
+            <div className="flex items-center justify-between">
+              <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+                Primary Text Color (Headings & Main Content)
               </label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="color"
-                  value={activeColor}
-                  onChange={(e) => handleChange("theme_primary_color", e.target.value)}
-                  className="w-10 h-10 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
-                />
-                <input
-                  type="text"
-                  value={activeColor}
-                  onChange={(e) => handleChange("theme_primary_color", e.target.value)}
-                  placeholder="#E31E2F"
-                  className="w-28 px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
-                />
-              </div>
+              <div
+                className="w-4 h-4 rounded-full border border-white/20 shadow-sm"
+                style={{ backgroundColor: activeTextColor }}
+              />
             </div>
 
-            {/* Live Theme Preview Box */}
-            <div className="flex-1 p-3 rounded-xl bg-[#161616] border border-[#292929] space-y-2">
-              <div className="text-[10px] text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-neutral-300" />
-                <span>Live Accent Preview</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  style={{ backgroundColor: activeColor }}
-                  className="px-3 py-1 rounded-lg text-white font-bold text-[11px] uppercase tracking-wider shadow-sm"
-                >
-                  Button
-                </button>
-                <span
-                  style={{ color: activeColor, borderColor: activeColor }}
-                  className="px-2 py-0.5 rounded border text-[10px] font-bold uppercase tracking-wider"
-                >
-                  Badge
-                </span>
-                <span style={{ color: activeColor }} className="text-xs font-extrabold">
-                  ₹4,200
-                </span>
-              </div>
+            {/* Presets */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              {TEXT_COLOR_PRESETS.map((p) => {
+                const isSelected = activeTextColor.toLowerCase() === p.color.toLowerCase();
+                return (
+                  <button
+                    key={p.color}
+                    type="button"
+                    onClick={() => handleChange("theme_text_color", p.color)}
+                    className={`flex items-center gap-2 p-2 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
+                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                    }`}
+                  >
+                    <span
+                      className="w-3.5 h-3.5 rounded-full shrink-0 border border-black/40"
+                      style={{ backgroundColor: p.color }}
+                    />
+                    <span className="text-[11px] font-semibold text-neutral-300 truncate">
+                      {p.name.split(" ")[0]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Custom Picker */}
+            <div className="flex items-center gap-2 pt-1">
+              <input
+                type="color"
+                value={activeTextColor}
+                onChange={(e) => handleChange("theme_text_color", e.target.value)}
+                className="w-9 h-9 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+              />
+              <input
+                type="text"
+                value={activeTextColor}
+                onChange={(e) => handleChange("theme_text_color", e.target.value)}
+                placeholder="#FFFFFF"
+                className="w-28 px-3 py-1.5 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+              />
+              <span className="text-[11px] text-neutral-500">Pick any custom hex shade</span>
+            </div>
+          </div>
+
+          {/* Secondary / Muted Text Color */}
+          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
+            <div className="flex items-center justify-between">
+              <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+                Secondary & Muted Text Color (Descriptions, Subtitles & SKU)
+              </label>
+              <div
+                className="w-4 h-4 rounded-full border border-white/20 shadow-sm"
+                style={{ backgroundColor: activeMutedColor }}
+              />
+            </div>
+
+            {/* Presets */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {MUTED_COLOR_PRESETS.map((p) => {
+                const isSelected = activeMutedColor.toLowerCase() === p.color.toLowerCase();
+                return (
+                  <button
+                    key={p.color}
+                    type="button"
+                    onClick={() => handleChange("theme_muted_text_color", p.color)}
+                    className={`flex items-center gap-2 p-2 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
+                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                    }`}
+                  >
+                    <span
+                      className="w-3.5 h-3.5 rounded-full shrink-0 border border-black/40"
+                      style={{ backgroundColor: p.color }}
+                    />
+                    <span className="text-[11px] font-semibold text-neutral-300 truncate">
+                      {p.name.split(" ")[0]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Custom Picker */}
+            <div className="flex items-center gap-2 pt-1">
+              <input
+                type="color"
+                value={activeMutedColor}
+                onChange={(e) => handleChange("theme_muted_text_color", e.target.value)}
+                className="w-9 h-9 rounded-xl bg-transparent border border-[#333] cursor-pointer p-0.5"
+              />
+              <input
+                type="text"
+                value={activeMutedColor}
+                onChange={(e) => handleChange("theme_muted_text_color", e.target.value)}
+                placeholder="#A6A6A6"
+                className="w-28 px-3 py-1.5 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white font-mono uppercase text-xs focus:outline-none"
+              />
+              <span className="text-[11px] text-neutral-500">Pick any custom hex shade</span>
+            </div>
+          </div>
+
+          {/* Heading Display Font Family */}
+          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+              Major Headings Display Font Family
+            </label>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+              {FONT_OPTIONS.map((f) => {
+                const isSelected = activeFont.toLowerCase() === f.id.toLowerCase();
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => handleChange("theme_heading_font", f.id)}
+                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
+                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-white uppercase">{f.name}</span>
+                      {isSelected && (
+                        <span className="text-[10px] font-bold text-emerald-400">ACTIVE</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-neutral-400">{f.desc}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Heading Letter Case / Style */}
+          <div className="space-y-3 pt-3 border-t border-[#1e1e1e]">
+            <label className="font-semibold uppercase tracking-wider text-neutral-300 text-xs block">
+              Heading Letter Case Style
+            </label>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              {STYLE_OPTIONS.map((s) => {
+                const isSelected = activeStyle.toLowerCase() === s.id.toLowerCase();
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => handleChange("theme_heading_style", s.id)}
+                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? "bg-[#1e1e1e] border-white/80 ring-1 ring-white/40"
+                        : "bg-[#171717] border-[#292929] hover:border-neutral-500"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-bold text-white">{s.name}</span>
+                      {isSelected && (
+                        <span className="text-[10px] font-bold text-emerald-400">ACTIVE</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-neutral-400">{s.desc}</p>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

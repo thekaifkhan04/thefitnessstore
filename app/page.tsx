@@ -323,31 +323,31 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SECTION E: FEATURED PRODUCTS */}
-      <section className="py-20 bg-[#0c0c0c] border-y border-[#1c1c1c]">
+      {/* SECTION E: FEATURED PRODUCTS - Compact, high-density layout */}
+      <section className="py-10 sm:py-14 bg-[#0c0c0c] border-y border-[#1c1c1c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 mb-2">
-                <div className="w-6 h-1 bg-[#E31E2F]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-[#E31E2F]">
+              <div className="inline-flex items-center gap-2 mb-1.5">
+                <div className="w-5 h-1 bg-[#E31E2F]" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#E31E2F]">
                   TOP PICKS
                 </span>
               </div>
-              <h2 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white">
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl uppercase tracking-tight text-white">
                 FEATURED PRODUCTS
               </h2>
             </div>
             <Link
               href="/shop"
-              className="mt-4 md:mt-0 px-5 py-2.5 rounded-lg bg-[#181818] border border-[#2d2d2d] hover:border-[#E31E2F] text-xs font-semibold uppercase tracking-wider text-neutral-200 hover:text-white transition-all flex items-center gap-2"
+              className="mt-3 md:mt-0 px-4 py-2 rounded-lg bg-[#181818] border border-[#2d2d2d] hover:border-[#E31E2F] text-xs font-semibold uppercase tracking-wider text-neutral-200 hover:text-white transition-all flex items-center gap-1.5 self-start md:self-auto"
             >
               <span>VIEW ALL PRODUCTS</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-2.5 sm:gap-4">
             {featuredProducts.map((p) => (
               <ProductCard
                 key={p.id}
