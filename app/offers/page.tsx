@@ -60,26 +60,28 @@ export default async function OffersPage() {
             {offers.map((off) => (
               <div
                 key={off.id}
-                className="rounded-3xl bg-gradient-to-br from-[#1a0809] to-[#121212] border border-red-900/40 p-8 flex flex-col justify-between shadow-xl"
+                className="rounded-3xl bg-gradient-to-br from-red-50/60 via-white to-red-100/40 dark:from-[#1a0809] dark:to-[#121212] border border-red-200/80 dark:border-red-900/40 p-8 flex flex-col justify-between shadow-xl shadow-red-950/5 dark:shadow-2xl"
               >
                 <div className="space-y-3">
                   {off.badge && (
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[10px] font-bold uppercase tracking-wider">
+                    <span className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
                       {off.badge}
                     </span>
                   )}
-                  <h3 className="font-display font-bold text-3xl uppercase text-white">
+                  <h3 className="font-display font-bold text-3xl uppercase text-neutral-900 dark:text-white">
                     {off.title}
                   </h3>
                   {off.description && (
-                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
                       {off.description}
                     </p>
                   )}
                   {off.code && (
                     <div className="pt-2 flex items-center gap-2">
-                      <span className="text-xs text-neutral-400 uppercase">Use Promo Code:</span>
-                      <span className="font-mono text-sm font-bold text-white bg-black/60 px-3 py-1 rounded-lg border border-red-500/40">
+                      <span className="text-xs text-neutral-600 dark:text-neutral-400 uppercase font-semibold">
+                        Use Promo Code:
+                      </span>
+                      <span className="font-mono text-sm font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-black/60 px-3 py-1 rounded-lg border border-red-300 dark:border-red-500/40 shadow-sm">
                         {off.code}
                       </span>
                     </div>
@@ -89,7 +91,7 @@ export default async function OffersPage() {
                 <div className="pt-6">
                   <Link
                     href={off.ctaUrl || "/shop"}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-display text-base uppercase tracking-wider transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E31E2F] hover:bg-[#c51826] text-white font-display text-base uppercase tracking-wider transition-all shadow-md"
                   >
                     <span>{off.ctaLabel || "CLAIM OFFER"}</span>
                     <ArrowRight className="w-4 h-4" />

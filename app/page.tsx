@@ -450,17 +450,17 @@ export default async function HomePage() {
 
       {/* SECTION G: PROMOTIONAL OFFER BANNER */}
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="relative rounded-3xl bg-gradient-to-r from-red-950/60 via-[#1a0809] to-[#121212] border border-red-900/40 p-8 sm:p-12 overflow-hidden shadow-2xl">
+        <div className="relative rounded-3xl bg-gradient-to-r from-red-50/60 via-white to-red-100/40 dark:from-red-950/60 dark:via-[#1a0809] dark:to-[#121212] border border-red-200/80 dark:border-red-900/40 p-8 sm:p-12 overflow-hidden shadow-xl shadow-red-950/5 dark:shadow-2xl">
           <div className="relative z-10 max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[11px] font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[11px] font-bold uppercase tracking-wider shadow-sm">
               <Flame className="w-3.5 h-3.5" />
               <span>LIMITED OFFER</span>
             </div>
-            <h3 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-white leading-tight">
+            <h3 className="font-display font-extrabold text-4xl sm:text-5xl uppercase tracking-tight text-neutral-900 dark:text-white leading-tight">
               FLAT 15% OFF ON LEVER BELTS
             </h3>
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-              Use code <span className="font-mono font-bold text-white bg-black/50 px-2 py-0.5 rounded border border-white/20">TFSBELT15</span> when ordering via WhatsApp. Direct wholesale rates on imported 13mm and 11mm lever belts.
+            <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
+              Use code <span className="font-mono font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-black/50 px-2.5 py-0.5 rounded border border-red-300 dark:border-white/20 shadow-sm">TFSBELT15</span> when ordering via WhatsApp. Direct wholesale rates on imported 13mm and 11mm lever belts.
             </p>
             <div className="pt-2">
               <Link
