@@ -1,0 +1,60 @@
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
+import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/auth";
+
+const updateSettingsSchema = z.record(z.string(), z.string());
+
+export async function GET() {
+  try {
+    await requireAdmin();
+    const settings = await prisma.storeSetting.findMany({
+      orderBy: { key: "asc" },
+    });
+    return NextResponse.json({ settings });
+  } catch {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    await requireAdmin();
+    const json = await req.json();
+    const settingsObj = updateSettingsSchema.parse(json);
+
+    for (const [key, value] of Object.entries(settingsObj)) {
+      // Whitelist only public safe keys
+      if (
+        [
+          "store_name",
+          "store_tagline",
+          "whatsapp_number",
+          "support_email",
+          "contact_phone",
+          "store_address",
+          "hero_eyebrow",
+          "hero_headline",
+          "hero_description",
+          "wholesale_banner_headline",
+          "currency_symbol",
+          "instagram_url",
+          "facebook_url",
+        ].includes(key)
+      ) {
+        await prisma.storeSetting.upsert({
+          where: { key },
+          update: { value: String(value) },
+          create: { key, value: String(value) },
+        });
+      }
+    }
+
+    return NextResponse.json({ success: true, message: "Settings updated successfully" });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: error.issues }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Failed to update settings" }, { status: 500 });
+  }
+}

@@ -1,0 +1,181 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("ADMIN") // ADMIN, STAFF
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Category {
+  id           String    @id @default(cuid())
+  name         String
+  slug         String    @unique
+  description  String?
+  image        String?
+  displayOrder Int       @default(0)
+  isActive     Boolean   @default(true)
+  products     Product[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+model Product {
+  id                 String             @id @default(cuid())
+  name               String
+  slug               String             @unique
+  sku                String             @unique
+  brand              String?
+  shortDescription   String?
+  fullDescription    String?
+  categoryId         String
+  category           Category           @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  sellingPricePaise  Int                // Integer paise (e.g. 250000 = ₹2,500.00)
+  originalPricePaise Int?               // MRP or strike-through price
+  stock              Int                @default(0)
+  isAvailable        Boolean            @default(true)
+  isFeatured         Boolean            @default(false)
+  isNewArrival       Boolean            @default(false)
+  isOffer            Boolean            @default(false)
+  enquiryType        String             @default("BOTH") // RETAIL, WHOLESALE, BOTH
+  specifications     String?            // JSON or multi-line specs
+  seoTitle           String?
+  seoDescription     String?
+  images             ProductImage[]
+  variants           ProductVariant[]
+  enquiryItems       OrderEnquiryItem[]
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  @@index([categoryId])
+  @@index([isAvailable])
+  @@index([isFeatured])
+  @@index([isNewArrival])
+  @@index([isOffer])
+}
+
+model ProductImage {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url          String
+  alt          String?
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([productId])
+}
+
+model ProductVariant {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name        String   // e.g. "Size M", "Red / 10kg", "510g Crunchy"
+  size        String?
+  weight      String?
+  color       String?
+  sku         String?
+  pricePaise  Int?     // If null, uses product's sellingPricePaise
+  stock       Int      @default(10)
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model StoreSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  group       String   @default("general") // general, contact, whatsapp, hero
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([key])
+}
+
+model Offer {
+  id              String    @id @default(cuid())
+  title           String
+  badge           String?   // e.g. "FLAT 20% OFF", "HOT DEAL"
+  description     String?
+  code            String?
+  discountPercent Int?
+  startDate       DateTime?
+  endDate         DateTime?
+  isActive        Boolean   @default(true)
+  bannerImage     String?
+  ctaLabel        String?   @default("SHOP NOW")
+  ctaUrl          String?   @default("/shop")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([isActive])
+}
+
+model HomepageBanner {
+  id           String   @id @default(cuid())
+  title        String
+  subtitle     String?
+  tag          String?  // e.g. "COMMERCIAL EQUIPMENT", "WHOLESALE"
+  desktopImage String?
+  mobileImage  String?
+  ctaLabel     String   @default("EXPLORE NOW")
+  ctaUrl       String   @default("/shop")
+  isActive     Boolean  @default(true)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+model OrderEnquiry {
+  id               String             @id @default(cuid())
+  reference        String             @unique // e.g. TFS-ENQ-20261012-1001
+  customerName     String?
+  customerPhone    String?
+  customerNote     String?
+  status           String             @default("ENQUIRY_INITIATED") // ENQUIRY_INITIATED, CONTACTED, CONFIRMED, CANCELLED, COMPLETED
+  totalAmountPaise Int                @default(0)
+  itemsCount       Int                @default(0)
+  items            OrderEnquiryItem[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@index([reference])
+  @@index([status])
+}
+
+model OrderEnquiryItem {
+  id             String        @id @default(cuid())
+  enquiryId      String
+  enquiry        OrderEnquiry  @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  productId      String?
+  product        Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variantId      String?
+  productName    String
+  productSku     String?
+  variantName    String?
+  unitPricePaise Int
+  quantity       Int           @default(1)
+  subtotalPaise  Int
+  createdAt      DateTime      @default(now())
+
+  @@index([enquiryId])
+}
