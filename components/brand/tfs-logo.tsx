@@ -28,15 +28,12 @@ export function TFSLogoEmblem({
 
   if (logoUrl && logoUrl.trim() !== "" && !imgError) {
     return (
-      <div className={`relative ${className} flex items-center justify-center overflow-hidden`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={logoUrl}
-          alt="Store Logo"
-          className="w-full h-full object-contain max-h-full"
-          onError={() => setImgError(true)}
-        />
-      </div>
+      <img
+        src={logoUrl}
+        alt="Store Logo"
+        className={`${className} object-contain`}
+        onError={() => setImgError(true)}
+      />
     );
   }
 
@@ -86,12 +83,14 @@ export function TFSLogo({
   const { settings } = useSettings();
   const effectiveLogoUrl = propLogoUrl || settings?.store_logo_url;
   const storeName = settings?.store_name || "THE FITNESS STORE";
+  const shouldShowWordmark =
+    showWordmark && settings?.store_logo_show_wordmark !== "false";
 
   const emblemSizes = {
-    sm: effectiveLogoUrl ? "h-7 w-auto min-w-[1.75rem] max-w-[7rem]" : "w-7 h-7",
-    md: effectiveLogoUrl ? "h-9 w-auto min-w-[2.25rem] max-w-[9rem]" : "w-9 h-9",
-    lg: effectiveLogoUrl ? "h-11 w-auto min-w-[2.75rem] max-w-[12rem]" : "w-11 h-11",
-    xl: effectiveLogoUrl ? "h-14 w-auto min-w-[3.5rem] max-w-[15rem]" : "w-14 h-14",
+    sm: effectiveLogoUrl ? "h-7 w-auto min-w-[1.75rem] max-w-[9rem]" : "w-7 h-7",
+    md: effectiveLogoUrl ? "h-9 w-auto min-w-[2.25rem] max-w-[12rem]" : "w-9 h-9",
+    lg: effectiveLogoUrl ? "h-11 w-auto min-w-[2.75rem] max-w-[15rem]" : "w-11 h-11",
+    xl: effectiveLogoUrl ? "h-14 w-auto min-w-[3.5rem] max-w-[20rem]" : "w-14 h-14",
   };
 
   const wordmarkSizes = {
@@ -110,7 +109,7 @@ export function TFSLogo({
       <div className="relative flex items-center justify-center p-1 rounded bg-[#111111] border border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors shrink-0">
         <TFSLogoEmblem className={emblemSizes[size]} logoUrl={effectiveLogoUrl} />
       </div>
-      {showWordmark && (
+      {shouldShowWordmark && (
         <div className="flex flex-col leading-none">
           <span className={`font-display font-extrabold uppercase text-white ${wordmarkSizes[size]}`}>
             {firstName} {lastName && <span className="text-[#E31E2F]">{lastName}</span>}

@@ -101,6 +101,9 @@ export function SettingsProvider({
     if (initialSettings) {
       setSettings(initialSettings);
       applyThemeStyles(initialSettings);
+      try {
+        localStorage.setItem("tfs_settings_cache", JSON.stringify(initialSettings));
+      } catch {}
     }
   }, [initialSettings]);
 
@@ -108,15 +111,22 @@ export function SettingsProvider({
   useEffect(() => {
     applyThemeStyles(settings);
 
-    // Initial check from localStorage cache if present
-    try {
-      const cached = localStorage.getItem("tfs_settings_cache");
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        setSettings(parsed);
-        applyThemeStyles(parsed);
-      }
-    } catch {}
+    // If initialSettings from server is provided, keep it authoritative and sync to localStorage
+    if (initialSettings) {
+      try {
+        localStorage.setItem("tfs_settings_cache", JSON.stringify(initialSettings));
+      } catch {}
+    } else {
+      // Fallback to localStorage cache only when no server initialSettings was provided
+      try {
+        const cached = localStorage.getItem("tfs_settings_cache");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          setSettings(parsed);
+          applyThemeStyles(parsed);
+        }
+      } catch {}
+    }
 
     // Fetch fresh settings on mount
     refreshSettings();

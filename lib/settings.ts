@@ -33,12 +33,14 @@ export interface StoreSettingsMap {
   hero_featured_btn_url: string;
   marquee_line1_text: string;
   marquee_line2_text: string;
+  store_logo_show_wordmark: string;
 }
 
 export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   store_name: "THE FITNESS STORE",
   store_tagline: "Wholesaler & Retailer of Sports & Fitness Goods",
   store_logo_url: "",
+  store_logo_show_wordmark: "true",
   theme_primary_color: "#E31E2F",
   whatsapp_number: process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || "919876543210",
   support_email: "support@thefitnessstore.com",

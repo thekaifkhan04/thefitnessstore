@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { TFSLogoEmblem } from "@/components/brand/tfs-logo";
+import { TFSLogo, TFSLogoEmblem } from "@/components/brand/tfs-logo";
 import { useSettings } from "@/context/settings-context";
 import {
   Save,
@@ -70,6 +70,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
   const [settings, setSettings] = useState<Record<string, string>>(initialSettings);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [isSavingLogo, setIsSavingLogo] = useState(false);
+  const [logoSaved, setLogoSaved] = useState(false);
+  const [logoError, setLogoError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -90,6 +93,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           "theme_heading_font",
           "theme_heading_style",
           "store_name",
+          "store_logo_url",
+          "store_logo_show_wordmark",
         ].includes(key)
       ) {
         updateSettings({ [key]: value } as any);
@@ -98,12 +103,50 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
     });
   };
 
+  const handleSaveLogo = async (overrideUrl?: string, overrideWordmark?: string) => {
+    setIsSavingLogo(true);
+    setLogoError(null);
+    setLogoSaved(false);
+
+    const logoUrlToSave = overrideUrl !== undefined ? overrideUrl : (settings.store_logo_url || "");
+    const wordmarkToSave = overrideWordmark !== undefined ? overrideWordmark : (settings.store_logo_show_wordmark || "true");
+
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          store_logo_url: logoUrlToSave,
+          store_logo_show_wordmark: wordmarkToSave,
+        }),
+      });
+
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson?.error || "Failed to persist logo to database");
+      }
+
+      updateSettings({
+        store_logo_url: logoUrlToSave,
+        store_logo_show_wordmark: wordmarkToSave,
+      } as any);
+
+      setLogoSaved(true);
+      setTimeout(() => setLogoSaved(false), 3000);
+      router.refresh();
+    } catch (err: any) {
+      setLogoError(err?.message || "Failed to save logo");
+    } finally {
+      setIsSavingLogo(false);
+    }
+  };
+
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     setIsUploadingLogo(true);
-    setError(null);
+    setLogoError(null);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -115,28 +158,16 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to upload logo image");
+        throw new Error("Failed to upload logo image file");
       }
 
       const data = await res.json();
       if (data.url) {
-        const nextSettings = { ...settings, store_logo_url: data.url };
-        setSettings(nextSettings);
-        updateSettings(nextSettings as any);
-
-        // Forcibly persist immediately to the database
-        await fetch("/api/admin/settings", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(nextSettings),
-        });
-
-        setSaved(true);
-        setTimeout(() => setSaved(false), 2500);
-        router.refresh();
+        setSettings((prev) => ({ ...prev, store_logo_url: data.url }));
+        await handleSaveLogo(data.url);
       }
     } catch (err: any) {
-      setError(err?.message || "Failed to upload logo");
+      setLogoError(err?.message || "Failed to upload logo");
     } finally {
       setIsUploadingLogo(false);
       e.target.value = "";
@@ -144,20 +175,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
   };
 
   const handleResetLogo = async () => {
-    const nextSettings = { ...settings, store_logo_url: "" };
-    setSettings(nextSettings);
-    updateSettings(nextSettings as any);
-
-    try {
-      await fetch("/api/admin/settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nextSettings),
-      });
-      setSaved(true);
-      setTimeout(() => setSaved(false), 2500);
-      router.refresh();
-    } catch {}
+    setSettings((prev) => ({ ...prev, store_logo_url: "" }));
+    await handleSaveLogo("");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -260,10 +279,31 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           {/* Logo Upload & Preview */}
-          <div className="pt-2 border-t border-[#1e1e1e] space-y-3">
-            <label className="font-semibold uppercase tracking-wider text-neutral-400 block">
-              Custom Logo (PNG, JPG, SVG or WebP)
-            </label>
+          <div className="pt-2 border-t border-[#1e1e1e] space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="font-semibold uppercase tracking-wider text-neutral-400 block">
+                Custom Logo (PNG, JPG, SVG or WebP)
+              </label>
+              {settings.store_logo_url && (
+                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300">
+                  Active Custom Logo
+                </span>
+              )}
+            </div>
+
+            {logoSaved && (
+              <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-200 text-xs flex items-center gap-2.5 animate-in fade-in">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Store logo saved to database and forcefully updated across the entire website!</span>
+              </div>
+            )}
+
+            {logoError && (
+              <div className="p-3 rounded-xl bg-red-950/60 border border-red-800 text-red-200 text-xs flex items-center gap-2.5 animate-in fade-in">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <span>{logoError}</span>
+              </div>
+            )}
 
             <div className="flex items-center gap-4 p-4 rounded-xl bg-[#181818] border border-[#2a2a2a]">
               {/* Preview */}
@@ -283,7 +323,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
 
               <div className="flex-1 space-y-2">
                 <div className="text-[11px] text-neutral-400">
-                  {settings.store_logo_url ? "Using custom uploaded logo" : "Using default TFS athletic geometric emblem"}
+                  {settings.store_logo_url
+                    ? "Using custom uploaded logo"
+                    : "Using default TFS athletic geometric emblem"}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -294,7 +336,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                       type="file"
                       accept="image/*"
                       onChange={handleLogoUpload}
-                      disabled={isUploadingLogo}
+                      disabled={isUploadingLogo || isSavingLogo}
                       className="hidden"
                     />
                   </label>
@@ -302,8 +344,9 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                   {settings.store_logo_url && (
                     <button
                       type="button"
+                      disabled={isSavingLogo}
                       onClick={handleResetLogo}
-                      className="px-3 py-1.5 rounded-lg bg-[#1f1f1f] hover:bg-red-950/40 hover:text-red-400 text-neutral-400 text-xs flex items-center gap-1 transition-colors"
+                      className="px-3 py-1.5 rounded-lg bg-[#1f1f1f] hover:bg-red-950/40 hover:text-red-400 text-neutral-400 text-xs flex items-center gap-1 transition-colors cursor-pointer"
                     >
                       <RotateCcw className="w-3 h-3" />
                       <span>Reset to Default</span>
@@ -315,15 +358,80 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
 
             <div>
               <label className="text-[11px] text-neutral-400 block mb-1">
-                Or enter Logo Image URL directly:
+                Logo Image URL or Local Asset Path:
               </label>
-              <input
-                type="text"
-                placeholder="/images/brand/custom-logo.png or https://..."
-                value={settings.store_logo_url || ""}
-                onChange={(e) => handleChange("store_logo_url", e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white text-xs font-mono focus:outline-none focus:border-neutral-400"
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="/images/brand/custom-logo.png or https://..."
+                  value={settings.store_logo_url || ""}
+                  onChange={(e) => handleChange("store_logo_url", e.target.value)}
+                  className="flex-1 px-3 py-2 rounded-xl bg-[#181818] border border-[#2d2d2d] text-white text-xs font-mono focus:outline-none focus:border-neutral-400"
+                />
+                <button
+                  type="button"
+                  disabled={isSavingLogo}
+                  onClick={() => handleSaveLogo()}
+                  style={{ backgroundColor: activeColor }}
+                  className="px-4 py-2 rounded-xl text-white text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all flex items-center gap-1.5 shrink-0 disabled:opacity-50 cursor-pointer shadow-md"
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span>{isSavingLogo ? "Saving..." : "Apply & Save Logo"}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Wordmark display toggle */}
+            <div className="pt-2 border-t border-[#1e1e1e] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs font-semibold text-neutral-300 block">
+                  Wordmark Beside Logo
+                </span>
+                <span className="text-[11px] text-neutral-500">
+                  Choose whether &quot;THE FITNESS STORE&quot; text displays beside the logo
+                </span>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleChange("store_logo_show_wordmark", "true");
+                    handleSaveLogo(undefined, "true");
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                    (settings.store_logo_show_wordmark ?? "true") !== "false"
+                      ? "bg-white text-black shadow"
+                      : "bg-[#1f1f1f] text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  Show Text
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleChange("store_logo_show_wordmark", "false");
+                    handleSaveLogo(undefined, "false");
+                  }}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                    settings.store_logo_show_wordmark === "false"
+                      ? "bg-white text-black shadow"
+                      : "bg-[#1f1f1f] text-neutral-400 hover:text-white"
+                  }`}
+                >
+                  Logo Only
+                </button>
+              </div>
+            </div>
+
+            {/* Live Preview */}
+            <div className="pt-2 border-t border-[#1e1e1e] space-y-2">
+              <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                Live Header Preview (As Rendered on Website)
+              </div>
+              <div className="p-3.5 rounded-xl bg-black border border-[#222222] flex items-center justify-between overflow-x-auto">
+                <TFSLogo size="md" href="" />
+                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-mono">Navbar</span>
+              </div>
             </div>
           </div>
         </div>

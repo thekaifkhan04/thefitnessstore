@@ -4,7 +4,10 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 
-const updateSettingsSchema = z.record(z.string(), z.string());
+const updateSettingsSchema = z.record(
+  z.string(),
+  z.union([z.string(), z.number(), z.boolean(), z.null(), z.undefined()]).transform((v) => (v === null || v === undefined ? "" : String(v)))
+);
 
 export async function GET() {
   try {
@@ -31,6 +34,7 @@ export async function POST(req: NextRequest) {
           "store_name",
           "store_tagline",
           "store_logo_url",
+          "store_logo_show_wordmark",
           "theme_primary_color",
           "whatsapp_number",
           "support_email",
