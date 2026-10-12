@@ -30,6 +30,8 @@ export async function POST(req: NextRequest) {
         [
           "store_name",
           "store_tagline",
+          "store_logo_url",
+          "theme_primary_color",
           "whatsapp_number",
           "support_email",
           "contact_phone",

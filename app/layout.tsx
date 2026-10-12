@@ -54,9 +54,32 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const settings = await getStoreSettings();
+  const primaryColor = settings.theme_primary_color || "#E31E2F";
 
   return (
     <html lang="en" className={`${bebasNeue.variable} ${inter.variable} dark`}>
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              :root {
+                --brand-primary: ${primaryColor};
+                --brand-red: ${primaryColor};
+              }
+              .bg-\\[\\#E31E2F\\] { background-color: var(--brand-primary) !important; }
+              .text-\\[\\#E31E2F\\] { color: var(--brand-primary) !important; }
+              .border-\\[\\#E31E2F\\] { border-color: var(--brand-primary) !important; }
+              .hover\\:bg-\\[\\#c51826\\]:hover { filter: brightness(0.85); }
+              .hover\\:text-\\[\\#E31E2F\\]:hover { color: var(--brand-primary) !important; }
+              .hover\\:border-\\[\\#E31E2F\\]:hover { border-color: var(--brand-primary) !important; }
+              .accent-\\[\\#E31E2F\\] { accent-color: var(--brand-primary) !important; }
+              ::selection { background-color: var(--brand-primary) !important; color: #ffffff !important; }
+              .red-glow { box-shadow: 0 0 25px ${primaryColor}55 !important; }
+              .red-glow-subtle { box-shadow: 0 0 15px ${primaryColor}26 !important; }
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-[#080808] text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
         <SettingsProvider initialSettings={settings}>
           <CartProvider>

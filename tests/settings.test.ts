@@ -54,3 +54,29 @@ test("Custom store name dynamically reflects in messages and URLs", async () => 
   assert.ok(url.startsWith(`https://wa.me/${testPhone}?text=`));
   assert.ok(url.includes("TFS%20ELITE%20ATHLETICS"));
 });
+
+test("Theme primary color and custom logo URL are supported in settings", async () => {
+  const testColor = "#10B981";
+  const testLogo = "/images/brand/custom-test-logo.png";
+
+  try {
+    await prisma.storeSetting.upsert({
+      where: { key: "theme_primary_color" },
+      update: { value: testColor },
+      create: { key: "theme_primary_color", value: testColor },
+    });
+    await prisma.storeSetting.upsert({
+      where: { key: "store_logo_url" },
+      update: { value: testLogo },
+      create: { key: "store_logo_url", value: testLogo },
+    });
+
+    const settings = await getStoreSettings();
+    assert.equal(settings.theme_primary_color, testColor);
+    assert.equal(settings.store_logo_url, testLogo);
+  } finally {
+    await prisma.storeSetting.deleteMany({
+      where: { key: { in: ["theme_primary_color", "store_logo_url"] } },
+    });
+  }
+});

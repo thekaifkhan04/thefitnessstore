@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 export interface StoreSettingsMap {
   store_name: string;
   store_tagline: string;
+  store_logo_url: string;
+  theme_primary_color: string;
   whatsapp_number: string;
   support_email: string;
   contact_phone: string;
@@ -19,6 +21,8 @@ export interface StoreSettingsMap {
 export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   store_name: "THE FITNESS STORE",
   store_tagline: "Wholesaler & Retailer of Sports & Fitness Goods",
+  store_logo_url: "",
+  theme_primary_color: "#E31E2F",
   whatsapp_number: process.env.NEXT_PUBLIC_DEFAULT_WHATSAPP || "919876543210",
   support_email: "support@thefitnessstore.com",
   contact_phone: "+91 98765 43210",

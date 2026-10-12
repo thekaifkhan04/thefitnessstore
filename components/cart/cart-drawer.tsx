@@ -33,37 +33,6 @@ export function CartDrawer() {
     setIsSubmitting(true);
 
     let enquiryRef = `TFS-${Date.now().toString().slice(-6)}`;
-
-    try {
-      // Optional: record enquiry on server
-      const res = await fetch("/api/enquiries/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customerName: customerName.trim() || undefined,
-          customerNote: customerNote.trim() || undefined,
-          items: items.map((i) => ({
-            productId: i.productId,
-            variantId: i.variantId,
-            productName: i.name,
-            productSku: i.sku,
-            variantName: i.variantName,
-            quantity: i.quantity,
-            unitPricePaise: i.unitPricePaise,
-          })),
-        }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        if (data.reference) {
-          enquiryRef = data.reference;
-        }
-      }
-    } catch (e) {
-      console.warn("Server enquiry logging skipped or failed, proceeding to WhatsApp", e);
-    }
-
     setLastEnquiryRef(enquiryRef);
 
     // Format WhatsApp message

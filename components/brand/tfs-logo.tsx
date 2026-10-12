@@ -1,14 +1,34 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useSettings } from "@/context/settings-context";
 
 interface TFSLogoProps {
   size?: "sm" | "md" | "lg" | "xl";
   showWordmark?: boolean;
   className?: string;
   href?: string;
+  logoUrl?: string;
 }
 
-export function TFSLogoEmblem({ className = "w-8 h-8" }: { className?: string }) {
+export function TFSLogoEmblem({ className = "w-8 h-8", logoUrl }: { className?: string; logoUrl?: string }) {
+  if (logoUrl) {
+    return (
+      <div className={`relative ${className} flex items-center justify-center overflow-hidden`}>
+        <Image
+          src={logoUrl}
+          alt="Store Logo"
+          fill
+          sizes="64px"
+          className="object-contain"
+          priority
+        />
+      </div>
+    );
+  }
+
   return (
     <svg
       viewBox="0 0 100 90"
@@ -50,7 +70,12 @@ export function TFSLogo({
   showWordmark = true,
   className = "",
   href = "/",
+  logoUrl: propLogoUrl,
 }: TFSLogoProps) {
+  const { settings } = useSettings();
+  const effectiveLogoUrl = propLogoUrl || settings?.store_logo_url;
+  const storeName = settings?.store_name || "THE FITNESS STORE";
+
   const emblemSizes = {
     sm: "w-7 h-7",
     md: "w-9 h-9",
@@ -65,15 +90,19 @@ export function TFSLogo({
     xl: "text-3xl tracking-widest",
   };
 
+  const nameParts = storeName.split(" ");
+  const lastName = nameParts.length > 1 ? nameParts.pop() : "";
+  const firstName = nameParts.join(" ") || storeName;
+
   const content = (
     <div className={`flex items-center gap-3 select-none ${className}`}>
       <div className="relative flex items-center justify-center p-1 rounded bg-[#111111] border border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors">
-        <TFSLogoEmblem className={emblemSizes[size]} />
+        <TFSLogoEmblem className={emblemSizes[size]} logoUrl={effectiveLogoUrl} />
       </div>
       {showWordmark && (
         <div className="flex flex-col leading-none">
           <span className={`font-display font-extrabold uppercase text-white ${wordmarkSizes[size]}`}>
-            THE FITNESS <span className="text-[#E31E2F]">STORE</span>
+            {firstName} {lastName && <span className="text-[#E31E2F]">{lastName}</span>}
           </span>
           <span className="text-[9px] uppercase tracking-widest text-[#A6A6A6] font-medium mt-0.5">
             TFS · SPORTS & FITNESS
