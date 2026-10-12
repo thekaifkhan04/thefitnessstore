@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { getStoreSettings } from "@/lib/settings";
+import { prisma } from "@/lib/prisma";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -73,7 +74,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getStoreSettings();
+  const [settings, categories] = await Promise.all([
+    getStoreSettings(),
+    prisma.category.findMany({
+      where: { isActive: true },
+      orderBy: { displayOrder: "asc" },
+      select: { name: true, slug: true },
+    }),
+  ]);
   const primaryColor = settings.theme_primary_color || "#E31E2F";
   const textColor = settings.theme_text_color || "#FFFFFF";
   const mutedTextColor = settings.theme_muted_text_color || "#A6A6A6";
@@ -126,11 +134,11 @@ export default async function RootLayout({
       <body className="min-h-screen bg-[#080808] text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
         <SettingsProvider initialSettings={settings}>
           <CartProvider>
-            <Navbar />
+            <Navbar initialCategories={categories} />
             <CartDrawer />
             <FloatingWhatsApp />
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer categories={categories} />
           </CartProvider>
         </SettingsProvider>
       </body>

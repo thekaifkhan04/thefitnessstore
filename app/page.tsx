@@ -19,7 +19,7 @@ import {
   Award,
 } from "lucide-react";
 
-export const revalidate = 60; // ISR cache revalidation every minute
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   // Query data and settings from PostgreSQL
@@ -27,17 +27,19 @@ export default async function HomePage() {
     prisma.category.findMany({
       where: { isActive: true },
       orderBy: { displayOrder: "asc" },
-      take: 12,
     }),
     prisma.product.findMany({
-      where: { isAvailable: true, isFeatured: true },
+      where: { isAvailable: true },
       include: {
         category: true,
         images: { orderBy: { displayOrder: "asc" }, take: 1 },
         variants: true,
       },
       take: 8,
-      orderBy: { createdAt: "desc" },
+      orderBy: [
+        { isFeatured: "desc" },
+        { createdAt: "desc" },
+      ],
     }),
     prisma.homepageBanner.findMany({
       where: { isActive: true },

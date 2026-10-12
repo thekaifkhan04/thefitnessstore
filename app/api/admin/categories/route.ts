@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
@@ -49,6 +50,15 @@ export async function POST(req: NextRequest) {
         isActive: data.isActive,
       },
     });
+
+    try {
+      revalidatePath("/", "layout");
+      revalidatePath("/");
+      revalidatePath("/shop");
+      revalidatePath(`/shop/${category.slug}`);
+    } catch (revalErr) {
+      console.warn("Revalidation warning:", revalErr);
+    }
 
     return NextResponse.json({ success: true, category });
   } catch (error) {

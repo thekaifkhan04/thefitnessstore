@@ -244,6 +244,9 @@ export function ProductForm({
         setError(data.error || "Failed to save product.");
       } else {
         setSuccess(true);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("tfs:products-updated"));
+        }
         setTimeout(() => {
           router.push("/admin/products");
           router.refresh();

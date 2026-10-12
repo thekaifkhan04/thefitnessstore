@@ -95,6 +95,9 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
         setError(data.error || "Failed to save category.");
       } else {
         setIsModalOpen(false);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("tfs:categories-updated"));
+        }
         router.refresh();
       }
     } catch {
@@ -118,6 +121,9 @@ export function CategoryManager({ categories }: { categories: Category[] }) {
       if (!res.ok) {
         alert(data.error || "Failed to delete category.");
       } else {
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("tfs:categories-updated"));
+        }
         router.refresh();
       }
     } catch {

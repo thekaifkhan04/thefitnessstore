@@ -27,6 +27,9 @@ export function DeleteProductButton({
       });
 
       if (res.ok) {
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("tfs:products-updated"));
+        }
         router.refresh();
       } else {
         alert("Failed to delete product. Please try again.");

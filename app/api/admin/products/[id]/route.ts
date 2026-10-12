@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
@@ -133,6 +134,17 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
       return p;
     });
 
+    try {
+      revalidatePath("/", "layout");
+      revalidatePath("/");
+      revalidatePath("/shop");
+      revalidatePath(`/product/${updated.slug}`);
+      revalidatePath("/offers");
+      revalidatePath("/search");
+    } catch (revalErr) {
+      console.warn("Revalidation warning:", revalErr);
+    }
+
     return NextResponse.json({ success: true, product: updated });
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -151,6 +163,16 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     await prisma.product.delete({
       where: { id },
     });
+
+    try {
+      revalidatePath("/", "layout");
+      revalidatePath("/");
+      revalidatePath("/shop");
+      revalidatePath("/offers");
+      revalidatePath("/search");
+    } catch (revalErr) {
+      console.warn("Revalidation warning:", revalErr);
+    }
 
     return NextResponse.json({ success: true, message: "Product deleted" });
   } catch (error) {

@@ -22,7 +22,7 @@ interface CategoryLink {
   slug: string;
 }
 
-const CATEGORIES: CategoryLink[] = [
+const DEFAULT_CATEGORIES: CategoryLink[] = [
   { name: "Men's Wear", slug: "mens-wear" },
   { name: "Women's Wear", slug: "womens-wear" },
   { name: "Supplements", slug: "supplements" },
@@ -42,12 +42,46 @@ const CATEGORIES: CategoryLink[] = [
   { name: "Sports Gear", slug: "sports-gear" },
 ];
 
-export function Navbar() {
+export function Navbar({ initialCategories }: { initialCategories?: CategoryLink[] }) {
   const pathname = usePathname();
   const { itemCount, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [categoriesDropdownOpen, setCategoriesDropdownOpen] = useState(false);
+
+  const [categories, setCategories] = useState<CategoryLink[]>(
+    initialCategories && initialCategories.length > 0 ? initialCategories : DEFAULT_CATEGORIES
+  );
+
+  const refreshCategories = async () => {
+    try {
+      const res = await fetch("/api/categories", { cache: "no-store" });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.categories) && data.categories.length > 0) {
+          setCategories(data.categories.map((c: any) => ({ name: c.name, slug: c.slug })));
+        }
+      }
+    } catch {
+      // keep existing categories
+    }
+  };
+
+  useEffect(() => {
+    if (initialCategories && initialCategories.length > 0) {
+      setCategories(initialCategories);
+    }
+  }, [initialCategories]);
+
+  useEffect(() => {
+    refreshCategories();
+
+    const handleUpdate = () => refreshCategories();
+    window.addEventListener("tfs:categories-updated", handleUpdate);
+    return () => {
+      window.removeEventListener("tfs:categories-updated", handleUpdate);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,33 +137,39 @@ export function Navbar() {
               {/* Categories Dropdown */}
               <div
                 className="relative"
-                onMouseEnter={() => setCategoriesDropdownOpen(true)}
+                onMouseEnter={() => {
+                  setCategoriesDropdownOpen(true);
+                  refreshCategories();
+                }}
                 onMouseLeave={() => setCategoriesDropdownOpen(false)}
               >
                 <button
                   className="flex items-center gap-1 hover:text-[#E31E2F] transition-colors py-2 cursor-pointer"
-                  onClick={() => setCategoriesDropdownOpen((p) => !p)}
+                  onClick={() => {
+                    setCategoriesDropdownOpen((p) => !p);
+                    refreshCategories();
+                  }}
                 >
                   <span>Categories</span>
                   <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200" />
                 </button>
 
                 {categoriesDropdownOpen && (
-                  <div className="absolute top-full -left-20 w-[480px] p-4 bg-[#111111]/95 backdrop-blur-xl border border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150">
-                    {CATEGORIES.map((cat) => (
+                  <div className="absolute top-full -left-20 w-[480px] sm:w-[520px] max-h-[72vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#333] p-4 bg-[#111111]/95 backdrop-blur-xl border border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150">
+                    {categories.map((cat) => (
                       <Link
                         key={cat.slug}
                         href={`/shop/${cat.slug}`}
                         className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#1a1a1a] hover:border-l-2 hover:border-[#E31E2F] transition-all flex items-center justify-between group"
                       >
-                        <span>{cat.name}</span>
+                        <span className="truncate pr-1">{cat.name}</span>
                         <span className="text-[#E31E2F] opacity-0 group-hover:opacity-100 text-[10px]">
                           &rarr;
                         </span>
                       </Link>
                     ))}
                     <div className="col-span-2 pt-2 border-t border-[#222222] mt-1 flex justify-between items-center text-[11px] text-neutral-400">
-                      <span>Total 17 Categories</span>
+                      <span>Total {categories.length} Categories</span>
                       <Link
                         href="/shop"
                         className="text-[#E31E2F] font-semibold hover:underline"
@@ -287,16 +327,25 @@ export function Navbar() {
             </Link>
 
             <div className="pt-2">
-              <span className="text-xs text-neutral-500 tracking-widest block mb-2">
-                POPULAR CATEGORIES
-              </span>
-              <div className="grid grid-cols-2 gap-2 text-xs normal-case font-normal text-neutral-300">
-                {CATEGORIES.slice(0, 10).map((cat) => (
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-neutral-500 tracking-widest block">
+                  CATEGORIES ({categories.length})
+                </span>
+                <Link
+                  href="/shop"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[11px] text-[#E31E2F] hover:underline"
+                >
+                  View All &rarr;
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-xs normal-case font-normal text-neutral-300 max-h-60 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[#333]">
+                {categories.map((cat) => (
                   <Link
                     key={cat.slug}
                     href={`/shop/${cat.slug}`}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 rounded bg-[#131313] border border-[#222222] hover:border-[#E31E2F]"
+                    className="p-2 rounded bg-[#131313] border border-[#222222] hover:border-[#E31E2F] truncate"
                   >
                     {cat.name}
                   </Link>

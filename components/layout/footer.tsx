@@ -6,9 +6,27 @@ import { TFSLogo } from "@/components/brand/tfs-logo";
 import { MessageSquare, Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 import { useSettings } from "@/context/settings-context";
 
-export function Footer() {
+interface FooterCategory {
+  name: string;
+  slug: string;
+}
+
+const DEFAULT_FOOTER_CATEGORIES: FooterCategory[] = [
+  { name: "Men's Wear", slug: "mens-wear" },
+  { name: "Women's Wear", slug: "womens-wear" },
+  { name: "Supplements", slug: "supplements" },
+  { name: "Shakers", slug: "shakers" },
+  { name: "Dumbbells & Weights", slug: "dumbbells" },
+  { name: "Lever & Gym Belts", slug: "gym-belts" },
+  { name: "Commercial Equipment", slug: "gym-equipment" },
+  { name: "Resistance Bands", slug: "resistance-bands" },
+];
+
+export function Footer({ categories }: { categories?: FooterCategory[] }) {
   const currentYear = new Date().getFullYear();
   const { settings, getWhatsAppUrl } = useSettings();
+
+  const displayCategories = categories && categories.length > 0 ? categories : DEFAULT_FOOTER_CATEGORIES;
 
   const whatsappUrl = getWhatsAppUrl(
     `Hello ${settings.store_name}! I would like to enquire about your products and wholesale availability.`
@@ -46,14 +64,13 @@ export function Footer() {
               CATEGORIES
             </h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/shop/mens-wear" className="hover:text-[#E31E2F] transition-colors">Men's Wear</Link></li>
-              <li><Link href="/shop/womens-wear" className="hover:text-[#E31E2F] transition-colors">Women's Wear</Link></li>
-              <li><Link href="/shop/supplements" className="hover:text-[#E31E2F] transition-colors">Supplements</Link></li>
-              <li><Link href="/shop/shakers" className="hover:text-[#E31E2F] transition-colors">Shakers</Link></li>
-              <li><Link href="/shop/dumbbells" className="hover:text-[#E31E2F] transition-colors">Dumbbells & Weights</Link></li>
-              <li><Link href="/shop/gym-belts" className="hover:text-[#E31E2F] transition-colors">Lever & Gym Belts</Link></li>
-              <li><Link href="/shop/gym-equipment" className="hover:text-[#E31E2F] transition-colors">Commercial Equipment</Link></li>
-              <li><Link href="/shop/resistance-bands" className="hover:text-[#E31E2F] transition-colors">Resistance Bands</Link></li>
+              {displayCategories.slice(0, 8).map((cat) => (
+                <li key={cat.slug}>
+                  <Link href={`/shop/${cat.slug}`} className="hover:text-[#E31E2F] transition-colors">
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

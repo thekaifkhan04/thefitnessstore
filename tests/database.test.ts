@@ -32,6 +32,51 @@ test("Admin user exists and is properly seeded", async () => {
   assert.ok(admin.passwordHash.length > 20);
 });
 
+test("Newly created category and product are immediately retrievable for menu and catalog", async () => {
+  const testSlug = `test-cat-${Date.now()}`;
+  const category = await prisma.category.create({
+    data: {
+      name: "Test Dynamic Equipment",
+      slug: testSlug,
+      description: "Dynamic category created via admin",
+      isActive: true,
+      displayOrder: 999,
+    },
+  });
+
+  assert.ok(category.id);
+  assert.strictEqual(category.slug, testSlug);
+
+  // Check it appears in active category listings
+  const activeCategories = await prisma.category.findMany({
+    where: { isActive: true },
+    orderBy: { displayOrder: "asc" },
+  });
+  const foundInActive = activeCategories.some((c) => c.id === category.id);
+  assert.strictEqual(foundInActive, true);
+
+  // Add a product under this category
+  const productSlug = `test-prod-${Date.now()}`;
+  const product = await prisma.product.create({
+    data: {
+      name: "Test Dynamic Kettlebell",
+      slug: productSlug,
+      sku: `TFS-TEST-${Date.now().toString().slice(-4)}`,
+      categoryId: category.id,
+      sellingPricePaise: 250000,
+      isAvailable: true,
+      isFeatured: true,
+    },
+  });
+
+  assert.ok(product.id);
+  assert.strictEqual(product.categoryId, category.id);
+
+  // Clean up test data
+  await prisma.product.delete({ where: { id: product.id } });
+  await prisma.category.delete({ where: { id: category.id } });
+});
+
 after(async () => {
   await prisma.$disconnect();
 });
