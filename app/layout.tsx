@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
+import { RouteProgressBar } from "@/components/layout/route-progress-bar";
 import { getStoreSettings } from "@/lib/settings";
 import { prisma } from "@/lib/prisma";
 
@@ -135,6 +136,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-[#080808] text-white flex flex-col font-sans antialiased selection:bg-[#E31E2F] selection:text-white">
+        <RouteProgressBar />
         <SettingsProvider initialSettings={settings}>
           <CartProvider>
             <Navbar initialCategories={categories} />

@@ -155,29 +155,38 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
                 </button>
 
                 {categoriesDropdownOpen && (
-                  <div className="absolute top-full -left-20 w-[480px] sm:w-[520px] max-h-[72vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#333] p-4 bg-[#111111]/95 backdrop-blur-xl border border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150">
-                    {categories.map((cat) => (
-                      <Link
-                        key={cat.slug}
-                        href={`/shop/${cat.slug}`}
-                        className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#1a1a1a] hover:border-l-2 hover:border-[#E31E2F] transition-all flex items-center justify-between group"
-                      >
-                        <span className="truncate pr-1">{cat.name}</span>
-                        <span className="text-[#E31E2F] opacity-0 group-hover:opacity-100 text-[10px]">
-                          &rarr;
-                        </span>
-                      </Link>
-                    ))}
-                    <div className="col-span-2 pt-2 border-t border-[#222222] mt-1 flex justify-between items-center text-[11px] text-neutral-400">
-                      <span>Total {categories.length} Categories</span>
-                      <Link
-                        href="/shop"
-                        className="text-[#E31E2F] font-semibold hover:underline"
-                      >
-                        View Full Catalogue &rarr;
-                      </Link>
+                  <>
+                    {/* Click-away backdrop to close dropdown */}
+                    <div
+                      className="fixed inset-0 z-10"
+                      onClick={() => setCategoriesDropdownOpen(false)}
+                    />
+                    <div className="absolute top-full -left-20 w-[480px] sm:w-[520px] max-h-[72vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#333] p-4 bg-[#111111]/95 backdrop-blur-xl border border-[#2b2b2b] rounded-xl shadow-2xl grid grid-cols-2 gap-2 animate-in fade-in slide-in-from-top-2 duration-150 z-20">
+                      {categories.map((cat) => (
+                        <Link
+                          key={cat.slug}
+                          href={`/shop/${cat.slug}`}
+                          onClick={() => setCategoriesDropdownOpen(false)}
+                          className="px-3 py-2 rounded-lg text-xs font-medium text-neutral-300 hover:text-white hover:bg-[#1a1a1a] hover:border-l-2 hover:border-[#E31E2F] transition-all flex items-center justify-between group"
+                        >
+                          <span className="truncate pr-1">{cat.name}</span>
+                          <span className="text-[#E31E2F] opacity-0 group-hover:opacity-100 text-[10px]">
+                            &rarr;
+                          </span>
+                        </Link>
+                      ))}
+                      <div className="col-span-2 pt-2 border-t border-[#222222] mt-1 flex justify-between items-center text-[11px] text-neutral-400">
+                        <span>Total {categories.length} Categories</span>
+                        <Link
+                          href="/shop"
+                          onClick={() => setCategoriesDropdownOpen(false)}
+                          className="text-[#E31E2F] font-semibold hover:underline"
+                        >
+                          View Full Catalogue &rarr;
+                        </Link>
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
 
