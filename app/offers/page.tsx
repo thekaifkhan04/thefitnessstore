@@ -60,15 +60,15 @@ export default async function OffersPage() {
             {offers.map((off) => (
               <div
                 key={off.id}
-                className="rounded-3xl bg-gradient-to-br from-red-50/60 via-white to-red-100/40 dark:from-[#1a0809] dark:to-[#121212] border border-red-200/80 dark:border-red-900/40 p-8 flex flex-col justify-between shadow-xl shadow-red-950/5 dark:shadow-2xl"
+                className="rounded-3xl bg-gradient-to-br from-red-50/80 to-white dark:from-[#1c0809] dark:to-[#111111] border border-red-200/80 dark:border-red-900/50 p-8 flex flex-col justify-between shadow-xl shadow-red-950/5 dark:shadow-2xl"
               >
                 <div className="space-y-3">
                   {off.badge && (
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white text-[10px] font-bold uppercase tracking-wider shadow-sm">
+                    <span className="inline-block px-3 py-1 rounded-full bg-[#E31E2F] text-white font-bold text-[10px] uppercase tracking-wider shadow-sm">
                       {off.badge}
                     </span>
                   )}
-                  <h3 className="font-display font-bold text-3xl uppercase text-neutral-900 dark:text-white">
+                  <h3 className="font-display font-bold text-3xl uppercase text-neutral-900 dark:text-white tracking-wide">
                     {off.title}
                   </h3>
                   {off.description && (
@@ -78,10 +78,10 @@ export default async function OffersPage() {
                   )}
                   {off.code && (
                     <div className="pt-2 flex items-center gap-2">
-                      <span className="text-xs text-neutral-600 dark:text-neutral-400 uppercase font-semibold">
+                      <span className="text-xs text-neutral-500 dark:text-neutral-400 uppercase font-semibold">
                         Use Promo Code:
                       </span>
-                      <span className="font-mono text-sm font-bold text-neutral-900 dark:text-white bg-neutral-100 dark:bg-black/60 px-3 py-1 rounded-lg border border-red-300 dark:border-red-500/40 shadow-sm">
+                      <span className="font-mono text-sm font-bold text-neutral-900 dark:text-white bg-white dark:bg-black/80 px-3 py-1 rounded-lg border border-red-200 dark:border-red-500/50 shadow-sm">
                         {off.code}
                       </span>
                     </div>

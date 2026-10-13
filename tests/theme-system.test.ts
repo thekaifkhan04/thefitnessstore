@@ -213,3 +213,34 @@ test("Theme System - Admin Settings form supports dual-theme text and protects l
     "SettingsContext applyThemeStyles must remove inline text override in light mode"
   );
 });
+
+test("Theme System - Deals and Offers promotional banners support dual-theme without gradient stops bleeding", () => {
+  const offersPageContent = fs.readFileSync(path.join(process.cwd(), "app/offers/page.tsx"), "utf-8");
+  const homePageContent = fs.readFileSync(path.join(process.cwd(), "app/page.tsx"), "utf-8");
+
+  // In offers page
+  assert.ok(
+    !offersPageContent.includes("via-white"),
+    "Offers page banners must NOT use via-white as it bleeds into dark theme"
+  );
+  assert.ok(
+    offersPageContent.includes("text-neutral-900 dark:text-white"),
+    "Offers page titles must use dual-theme text classes"
+  );
+  assert.ok(
+    offersPageContent.includes("text-neutral-600 dark:text-neutral-300"),
+    "Offers page description must use dual-theme text classes"
+  );
+  assert.ok(
+    offersPageContent.includes("dark:from-[#1c0809]") && offersPageContent.includes("dark:to-[#111111]"),
+    "Offers page banners must have clean dark gradient stops"
+  );
+
+  // In home page Section G
+  const sectionGMatch = homePageContent.match(/SECTION G: PROMOTIONAL OFFER BANNER[\s\S]*?<\/section>/);
+  assert.ok(
+    sectionGMatch && !sectionGMatch[0].includes("via-white"),
+    "Home page Section G promotional banner must NOT use via-white"
+  );
+});
+
