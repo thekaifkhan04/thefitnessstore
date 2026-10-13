@@ -25,7 +25,8 @@ export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
     const json = await req.json();
-    const settingsObj = updateSettingsSchema.parse(json);
+    const rawObj = json && typeof json.settings === "object" && json.settings !== null ? json.settings : json;
+    const settingsObj = updateSettingsSchema.parse(rawObj);
 
     for (const [key, value] of Object.entries(settingsObj)) {
       // Whitelist only public safe keys

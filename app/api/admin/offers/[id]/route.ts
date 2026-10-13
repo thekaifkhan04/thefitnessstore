@@ -32,6 +32,9 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json({ success: true, offer: updated });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
@@ -49,7 +52,10 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     });
 
     return NextResponse.json({ success: true, message: "Offer deleted" });
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     return NextResponse.json({ error: "Failed to delete offer" }, { status: 500 });
   }
 }

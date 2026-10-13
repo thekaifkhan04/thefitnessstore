@@ -31,11 +31,18 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json({ success: true, enquiry: updated });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
     return NextResponse.json({ error: "Failed to update enquiry status" }, { status: 500 });
   }
+}
+
+export async function PATCH(req: NextRequest, context: RouteParams) {
+  return PUT(req, context);
 }
 
 export async function DELETE(req: NextRequest, { params }: RouteParams) {
@@ -48,7 +55,10 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     });
 
     return NextResponse.json({ success: true, message: "Enquiry deleted" });
-  } catch {
+  } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     return NextResponse.json({ error: "Failed to delete enquiry" }, { status: 500 });
   }
 }

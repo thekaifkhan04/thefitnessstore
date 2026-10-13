@@ -147,6 +147,9 @@ export async function PUT(req: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json({ success: true, product: updated });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
@@ -176,6 +179,9 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
 
     return NextResponse.json({ success: true, message: "Product deleted" });
   } catch (error) {
+    if (error instanceof Error && error.message === "UNAUTHORIZED") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     console.error("Delete product failed", error);
     return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
   }
