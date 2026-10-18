@@ -251,6 +251,7 @@ export default async function HomePage() {
           settings.marquee_line2_text ||
           "THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT"
         }
+        textColor={settings.marquee_text_color}
       />
 
       {/* SECTION D: SHOP BY CATEGORY */}

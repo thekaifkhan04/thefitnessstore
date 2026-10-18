@@ -33,6 +33,7 @@ export interface StoreSettingsMap {
   hero_featured_btn_url: string;
   marquee_line1_text: string;
   marquee_line2_text: string;
+  marquee_text_color: string;
   store_logo_show_wordmark: string;
 }
 
@@ -71,6 +72,7 @@ export const DEFAULT_STORE_SETTINGS: StoreSettingsMap = {
   hero_featured_btn_url: "/shop/gym-belts",
   marquee_line1_text: "THE FITNESS STORE",
   marquee_line2_text: "THE FITNESS STORE · BUILT FOR EVERY REP · PERFORMANCE EQUIPMENT",
+  marquee_text_color: "",
 };
 
 /**

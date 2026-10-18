@@ -10,6 +10,7 @@ const offerSchema = z.object({
   code: z.string().optional().nullable(),
   discountPercent: z.number().int().optional().nullable(),
   isActive: z.boolean().default(true),
+  bannerImage: z.string().optional().nullable(),
   ctaLabel: z.string().default("SHOP NOW"),
   ctaUrl: z.string().default("/shop"),
 });
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest) {
         code: data.code,
         discountPercent: data.discountPercent,
         isActive: data.isActive,
+        bannerImage: data.bannerImage,
         ctaLabel: data.ctaLabel,
         ctaUrl: data.ctaUrl,
       },

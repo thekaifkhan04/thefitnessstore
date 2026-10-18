@@ -65,6 +65,7 @@ export async function POST(req: NextRequest) {
           "hero_featured_btn_url",
           "marquee_line1_text",
           "marquee_line2_text",
+          "marquee_text_color",
         ].includes(key)
       ) {
         await prisma.storeSetting.upsert({

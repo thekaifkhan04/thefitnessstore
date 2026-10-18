@@ -87,17 +87,17 @@ export function TFSLogo({
     showWordmark && settings?.store_logo_show_wordmark !== "false";
 
   const emblemSizes = {
-    sm: effectiveLogoUrl ? "h-7 w-auto min-w-[1.75rem] max-w-[9rem]" : "w-7 h-7",
-    md: effectiveLogoUrl ? "h-9 w-auto min-w-[2.25rem] max-w-[12rem]" : "w-9 h-9",
-    lg: effectiveLogoUrl ? "h-11 w-auto min-w-[2.75rem] max-w-[15rem]" : "w-11 h-11",
-    xl: effectiveLogoUrl ? "h-14 w-auto min-w-[3.5rem] max-w-[20rem]" : "w-14 h-14",
+    sm: effectiveLogoUrl ? "h-6 sm:h-7 w-auto min-w-[1.5rem] max-w-[5rem] sm:max-w-[9rem]" : "w-6 h-6 sm:w-7 sm:h-7",
+    md: effectiveLogoUrl ? "h-7 sm:h-9 w-auto min-w-[1.75rem] max-w-[6.5rem] sm:max-w-[12rem]" : "w-7 h-7 sm:w-9 sm:h-9",
+    lg: effectiveLogoUrl ? "h-9 sm:h-11 w-auto min-w-[2.25rem] max-w-[10rem] sm:max-w-[15rem]" : "w-9 h-9 sm:w-11 sm:h-11",
+    xl: effectiveLogoUrl ? "h-12 sm:h-14 w-auto min-w-[3rem] max-w-[14rem] sm:max-w-[20rem]" : "w-12 h-12 sm:w-14 sm:h-14",
   };
 
   const wordmarkSizes = {
-    sm: "text-base tracking-wider",
-    md: "text-xl tracking-wider",
-    lg: "text-2xl tracking-wider",
-    xl: "text-3xl tracking-widest",
+    sm: "text-sm sm:text-base tracking-wider whitespace-nowrap",
+    md: "text-[15px] sm:text-xl tracking-tight sm:tracking-wider whitespace-nowrap",
+    lg: "text-xl sm:text-2xl tracking-wider whitespace-nowrap",
+    xl: "text-2xl sm:text-3xl tracking-widest whitespace-nowrap",
   };
 
   const nameParts = storeName.split(" ");
@@ -105,16 +105,16 @@ export function TFSLogo({
   const firstName = nameParts.join(" ") || storeName;
 
   const content = (
-    <div className={`flex items-center gap-3 select-none ${className}`}>
+    <div className={`flex items-center gap-2 sm:gap-3 select-none shrink-0 ${className}`}>
       <div className="relative flex items-center justify-center p-1 rounded bg-white dark:bg-[#111111] border border-neutral-200 dark:border-[#262626] shadow-sm group-hover:border-[#E31E2F] transition-colors shrink-0">
         <TFSLogoEmblem className={emblemSizes[size]} logoUrl={effectiveLogoUrl} />
       </div>
       {shouldShowWordmark && (
-        <div className="flex flex-col leading-none">
+        <div className="flex flex-col justify-center leading-none min-w-0">
           <span className={`font-display font-extrabold uppercase text-neutral-900 dark:text-white ${wordmarkSizes[size]}`}>
             {firstName} {lastName && <span className="text-[#E31E2F]">{lastName}</span>}
           </span>
-          <span className="text-[9px] uppercase tracking-widest text-neutral-500 dark:text-[#A6A6A6] font-medium mt-0.5">
+          <span className="text-[8px] sm:text-[9px] uppercase tracking-wider sm:tracking-widest text-neutral-500 dark:text-[#A6A6A6] font-medium mt-0.5 whitespace-nowrap">
             TFS · SPORTS & FITNESS
           </span>
         </div>

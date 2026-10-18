@@ -179,3 +179,14 @@ model OrderEnquiryItem {
 
   @@index([enquiryId])
 }
+
+model ImageAsset {
+  id        String   @id @default(cuid())
+  data      Bytes
+  mimeType  String
+  size      Int
+  filename  String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

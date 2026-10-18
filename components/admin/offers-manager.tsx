@@ -2,7 +2,20 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Edit3, Trash2, Flame, X, Check, AlertCircle } from "lucide-react";
+import Image from "next/image";
+import {
+  Plus,
+  Edit3,
+  Trash2,
+  Flame,
+  X,
+  Check,
+  AlertCircle,
+  Upload,
+  RotateCcw,
+  ImageIcon,
+  Loader2,
+} from "lucide-react";
 
 interface Offer {
   id: string;
@@ -12,6 +25,7 @@ interface Offer {
   code: string | null;
   discountPercent: number | null;
   isActive: boolean;
+  bannerImage: string | null;
   ctaLabel: string | null;
   ctaUrl: string | null;
 }
@@ -26,12 +40,47 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
   const [description, setDescription] = useState("");
   const [code, setCode] = useState("");
   const [discountPercent, setDiscountPercent] = useState<number | "">("");
+  const [bannerImage, setBannerImage] = useState("");
   const [ctaLabel, setCtaLabel] = useState("SHOP NOW");
   const [ctaUrl, setCtaUrl] = useState("/shop");
   const [isActive, setIsActive] = useState(true);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingImage(true);
+    setUploadError(null);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to upload promotional banner image");
+      }
+
+      if (data.url) {
+        setBannerImage(data.url);
+      }
+    } catch (err: any) {
+      setUploadError(err?.message || "Failed to upload banner image");
+    } finally {
+      setIsUploadingImage(false);
+      e.target.value = "";
+    }
+  };
 
   const openCreateModal = () => {
     setEditingOffer(null);
@@ -40,10 +89,12 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
     setDescription("");
     setCode("");
     setDiscountPercent("");
+    setBannerImage("");
     setCtaLabel("SHOP NOW");
     setCtaUrl("/shop");
     setIsActive(true);
     setError(null);
+    setUploadError(null);
     setIsModalOpen(true);
   };
 
@@ -54,10 +105,12 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
     setDescription(off.description || "");
     setCode(off.code || "");
     setDiscountPercent(off.discountPercent ?? "");
+    setBannerImage(off.bannerImage || "");
     setCtaLabel(off.ctaLabel || "SHOP NOW");
     setCtaUrl(off.ctaUrl || "/shop");
     setIsActive(off.isActive);
     setError(null);
+    setUploadError(null);
     setIsModalOpen(true);
   };
 
@@ -73,6 +126,7 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
         description: description.trim() || null,
         code: code.trim() || null,
         discountPercent: discountPercent === "" ? null : Number(discountPercent),
+        bannerImage: bannerImage.trim() || null,
         ctaLabel,
         ctaUrl,
         isActive,
@@ -279,6 +333,83 @@ export function OffersManager({ offers }: { offers: Offer[] }) {
                   placeholder="Details of the promotion and WhatsApp ordering instructions..."
                   className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
                 />
+              </div>
+
+              {/* Promotional Banner Image Upload & Preview */}
+              <div className="space-y-2 p-3.5 rounded-2xl bg-neutral-50 dark:bg-[#161616] border border-neutral-200 dark:border-[#262626]">
+                <div className="flex items-center justify-between">
+                  <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 block text-[11px]">
+                    Banner Graphic / Poster Image (Optional)
+                  </label>
+                  {bannerImage && (
+                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                      Graphic Attached
+                    </span>
+                  )}
+                </div>
+
+                {uploadError && (
+                  <div className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                    <span>{uploadError}</span>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-3">
+                  <div className="relative w-16 h-16 rounded-xl bg-white dark:bg-[#1a1a1a] border border-neutral-300 dark:border-[#333] overflow-hidden shrink-0 flex items-center justify-center shadow-inner">
+                    {bannerImage ? (
+                      <Image
+                        src={bannerImage}
+                        alt="Offer preview"
+                        fill
+                        sizes="64px"
+                        className="object-contain p-1"
+                      />
+                    ) : (
+                      <ImageIcon className="w-6 h-6 text-neutral-400 dark:text-neutral-600" />
+                    )}
+                  </div>
+
+                  <div className="flex-1 space-y-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-[#252525] dark:hover:bg-[#303030] border border-neutral-300 dark:border-[#383838] text-xs font-semibold text-neutral-800 dark:text-white flex items-center gap-1.5 transition-colors">
+                        {isUploadingImage ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-[#E31E2F]" />
+                        ) : (
+                          <Upload className="w-3.5 h-3.5" />
+                        )}
+                        <span>{isUploadingImage ? "Uploading..." : bannerImage ? "Replace Image" : "Upload Banner"}</span>
+                        <input
+                          type="file"
+                          accept=".jpg,.jpeg,.png,.webp,.svg,.gif,image/*"
+                          onChange={handleBannerUpload}
+                          disabled={isUploadingImage || isSubmitting}
+                          className="hidden"
+                        />
+                      </label>
+
+                      {bannerImage && (
+                        <button
+                          type="button"
+                          onClick={() => setBannerImage("")}
+                          disabled={isUploadingImage}
+                          className="px-2.5 py-1.5 rounded-lg bg-neutral-100 hover:bg-red-50 hover:text-red-600 dark:bg-[#202020] dark:hover:bg-red-950/40 dark:hover:text-red-400 text-neutral-600 dark:text-neutral-400 text-xs flex items-center gap-1 transition-colors cursor-pointer"
+                        >
+                          <RotateCcw className="w-3 h-3" />
+                          <span>Remove</span>
+                        </button>
+                      )}
+                    </div>
+
+                    <input
+                      type="text"
+                      value={bannerImage}
+                      onChange={(e) => setBannerImage(e.target.value)}
+                      placeholder="/images/... or /api/images/..."
+                      className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-[#1a1a1a] border border-neutral-300 dark:border-[#2e2e2e] text-neutral-900 dark:text-white font-mono text-[11px] focus:outline-none focus:border-[#E31E2F]"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">

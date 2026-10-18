@@ -15,6 +15,7 @@ import {
   Dumbbell,
   ShieldCheck,
   Flame,
+  Palette,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 
@@ -48,6 +49,7 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
   const { itemCount, openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileThemeOpen, setMobileThemeOpen] = useState(false);
   const [categoriesDropdownOpen, setCategoriesDropdownOpen] = useState(false);
 
   const [categories, setCategories] = useState<CategoryLink[]>(
@@ -95,8 +97,22 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setMobileThemeOpen(false);
     setCategoriesDropdownOpen(false);
   }, [pathname]);
+
+  // Close menus and dropdowns on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        setMobileThemeOpen(false);
+        setCategoriesDropdownOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const isAdminRoute = pathname?.startsWith("/admin");
   if (isAdminRoute) return null; // Admin has its own dedicated shell
@@ -107,11 +123,11 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? "bg-white/90 dark:bg-[#080808]/90 backdrop-blur-md border-b border-neutral-200 dark:border-[#222222] py-3 shadow-sm dark:shadow-xl"
-            : "bg-gradient-to-b from-white/90 via-white/50 dark:from-black/80 dark:via-black/40 to-transparent py-4.5"
+            : "bg-gradient-to-b from-white/90 via-white/50 dark:from-black/80 dark:via-black/40 to-transparent py-3.5 sm:py-4.5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-1 sm:gap-4">
             {/* Brand Logo */}
             <TFSLogo size="md" href="/" />
 
@@ -248,28 +264,28 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
             </nav>
 
             {/* Right Side Actions: ThemeToggle, Search, Cart, Mobile Menu */}
-            <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="flex items-center space-x-1 sm:space-x-2.5 shrink-0">
               {/* Theme Selector Toggle */}
               <ThemeToggle align="right" />
 
               {/* Search Button */}
               <Link
                 href="/search"
-                className="p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
+                className="p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
                 aria-label="Search products"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
               </Link>
 
               {/* Cart Trigger */}
               <button
                 onClick={openCart}
-                className="relative p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
+                className="relative p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
                 aria-label="Shopping bag"
               >
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#080808] animate-in zoom-in-50">
+                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[10px] font-bold w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#080808] animate-in zoom-in-50">
                     {itemCount}
                   </span>
                 )}
@@ -277,14 +293,20 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
 
               {/* Mobile Menu Toggle */}
               <button
-                onClick={() => setMobileMenuOpen((p) => !p)}
-                className="lg:hidden p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
+                onClick={() => {
+                  setMobileMenuOpen((p) => {
+                    if (!p) setMobileThemeOpen(false); // Appearance settings remain closed by default
+                    return !p;
+                  });
+                }}
+                className="lg:hidden p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
                 aria-label="Toggle mobile menu"
+                aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
                 )}
               </button>
             </div>
@@ -296,12 +318,36 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-30 lg:hidden pt-20 bg-white/98 dark:bg-[#080808]/98 backdrop-blur-2xl flex flex-col p-6 overflow-y-auto border-b border-neutral-200 dark:border-[#222222]">
           <div className="flex flex-col space-y-4 text-base font-semibold uppercase tracking-wider text-neutral-800 dark:text-neutral-200">
-            {/* Mobile Theme Switcher Bar */}
-            <div className="pb-4 border-b border-neutral-200 dark:border-[#1c1c1c] flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
-                Appearance
-              </span>
-              <ThemeToggle variant="segmented" />
+            {/* Mobile Theme / Appearance Settings - Closed by default */}
+            <div className="pb-3 border-b border-neutral-200 dark:border-[#1c1c1c]">
+              <button
+                type="button"
+                onClick={() => setMobileThemeOpen((prev) => !prev)}
+                className="w-full flex items-center justify-between py-1.5 text-xs font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+                aria-expanded={mobileThemeOpen}
+                aria-label="Toggle website appearance and theme settings"
+              >
+                <div className="flex items-center gap-2">
+                  <Palette className="w-4 h-4 text-[#E31E2F]" />
+                  <span>Website Appearance</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-neutral-400 capitalize font-medium">
+                    {mobileThemeOpen ? "Hide" : "Customize"}
+                  </span>
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      mobileThemeOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </div>
+              </button>
+
+              {mobileThemeOpen && (
+                <div className="pt-2.5 pb-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <ThemeToggle variant="segmented" />
+                </div>
+              )}
             </div>
 
             <Link

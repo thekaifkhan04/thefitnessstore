@@ -6,9 +6,10 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 interface ScrollMarqueeProps {
   line1Text: string;
   line2Text: string;
+  textColor?: string;
 }
 
-export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
+export function ScrollMarquee({ line1Text, line2Text, textColor }: ScrollMarqueeProps) {
   const containerRef = useRef<HTMLElement>(null);
 
   // Hook into viewport scroll progress relative to this section
@@ -43,7 +44,10 @@ export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="inline-flex items-center shrink-0">
-              <span className="hover:text-[var(--brand-primary,#E31E2F)] transition-colors">
+              <span
+                style={textColor ? { color: textColor } : undefined}
+                className="hover:text-[var(--brand-primary,#E31E2F)] transition-colors"
+              >
                 {line1Text}
               </span>
               <span
@@ -65,7 +69,10 @@ export function ScrollMarquee({ line1Text, line2Text }: ScrollMarqueeProps) {
         >
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="inline-flex items-center shrink-0">
-              <span className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+              <span
+                style={textColor ? { color: textColor } : undefined}
+                className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              >
                 {line2Text}
               </span>
               <span

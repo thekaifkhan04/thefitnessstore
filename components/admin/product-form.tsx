@@ -150,6 +150,7 @@ export function ProductForm({
       alert("Error uploading image");
     } finally {
       setIsUploading(false);
+      e.target.value = "";
     }
   };
 

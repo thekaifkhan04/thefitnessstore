@@ -10,6 +10,7 @@ const updateOfferSchema = z.object({
   code: z.string().optional().nullable(),
   discountPercent: z.number().int().optional().nullable(),
   isActive: z.boolean().default(true),
+  bannerImage: z.string().optional().nullable(),
   ctaLabel: z.string().default("SHOP NOW"),
   ctaUrl: z.string().default("/shop"),
 });

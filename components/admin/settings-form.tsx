@@ -159,7 +159,8 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to upload logo image file");
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData?.error || "Failed to upload logo image file");
       }
 
       const data = await res.json();
@@ -350,10 +351,10 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
                 <div className="flex flex-wrap gap-2">
                   <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-neutral-200 hover:bg-neutral-300 dark:bg-[#242424] dark:hover:bg-[#303030] border border-neutral-300 dark:border-[#3a3a3a] text-xs font-semibold text-neutral-800 dark:text-white flex items-center gap-1.5 transition-colors">
                     <Upload className="w-3.5 h-3.5" />
-                    <span>{isUploadingLogo ? "Uploading..." : "Upload Logo File"}</span>
+                    <span>{isUploadingLogo ? "Uploading..." : settings.store_logo_url ? "Replace Logo" : "Upload Logo File"}</span>
                     <input
                       type="file"
-                      accept="image/*"
+                      accept=".jpg,.jpeg,.png,.webp,.svg,.gif,image/*"
                       onChange={handleLogoUpload}
                       disabled={isUploadingLogo || isSavingLogo}
                       className="hidden"
@@ -1081,6 +1082,56 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
             />
             <p className="text-[10px] text-neutral-500 dark:text-neutral-400 mt-1">
               Rendered in stylized outline typographic stroke gliding in parallel.
+            </p>
+          </div>
+
+          {/* Marquee Text Color Customizer */}
+          <div className="pt-3 border-t border-neutral-200 dark:border-[#1e1e1e] space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block text-xs">
+                Marquee Text Color
+              </label>
+              {settings.marquee_text_color && (
+                <button
+                  type="button"
+                  onClick={() => handleChange("marquee_text_color", "")}
+                  className="text-[11px] text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white flex items-center gap-1 hover:underline cursor-pointer"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Restore Default Color</span>
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <input
+                type="color"
+                value={settings.marquee_text_color || "#FFFFFF"}
+                onChange={(e) => handleChange("marquee_text_color", e.target.value)}
+                className="w-10 h-10 rounded-xl bg-transparent border border-neutral-300 dark:border-[#333] cursor-pointer p-0.5"
+                title="Choose Marquee Text Color"
+              />
+              <input
+                type="text"
+                value={settings.marquee_text_color || ""}
+                onChange={(e) => {
+                  const val = e.target.value.trim();
+                  handleChange("marquee_text_color", val);
+                }}
+                placeholder="#FFFFFF (Default: adaptive)"
+                className="w-36 px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white font-mono uppercase text-xs focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
+              />
+              <div
+                className="px-3 py-2 rounded-xl border border-neutral-200 dark:border-[#2d2d2d] bg-neutral-100 dark:bg-[#181818] text-xs font-bold font-display uppercase tracking-wider shrink-0 flex items-center gap-2 shadow-inner"
+              >
+                <span className="text-[10px] text-neutral-400 uppercase font-sans font-normal">Preview:</span>
+                <span style={{ color: settings.marquee_text_color || undefined }}>
+                  {settings.marquee_line1_text || "THE FITNESS STORE"}
+                </span>
+              </div>
+            </div>
+            <p className="text-[10px] text-neutral-500 dark:text-neutral-400">
+              Pick any custom color or type a valid HEX code. Click &quot;Restore Default Color&quot; to revert to automatic adaptive colors.
             </p>
           </div>
         </div>
