@@ -79,13 +79,14 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Bold Athletic Headlines */}
             <div className="lg:col-span-8 space-y-6">
-              {/* Eyebrow with red accent bar */}
-              <div className="inline-flex items-center gap-3">
-                <div className="w-10 h-1 bg-[#E31E2F] rounded-full" />
-                <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#E31E2F]">
-                  {settings.hero_eyebrow || "BUILT FOR EVERY REP · RETAIL & WHOLESALE"}
-                </span>
-              </div>
+              {/* Homepage Tagline (Admin Controlled) */}
+              {settings.hero_eyebrow && settings.hero_eyebrow.trim() !== "" ? (
+                <div className="inline-flex items-center max-w-full">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#E31E2F] break-words">
+                    {settings.hero_eyebrow}
+                  </span>
+                </div>
+              ) : null}
 
               {/* Oversized Athletic Headline */}
               <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.92] text-neutral-900 dark:text-white">

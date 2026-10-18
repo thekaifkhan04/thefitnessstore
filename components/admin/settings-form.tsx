@@ -96,6 +96,7 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           "store_name",
           "store_logo_url",
           "store_logo_show_wordmark",
+          "hero_eyebrow",
         ].includes(key)
       ) {
         updateSettings({ [key]: value } as any);
@@ -287,15 +288,41 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </div>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
-              Tagline
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block">
+                Store Subtitle (Footer & SEO)
+              </label>
+              <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-medium">Footer / Meta</span>
+            </div>
             <input
               type="text"
-              value={settings.store_tagline || "Wholesaler & Retailer of Sports & Fitness Goods"}
+              value={settings.store_tagline ?? ""}
               onChange={(e) => handleChange("store_tagline", e.target.value)}
+              placeholder="Wholesaler & Retailer of Sports & Fitness Goods"
               className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
             />
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1">
+              Used in website footer description, meta tags, and contact info.
+            </p>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <label className="font-semibold uppercase tracking-wider text-[#E31E2F] dark:text-[#ff4d5a] block font-bold">
+                Homepage Tagline / Eyebrow Text
+              </label>
+              <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">Hero Top Banner</span>
+            </div>
+            <input
+              type="text"
+              value={settings.hero_eyebrow ?? ""}
+              onChange={(e) => handleChange("hero_eyebrow", e.target.value)}
+              placeholder="e.g. BUILT FOR EVERY REP · RETAIL & WHOLESALE"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
+            />
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1">
+              The red athletic tagline displayed at the top of the homepage hero banner. Leave empty to hide.
+            </p>
           </div>
 
           {/* Logo Upload & Preview */}
@@ -812,15 +839,22 @@ export function SettingsForm({ initialSettings }: SettingsFormProps) {
           </h2>
 
           <div>
-            <label className="font-semibold uppercase tracking-wider text-neutral-700 dark:text-neutral-400 block mb-1">
-              Hero Eyebrow
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="font-semibold uppercase tracking-wider text-[#E31E2F] dark:text-[#ff4d5a] block font-bold">
+                Homepage Tagline / Hero Eyebrow Text
+              </label>
+              <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">Red Top Tagline</span>
+            </div>
             <input
               type="text"
-              value={settings.hero_eyebrow || "BUILT FOR EVERY REP"}
+              value={settings.hero_eyebrow ?? ""}
               onChange={(e) => handleChange("hero_eyebrow", e.target.value)}
-              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-neutral-500 dark:focus:border-neutral-400"
+              placeholder="e.g. BUILT FOR EVERY REP · RETAIL & WHOLESALE"
+              className="w-full px-3 py-2 rounded-xl bg-neutral-50 dark:bg-[#181818] border border-neutral-300 dark:border-[#2d2d2d] text-neutral-900 dark:text-white focus:outline-none focus:border-[#E31E2F]"
             />
+            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1">
+              The red athletic tagline displayed above the main headline on the homepage. Leave empty to hide.
+            </p>
           </div>
 
           <div>

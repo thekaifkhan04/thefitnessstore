@@ -126,7 +126,7 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
             : "bg-gradient-to-b from-white/90 via-white/50 dark:from-black/80 dark:via-black/40 to-transparent py-3.5 sm:py-4.5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-2.5 min-[360px]:px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-1 sm:gap-4">
             {/* Brand Logo */}
             <TFSLogo size="md" href="/" />
@@ -264,28 +264,28 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
             </nav>
 
             {/* Right Side Actions: ThemeToggle, Search, Cart, Mobile Menu */}
-            <div className="flex items-center space-x-1 sm:space-x-2.5 shrink-0">
+            <div className="flex items-center space-x-0.5 min-[360px]:space-x-1 sm:space-x-2.5 shrink-0">
               {/* Theme Selector Toggle */}
               <ThemeToggle align="right" />
 
               {/* Search Button */}
               <Link
                 href="/search"
-                className="p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
+                className="p-1.5 min-[360px]:p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors"
                 aria-label="Search products"
               >
-                <Search className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                <Search className="w-4 h-4 min-[360px]:w-4.5 min-[360px]:h-4.5 sm:w-5 sm:h-5" />
               </Link>
 
               {/* Cart Trigger */}
               <button
                 onClick={openCart}
-                className="relative p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
+                className="relative p-1.5 min-[360px]:p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
                 aria-label="Shopping bag"
               >
-                <ShoppingBag className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                <ShoppingBag className="w-4 h-4 min-[360px]:w-4.5 min-[360px]:h-4.5 sm:w-5 sm:h-5" />
                 {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[10px] font-bold w-4.5 h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#080808] animate-in zoom-in-50">
+                  <span className="absolute -top-1 -right-1 bg-[#E31E2F] text-white text-[9px] min-[360px]:text-[10px] font-bold w-4 h-4 min-[360px]:w-4.5 min-[360px]:h-4.5 sm:w-5 sm:h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#080808] animate-in zoom-in-50">
                     {itemCount}
                   </span>
                 )}
@@ -299,14 +299,14 @@ export function Navbar({ initialCategories }: { initialCategories?: CategoryLink
                     return !p;
                   });
                 }}
-                className="lg:hidden p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
+                className="lg:hidden p-1.5 min-[360px]:p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-[#181818] transition-colors cursor-pointer"
                 aria-label="Toggle mobile menu"
                 aria-expanded={mobileMenuOpen}
               >
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <X className="w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5 sm:w-6 sm:h-6" />
                 ) : (
-                  <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <Menu className="w-4.5 h-4.5 min-[360px]:w-5 min-[360px]:h-5 sm:w-6 sm:h-6" />
                 )}
               </button>
             </div>

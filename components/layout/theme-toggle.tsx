@@ -95,13 +95,13 @@ export function ThemeToggle({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-[#181818] border border-transparent hover:border-neutral-300 dark:hover:border-[#2a2a2a] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E31E2F] cursor-pointer"
+        className="p-1.5 min-[360px]:p-2 sm:p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-200/60 dark:hover:bg-[#181818] border border-transparent hover:border-neutral-300 dark:hover:border-[#2a2a2a] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E31E2F] cursor-pointer"
         aria-label={`Theme settings. Current: ${theme} mode`}
         aria-haspopup="menu"
         aria-expanded={isOpen}
         title={`Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)} (Click to change)`}
       >
-        <ActiveIcon className="w-5 h-5 transition-transform duration-200" />
+        <ActiveIcon className="w-4 h-4 min-[360px]:w-4.5 min-[360px]:h-4.5 sm:w-5 sm:h-5 transition-transform duration-200" />
       </button>
 
       {isOpen && (
